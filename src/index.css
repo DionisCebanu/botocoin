@@ -1,0 +1,99 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nunito:wght@400;600;700&family=Dancing+Script:wght@700&display=swap');
+@import 'leaflet/dist/leaflet.css';
+
+:root {
+  --radius: 1.5rem;
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-soft-cream text-chocolate-brown font-sans text-[17px] leading-relaxed antialiased overflow-x-hidden transition-colors duration-500;
+  }
+  .dark body {
+    @apply bg-dark-bg text-dark-text;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      @apply scroll-auto;
+    }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .section-wrapper {
+    @apply py-24 md:py-32 overflow-hidden relative;
+  }
+
+  .section-container {
+      @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .section-title {
+      @apply font-display text-4xl md:text-5xl font-bold text-chocolate-brown dark:text-soft-cream;
+  }
+  
+  .section-title-underline {
+    @apply relative pb-4;
+  }
+  .section-title-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-amber-orange rounded-full;
+  }
+  
+  .section-subtitle {
+      @apply text-lg text-warm-gray dark:text-dark-subtle max-w-3xl;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-8 py-3 text-base font-semibold rounded-full transition-all duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-orange focus-visible:ring-offset-2 focus-visible:ring-offset-soft-cream dark:focus-visible:ring-offset-dark-bg shadow-sm;
+  }
+
+  .btn-primary {
+    @apply btn bg-amber-orange text-white hover:bg-yellow-600 hover:shadow-lg hover:-translate-y-0.5;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-transparent border-2 border-chocolate-brown text-chocolate-brown hover:bg-chocolate-brown hover:text-white dark:border-soft-cream dark:text-soft-cream dark:hover:bg-soft-cream dark:hover:text-chocolate-brown;
+  }
+}
+
+/* Embla Carousel Base Styles */
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+/* Leaflet Map Styles */
+.leaflet-container {
+  @apply rounded-2xl;
+}
+.leaflet-control-zoom-in, .leaflet-control-zoom-out {
+  @apply !bg-soft-cream !text-chocolate-brown !border-chocolate-brown/20;
+}
+.leaflet-control-zoom-in:hover, .leaflet-control-zoom-out:hover {
+  @apply !bg-amber-orange/20;
+}
+.leaflet-marker-icon {
+  filter: hue-rotate(20deg) saturate(3);
+}

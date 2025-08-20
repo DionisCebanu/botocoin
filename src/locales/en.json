@@ -1,0 +1,124 @@
+
+{
+  "nav_menu": "Menu",
+  "nav_quality": "Quality",
+  "nav_gallery": "Gallery",
+  "nav_contact": "Contact",
+  "nav_order": "Order Now",
+  "nav_news": "News",
+
+  "hero_promo_badge": "Promo of the week {{index}}",
+  "hero_slides": [
+    {
+      "headline": "Exotic Flavors to Discover",
+      "text": "Enjoy -20% on our delicious banana donuts.",
+      "cta1": "Order Now",
+      "cta2": "See Menu"
+    },
+    {
+      "headline": "The Perfect Combo",
+      "text": "Buy a donut, get a ginger juice for half price.",
+      "cta1": "Get the Offer",
+      "cta2": "Our Juices"
+    },
+    {
+      "headline": "Treat Your Colleagues",
+      "text": "Brighten up the office with our discovery box.",
+      "cta1": "Order for the Office",
+      "cta2": "Catering"
+    }
+  ],
+
+  "bestsellers_title": "Our Best-Sellers",
+  "bestsellers_items": [
+    { "name": "Supreme Donut", "category": "Donut • Sweet", "price": "€3.50", "discount": "-20%" },
+    { "name": "Classic Revisited", "category": "Donut • Classic", "price": "€3.00" },
+    { "name": "Gourmet Trio", "category": "Mini • Assortment", "price": "€5.00" },
+    { "name": "Chocolate Madness", "category": "Filled • Rich", "price": "€4.00" },
+    { "name": "Citrus Zest", "category": "Glazed • Fruity", "price": "€3.50" },
+    { "name": "Royal Coconut", "category": "Donut • Tropical", "price": "€3.75" }
+  ],
+  "order_button": "Order",
+
+  "donuts_title": "Our Donuts",
+  "donuts_subtitle": "Each donut is a work of art, prepared with passion.",
+  "donuts_items": [
+    { "name": "Classic Sugar", "description": "The original, simple and delicious." },
+    { "name": "Banana Filled", "description": "A melting and fruity heart." },
+    { "name": "African Spices", "description": "A secret blend for a unique taste." },
+    { "name": "Hibiscus Glaze", "description": "A floral and tangy touch." }
+  ],
+  "add_to_cart_button": "Add to cart",
+
+  "quality_title": "Our Quality Promise",
+  "quality_subtitle": "Three pillars that make every visit a memorable experience.",
+  "quality_items": [
+    { "title": "Fresh Ingredients", "description": "We use local and seasonal products for an unparalleled flavor." },
+    { "title": "Authentic Recipes", "description": "Our recipes are passed down from generation to generation, with a modern twist." },
+    { "title": "Warm Atmosphere", "description": "With us, every customer is part of the family. Feel at home." }
+  ],
+  
+  "cta_banner_title": "Taste the Tradition – Order Today!",
+  "cta_banner_subtitle": "Every bite tells a story. Let us tell you ours.",
+  "cta_banner_button": "Order Now",
+  
+  "news_title": "Latest News",
+  "news_subtitle": "Discover our latest creations and stories.",
+  "news_items": [
+    { "category": "New Product", "date": "August 20, 2025", "title": "The Baobab Donut has arrived!", "excerpt": "Discover our new creation with exotic and tangy notes, a true journey for the taste buds.", "read_more": "Read more" },
+    { "category": "Event", "date": "August 15, 2025", "title": "Le Botocoin at the AfroMontréal Festival", "excerpt": "Come meet us at our stand for three days of festivities, music, and of course, donuts.", "read_more": "Read more" },
+    { "category": "Behind the Scenes", "date": "August 10, 2025", "title": "The Secret of our Ginger Juice", "excerpt": "We reveal some secrets behind our famous homemade ginger juice, a family recipe.", "read_more": "Read more" }
+  ],
+
+  "gallery_title": "Gourmet Gallery",
+  "gallery_subtitle": "A glimpse into our world.",
+  "gallery_button": "View Full Gallery",
+  "gallery_images": [
+    { "alt": "Freshly Glazed" },
+    { "alt": "Colorful Toppings" },
+    { "alt": "In the Kitchen" },
+    { "alt": "Perfectly Stacked" },
+    { "alt": "Ready to Serve" },
+    { "alt": "Coffee & Donut" }
+  ],
+
+  "testimonials_title": "What Our Customers Say",
+  "testimonials_subtitle": "Your satisfaction is our greatest reward.",
+  "testimonials_items": [
+    { "quote": "The best African donuts in all of Montreal! A real trip back to childhood.", "author": "Amina K." },
+    { "quote": "The welcome is as warm as the donuts. You immediately feel at home.", "author": "Julien R." },
+    { "quote": "An explosion of flavors! The ginger juice is incredible. I recommend it 100%.", "author": "Chloé D." },
+    { "quote": "The quality is always top-notch. It's my mandatory stop every week.", "author": "David L." },
+    { "quote": "Perfect for an event, everyone loved it. Impeccable service.", "author": "Sophie T." },
+    { "quote": "The flavors are authentic and the products are super fresh. A real gem!", "author": "Marc A." }
+  ],
+
+  "contact_title": "Contact Us",
+  "contact_subtitle": "A question or a catering request? We are here for you.",
+  "contact_visit_us": "Visit Us",
+  "contact_address_label": "Address",
+  "contact_address_value": "3881 Rue Rachel E Local 5, Montréal, QC H1X 1Z2",
+  "contact_hours_label": "Opening Hours",
+  "contact_hours_value_1": "Monday - Friday: 10:00 AM – 6:00 PM",
+  "contact_hours_value_2": "Saturday: 10:00 AM – 4:00 PM | Sunday: Closed",
+  "contact_phone_label": "Phone",
+  "contact_phone_value": "(514) 712-6497",
+  "contact_map_placeholder": "OpenStreetMap Location",
+  "form_name_label": "Your name",
+  "form_email_label": "Your email",
+  "form_phone_label": "Phone (Optional)",
+  "form_topic_label": "Subject of request",
+  "form_topic_placeholder": "Subject",
+  "form_topic_order": "Order",
+  "form_topic_catering": "Catering",
+  "form_topic_feedback": "Feedback",
+  "form_topic_other": "Other",
+  "form_message_label": "Your message...",
+  "form_submit_button": "Send Message",
+
+  "footer_about": "Artisanal African donuts. Made with love in Montreal.",
+  "footer_nav_title": "Navigation",
+  "footer_follow_us": "Follow Us",
+  "footer_copyright": "© {{year}} Le Botocoin. All rights reserved.",
+  "footer_credit": "Website created by"
+}

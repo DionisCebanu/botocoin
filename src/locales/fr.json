@@ -1,0 +1,124 @@
+
+{
+  "nav_menu": "Menu",
+  "nav_quality": "Qualité",
+  "nav_gallery": "Galerie",
+  "nav_contact": "Contact",
+  "nav_order": "Commander",
+  "nav_news": "Actualités",
+
+  "hero_promo_badge": "Promo de la semaine {{index}}",
+  "hero_slides": [
+    {
+      "headline": "Saveurs Exotiques à Découvrir",
+      "text": "Profitez de -20% sur nos délicieux beignets à la banane.",
+      "cta1": "Commander Maintenant",
+      "cta2": "Voir le Menu"
+    },
+    {
+      "headline": "Le Combo Parfait",
+      "text": "Un beignet acheté, un jus de gingembre à moitié prix.",
+      "cta1": "Profiter de l'offre",
+      "cta2": "Nos Jus"
+    },
+    {
+      "headline": "Faites Plaisir à vos Collègues",
+      "text": "Égayez le bureau avec notre boîte découverte.",
+      "cta1": "Commander pour le bureau",
+      "cta2": "Traiteur"
+    }
+  ],
+
+  "bestsellers_title": "Nos Best-Sellers",
+  "bestsellers_items": [
+    { "name": "Beignet Suprême", "category": "Donut • Sucré", "price": "3.50€", "discount": "-20%" },
+    { "name": "Le Classique revisité", "category": "Donut • Classique", "price": "3.00€" },
+    { "name": "Trio Gourmand", "category": "Mini • Assortiment", "price": "5.00€" },
+    { "name": "Folie Chocolat", "category": "Fourré • Riche", "price": "4.00€" },
+    { "name": "Zeste d'Agrumes", "category": "Glacé • Fruité", "price": "3.50€" },
+    { "name": "Le Royal Coco", "category": "Donut • Tropical", "price": "3.75€" }
+  ],
+  "order_button": "Commander",
+  
+  "donuts_title": "Nos Beignets",
+  "donuts_subtitle": "Chaque beignet est une œuvre d'art, préparée avec passion.",
+  "donuts_items": [
+    { "name": "Classique au Sucre", "description": "L'original, simple et délicieux." },
+    { "name": "Fourré à la Banane", "description": "Un cœur fondant et fruité." },
+    { "name": "Épices d'Afrique", "description": "Un mélange secret pour un goût unique." },
+    { "name": "Glaçage Hibiscus", "description": "Une touche florale et acidulée." }
+  ],
+  "add_to_cart_button": "Ajouter au panier",
+
+  "quality_title": "Notre Promesse Qualité",
+  "quality_subtitle": "Trois piliers qui font de chaque visite une expérience mémorable.",
+  "quality_items": [
+    { "title": "Ingrédients Frais", "description": "Nous utilisons des produits locaux et de saison pour une saveur inégalée." },
+    { "title": "Recettes Authentiques", "description": "Nos recettes sont transmises de génération en génération, avec une touche de modernité." },
+    { "title": "Ambiance Chaleureuse", "description": "Chez nous, chaque client fait partie de la famille. Sentez-vous comme à la maison." }
+  ],
+
+  "cta_banner_title": "Goûtez à la Tradition – Commandez Aujourd'hui !",
+  "cta_banner_subtitle": "Chaque bouchée raconte une histoire. Laissez-nous vous raconter la nôtre.",
+  "cta_banner_button": "Commander Maintenant",
+
+  "news_title": "Dernières Actualités",
+  "news_subtitle": "Découvrez nos dernières créations et histoires.",
+  "news_items": [
+    { "category": "Nouveau Produit", "date": "20 Août 2025", "title": "Le beignet au Baobab est arrivé !", "excerpt": "Découvrez notre nouvelle création aux notes exotiques et acidulées, un véritable voyage pour les papilles.", "read_more": "Lire la suite" },
+    { "category": "Événement", "date": "15 Août 2025", "title": "Le Botocoin au Festival AfroMontréal", "excerpt": "Retrouvez-nous à notre stand pour trois jours de festivités, de musique, et bien sûr, de beignets.", "read_more": "Lire la suite" },
+    { "category": "Coulisses", "date": "10 Août 2025", "title": "Le secret de notre jus de gingembre", "excerpt": "On vous dévoile quelques secrets derrière notre fameux jus de gingembre maison, une recette de famille.", "read_more": "Lire la suite" }
+  ],
+
+  "gallery_title": "Galerie Gourmande",
+  "gallery_subtitle": "Un aperçu de notre univers.",
+  "gallery_button": "Voir Toute la Galerie",
+  "gallery_images": [
+    { "alt": "Fraîchement glacé" },
+    { "alt": "Garnitures colorées" },
+    { "alt": "En cuisine" },
+    { "alt": "Parfaitement empilés" },
+    { "alt": "Prêt à servir" },
+    { "alt": "Café et beignet" }
+  ],
+
+  "testimonials_title": "Ce que nos clients disent",
+  "testimonials_subtitle": "Votre satisfaction est notre plus belle récompense.",
+  "testimonials_items": [
+    { "quote": "Les meilleurs beignets africains de tout Montréal ! Un vrai retour en enfance.", "author": "Amina K." },
+    { "quote": "L'accueil est aussi chaleureux que les beignets. On se sent tout de suite à la maison.", "author": "Julien R." },
+    { "quote": "Une explosion de saveurs ! Le jus de gingembre est incroyable. Je recommande à 100%.", "author": "Chloé D." },
+    { "quote": "La qualité est toujours au rendez-vous. C'est mon arrêt obligé chaque semaine.", "author": "David L." },
+    { "quote": "Parfait pour un événement, tout le monde a adoré. Service impeccable.", "author": "Sophie T." },
+    { "quote": "Les saveurs sont authentiques et les produits ultra frais. Une pépite !", "author": "Marc A." }
+  ],
+
+  "contact_title": "Contactez-nous",
+  "contact_subtitle": "Une question ou une demande de traiteur ? Nous sommes là pour vous.",
+  "contact_visit_us": "Visitez-nous",
+  "contact_address_label": "Adresse",
+  "contact_address_value": "3881 Rue Rachel E Local 5, Montréal, QC H1X 1Z2",
+  "contact_hours_label": "Heures d'ouverture",
+  "contact_hours_value_1": "Lundi - Vendredi: 10h00 – 18h00",
+  "contact_hours_value_2": "Samedi: 10h00 – 16h00 | Dimanche: Fermé",
+  "contact_phone_label": "Téléphone",
+  "contact_phone_value": "(514) 712-6497",
+  "contact_map_placeholder": "Emplacement de la carte OpenStreetMap",
+  "form_name_label": "Votre nom",
+  "form_email_label": "Votre email",
+  "form_phone_label": "Téléphone (Optionnel)",
+  "form_topic_label": "Sujet de la demande",
+  "form_topic_placeholder": "Sujet",
+  "form_topic_order": "Commande",
+  "form_topic_catering": "Traiteur",
+  "form_topic_feedback": "Avis & Suggestions",
+  "form_topic_other": "Autre",
+  "form_message_label": "Votre message...",
+  "form_submit_button": "Envoyer le message",
+
+  "footer_about": "Beignets africains artisanaux. Fait avec amour à Montréal.",
+  "footer_nav_title": "Navigation",
+  "footer_follow_us": "Suivez-nous",
+  "footer_copyright": "© {{year}} Le Botocoin. Tous droits réservés.",
+  "footer_credit": "Site web créé par"
+}
