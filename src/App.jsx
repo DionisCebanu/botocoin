@@ -51,7 +51,7 @@ function App() {
   return (
     <ThemeProvider>
       <Helmet>
-        <title>{t('seo_title')}</title>
+        <title>{t('Botocoin')}</title>
         <meta name="description" content={t('seo_description')} />
         <meta name="keywords" content={t('seo_keywords')} />
         <meta property="og:title" content={t('og_title')} />
