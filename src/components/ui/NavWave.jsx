@@ -1,3 +1,6 @@
+/* Wave SVG
+* https://getwaves.io/
+*/
 const NavWave = ({ className = '' }) => (
   <svg
     className={className}
