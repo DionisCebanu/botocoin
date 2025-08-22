@@ -103,6 +103,8 @@
   "contact_hours_value_2": "Samedi: 10h00 – 16h00 | Dimanche: Fermé",
   "contact_phone_label": "Téléphone",
   "contact_phone_value": "(514) 712-6497",
+  "contact_email_label": "E-mail",
+  "contact_email_value": "info@lebotocoin.com",
   "contact_map_placeholder": "Emplacement de la carte OpenStreetMap",
   "form_name_label": "Votre nom",
   "form_email_label": "Votre email",

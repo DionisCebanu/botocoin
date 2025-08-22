@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Send, MapPin, Clock, Phone, ArrowRight } from 'lucide-react';
+import { Send, MapPin, Clock, Phone, ArrowRight, Mail } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 import { itemVariants } from '@/lib/animations';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -100,12 +100,12 @@ const ContactSection = ({ onFormSubmit }) => {
         <div className="grid xl:grid-cols-12 gap-8 lg:gap-10 items-stretch">
           {/* Left: info card */}
           <motion.aside variants={itemVariants} className="xl:col-span-4 self-stretch">
-            <div className="h-full flex flex-col rounded-2xl bg-white/70 dark:bg-dark-surface/70 backdrop-blur ring-1 ring-black/5 dark:ring-white/5 p-6 md:p-7 shadow-sm">
+            <div className="h-full flex flex-col justify-around rounded-2xl bg-white/70 dark:bg-dark-surface/70 backdrop-blur ring-1 ring-black/5 dark:ring-white/5 p-6 md:p-7 shadow-sm">
               <h3 className="font-display text-2xl md:text-3xl font-bold text-chocolate-brown dark:text-soft-cream mb-6">
                 {t('contact_visit_us')}
               </h3>
 
-              <ul className="space-y-5 text-lg flex-1">
+              <ul className="space-y-5 text-lg flex flex-col justify-around">
                 <li className="flex gap-4">
                   <div className="h-10 w-10 rounded-full bg-amber-orange/15 text-amber-orange flex items-center justify-center flex-shrink-0">
                     <MapPin size={20} />
@@ -135,6 +135,17 @@ const ContactSection = ({ onFormSubmit }) => {
                     <p className="font-semibold text-chocolate-brown dark:text-soft-cream">{t('contact_phone_label')}</p>
                     <a href={`tel:${t('contact_phone_value')}`} className="text-warm-gray hover:text-amber-orange transition-colors">
                       {t('contact_phone_value')}
+                    </a>
+                  </div>
+                </li>
+                <li className="flex gap-4">
+                  <div className="h-10 w-10 rounded-full bg-amber-orange/15 text-amber-orange flex items-center justify-center flex-shrink-0">
+                    <Mail size={20} />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-chocolate-brown dark:text-soft-cream">{t('contact_email_label')}</p>
+                    <a href={`mailto:${t('contact_email_value')}`} className="text-warm-gray hover:text-amber-orange transition-colors">
+                      {t('contact_email_value')}
                     </a>
                   </div>
                 </li>
