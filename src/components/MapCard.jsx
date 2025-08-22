@@ -39,17 +39,16 @@ const MapCard = () => {
     }
 
     return (
-        <MapContainer center={position} zoom={16} scrollWheelZoom={false} style={{ height: '100%', width: '100%' }}>
-            <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker position={position}>
-                <Popup>
-                    <b>Le Botocoin</b><br />{address}
-                </Popup>
-            </Marker>
-        </MapContainer>
+      <div class="bg-card h-72 rounded-lg shadow-xl overflow-hidden">
+            <iframe
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-73.5601%2C45.5517%2C-73.5441%2C45.5597&layer=mapnik&marker=45.5557%2C-73.5521"
+                class="w-full h-full border-0"
+                title="Emplacement — 3881 Rue Rachel Est, Montréal"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
     );
 };
 

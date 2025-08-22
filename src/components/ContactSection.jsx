@@ -1,84 +1,87 @@
-
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Send, MapPin, Clock, Phone } from 'lucide-react';
+import { Send, MapPin, Clock, Phone, ArrowRight } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 import { itemVariants } from '@/lib/animations';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import MapCard from '@/components/MapCard';
 
-const FloatingLabelInput = ({ id, label, ...props }) => {
-    const [isFocused, setIsFocused] = useState(false);
-    const [hasValue, setHasValue] = useState(false);
+/* ------------ Inputs with floating labels ------------ */
 
-    const handleFocus = () => setIsFocused(true);
-    const handleBlur = (e) => {
-        setIsFocused(false);
-        setHasValue(e.target.value !== '');
-    };
+const FloatingLabelInput = ({ id, label, name, className = '', ...props }) => {
+  const [focused, setFocused] = useState(false);
+  const [hasValue, setHasValue] = useState(!!props.defaultValue);
 
-    const isFloating = isFocused || hasValue;
+  const isFloating = focused || hasValue;
 
-    return (
-        <div className="relative">
-            <input 
-                id={id}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-                className="w-full p-4 pt-6 rounded-xl bg-soft-cream/50 dark:bg-dark-bg placeholder:text-transparent focus:ring-2 focus:ring-amber-orange outline-none transition-shadow peer"
-                placeholder={label}
-                {...props}
-            />
-            <label 
-                htmlFor={id} 
-                className={`absolute left-4 transition-all duration-300 pointer-events-none text-warm-gray
-                    ${isFloating ? 'top-2 text-xs text-amber-orange' : 'top-4 text-base'}`}
-            >
-                {label}
-            </label>
-        </div>
-    );
+  return (
+    <div className={`relative ${className}`}>
+      <input
+        id={id}
+        name={name || id}
+        onFocus={() => setFocused(true)}
+        onBlur={(e) => { setFocused(false); setHasValue(e.target.value !== ''); }}
+        placeholder={label}
+        className="
+          w-full rounded-xl bg-soft-cream/60 dark:bg-dark-bg/70
+          ring-1 ring-black/5 dark:ring-white/5
+          p-4 pt-6 placeholder:text-transparent
+          focus:outline-none focus:ring-2 focus:ring-amber-orange
+          transition-shadow
+        "
+        {...props}
+      />
+      <label
+        htmlFor={id}
+        className={`
+          absolute left-4 transition-all duration-200 pointer-events-none
+          ${isFloating ? 'top-2 text-xs text-amber-orange' : 'top-4 text-base text-warm-gray'}
+        `}
+      >
+        {label}
+      </label>
+    </div>
+  );
 };
 
-const FloatingLabelTextarea = ({ id, label, ...props }) => {
-    const [isFocused, setIsFocused] = useState(false);
-    const [hasValue, setHasValue] = useState(false);
+const FloatingLabelTextarea = ({ id, label, name, className = '', ...props }) => {
+  const [focused, setFocused] = useState(false);
+  const [hasValue, setHasValue] = useState(!!props.defaultValue);
 
-    const handleFocus = () => setIsFocused(true);
-    const handleBlur = (e) => {
-        setIsFocused(false);
-        setHasValue(e.target.value !== '');
-    };
+  const isFloating = focused || hasValue;
 
-    const isFloating = isFocused || hasValue;
-
-    return (
-        <div className="relative">
-            <textarea 
-                id={id}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-                className="w-full p-4 pt-6 rounded-xl bg-soft-cream/50 dark:bg-dark-bg placeholder:text-transparent focus:ring-2 focus:ring-amber-orange outline-none transition-shadow peer min-h-[140px]"
-                placeholder={label}
-                {...props}
-            />
-            <label 
-                htmlFor={id} 
-                className={`absolute left-4 transition-all duration-300 pointer-events-none text-warm-gray
-                    ${isFloating ? 'top-2 text-xs text-amber-orange' : 'top-4 text-base'}`}
-            >
-                {label}
-            </label>
-        </div>
-    );
+  return (
+    <div className={`relative ${className}`}>
+      <textarea
+        id={id}
+        name={name || id}
+        onFocus={() => setFocused(true)}
+        onBlur={(e) => { setFocused(false); setHasValue(e.target.value !== ''); }}
+        placeholder={label}
+        className="
+          w-full min-h-[150px] rounded-xl bg-soft-cream/60 dark:bg-dark-bg/70
+          ring-1 ring-black/5 dark:ring-white/5
+          p-4 pt-6 placeholder:text-transparent
+          focus:outline-none focus:ring-2 focus:ring-amber-orange
+          transition-shadow
+        "
+        {...props}
+      />
+      <label
+        htmlFor={id}
+        className={`
+          absolute left-4 transition-all duration-200 pointer-events-none
+          ${isFloating ? 'top-2 text-xs text-amber-orange' : 'top-4 text-base text-warm-gray'}
+        `}
+      >
+        {label}
+      </label>
+    </div>
+  );
 };
+
+/* -------------------- Section -------------------- */
 
 const ContactSection = ({ onFormSubmit }) => {
   const { t } = useTranslation();
@@ -86,82 +89,110 @@ const ContactSection = ({ onFormSubmit }) => {
   return (
     <AnimatedSection as="section" id="contact" className="section-wrapper bg-soft-cream dark:bg-dark-bg">
       <div className="section-container">
-        <div className="text-center mb-16">
+        <div className="text-center mb-14">
           <motion.h2 variants={itemVariants} className="section-title">{t('contact_title')}</motion.h2>
-          <motion.p variants={itemVariants} className="section-subtitle mx-auto mt-4">
+          <motion.p variants={itemVariants} className="section-subtitle mx-auto mt-3 max-w-2xl">
             {t('contact_subtitle')}
           </motion.p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-12">
-            <motion.div variants={itemVariants} className="lg:col-span-2">
-                 <h3 className="font-display text-3xl font-bold text-chocolate-brown dark:text-soft-cream mb-8">{t('contact_visit_us')}</h3>
-                 <div className="space-y-6 text-lg">
-                    <div className="flex items-start space-x-4">
-                        <MapPin className="h-8 w-8 text-amber-orange mt-1 flex-shrink-0" />
-                        <div>
-                            <h4 className="font-bold text-chocolate-brown dark:text-soft-cream">{t('contact_address_label')}</h4>
-                            <p className="text-warm-gray">{t('contact_address_value')}</p>
-                        </div>
-                    </div>
-                     <div className="flex items-start space-x-4">
-                        <Clock className="h-8 w-8 text-amber-orange mt-1 flex-shrink-0" />
-                        <div>
-                            <h4 className="font-bold text-chocolate-brown dark:text-soft-cream">{t('contact_hours_label')}</h4>
-                            <p className="text-warm-gray">{t('contact_hours_value_1')}</p>
-                            <p className="text-warm-gray">{t('contact_hours_value_2')}</p>
-                        </div>
-                    </div>
-                    <div className="flex items-start space-x-4">
-                        <Phone className="h-8 w-8 text-amber-orange mt-1 flex-shrink-0" />
-                        <div>
-                            <h4 className="font-bold text-chocolate-brown dark:text-soft-cream">{t('contact_phone_label')}</h4>
-                            <p className="text-warm-gray">{t('contact_phone_value')}</p>
-                        </div>
-                    </div>
-                </div>
-                 <div className="h-64 md:h-96 mt-10 w-full rounded-2xl overflow-hidden shadow-soft">
-                     <MapCard />
-                </div>
-            </motion.div>
-            
-            <motion.form
-                variants={itemVariants}
-                onSubmit={onFormSubmit}
-                className="lg:col-span-3 bg-white dark:bg-dark-surface p-8 md:p-10 rounded-2xl shadow-lg space-y-6"
-            >
-                <div className="grid md:grid-cols-2 gap-6">
-                    <FloatingLabelInput id="name" label={t('form_name_label')} type="text" required />
-                    <FloatingLabelInput id="email" label={t('form_email_label')} type="email" required />
-                </div>
-                <div>
-                     <FloatingLabelInput id="phone" label={t('form_phone_label')} type="tel" />
-                </div>
-                <div>
-                    <Select>
-                        <SelectTrigger className="w-full text-warm-gray h-16 rounded-xl bg-soft-cream/50 dark:bg-dark-bg">
-                            <SelectValue placeholder={t('form_topic_placeholder')} />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="order">{t('form_topic_order')}</SelectItem>
-                            <SelectItem value="catering">{t('form_topic_catering')}</SelectItem>
-                            <SelectItem value="feedback">{t('form_topic_feedback')}</SelectItem>
-                            <SelectItem value="other">{t('form_topic_other')}</SelectItem>
-                        </SelectContent>
-                    </Select>
-                </div>
-                <FloatingLabelTextarea id="message" label={t('form_message_label')} required />
-                <div className="text-right pt-2">
-                    <button type="submit" className="btn-primary">
-                        <Send className="mr-2 h-5 w-5" />
-                        {t('form_submit_button')}
-                    </button>
-                </div>
-            </motion.form>
+        {/* NEW GRID: 12 cols, 2 rows (map spans row 2) */}
+        <div className="grid xl:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+          {/* Left: info card */}
+          <motion.aside variants={itemVariants} className="xl:col-span-4 self-stretch">
+            <div className="h-full flex flex-col rounded-2xl bg-white/70 dark:bg-dark-surface/70 backdrop-blur ring-1 ring-black/5 dark:ring-white/5 p-6 md:p-7 shadow-sm">
+              <h3 className="font-display text-2xl md:text-3xl font-bold text-chocolate-brown dark:text-soft-cream mb-6">
+                {t('contact_visit_us')}
+              </h3>
+
+              <ul className="space-y-5 text-lg flex-1">
+                <li className="flex gap-4">
+                  <div className="h-10 w-10 rounded-full bg-amber-orange/15 text-amber-orange flex items-center justify-center flex-shrink-0">
+                    <MapPin size={20} />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-chocolate-brown dark:text-soft-cream">{t('contact_address_label')}</p>
+                    <p className="text-warm-gray">{t('contact_address_value')}</p>
+                  </div>
+                </li>
+
+                <li className="flex gap-4">
+                  <div className="h-10 w-10 rounded-full bg-amber-orange/15 text-amber-orange flex items-center justify-center flex-shrink-0">
+                    <Clock size={20} />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-chocolate-brown dark:text-soft-cream">{t('contact_hours_label')}</p>
+                    <p className="text-warm-gray">{t('contact_hours_value_1')}</p>
+                    <p className="text-warm-gray">{t('contact_hours_value_2')}</p>
+                  </div>
+                </li>
+
+                <li className="flex gap-4">
+                  <div className="h-10 w-10 rounded-full bg-amber-orange/15 text-amber-orange flex items-center justify-center flex-shrink-0">
+                    <Phone size={20} />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-chocolate-brown dark:text-soft-cream">{t('contact_phone_label')}</p>
+                    <a href={`tel:${t('contact_phone_value')}`} className="text-warm-gray hover:text-amber-orange transition-colors">
+                      {t('contact_phone_value')}
+                    </a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </motion.aside>
+
+          {/* Right: form (slightly more compact) */}
+          <motion.form
+            variants={itemVariants}
+            onSubmit={onFormSubmit}
+            className="xl:col-span-8 rounded-2xl bg-white/80 dark:bg-dark-surface/80 backdrop-blur
+                       ring-1 ring-black/5 dark:ring-white/5 p-6 md:p-8 lg:p-10 shadow-md space-y-6"
+          >
+            <div className="grid md:grid-cols-2 gap-6">
+              <FloatingLabelInput id="name" label={t('form_name_label')} type="text" required />
+              <FloatingLabelInput id="email" label={t('form_email_label')} type="email" required />
+            </div>
+
+            <FloatingLabelInput id="phone" label={t('form_phone_label')} type="tel" />
+
+            <div>
+              <Select>
+                {/* reduced height for a tighter form */}
+                <SelectTrigger className="w-full h-14 rounded-xl bg-soft-cream/60 dark:bg-dark-bg/70 ring-1 ring-black/5 dark:ring-white/5 text-warm-gray">
+                  <SelectValue placeholder={t('form_topic_placeholder')} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="order">{t('form_topic_order')}</SelectItem>
+                  <SelectItem value="catering">{t('form_topic_catering')}</SelectItem>
+                  <SelectItem value="feedback">{t('form_topic_feedback')}</SelectItem>
+                  <SelectItem value="other">{t('form_topic_other')}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* slightly shorter textarea */}
+            <FloatingLabelTextarea id="message" label={t('form_message_label')} required className="min-h-[120px]" />
+
+            <div className="flex justify-end">
+              <button type="submit" className="btn-primary inline-flex items-center">
+                <Send className="mr-2 h-5 w-5" />
+                {t('form_submit_button')}
+              </button>
+            </div>
+          </motion.form>
+
+          {/* Row 2: map spans full width */}
+          <motion.div variants={itemVariants} className="xl:col-span-12">
+            <div className="h-64 md:h-80 w-full rounded-2xl overflow-hidden shadow-soft ring-1 ring-black/5 dark:ring-white/5 bg-white/70 dark:bg-dark-surface/70 backdrop-blur">
+              <MapCard />
+            </div>
+          </motion.div>
         </div>
       </div>
     </AnimatedSection>
   );
 };
+
 
 export default ContactSection;
