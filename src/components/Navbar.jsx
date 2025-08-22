@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Instagram, Phone, Menu as MenuIcon, X } from 'lucide-react';
+import NavWave from './ui/NavWave';
 import ThemeToggle from '@/components/ThemeToggle';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 
@@ -101,6 +102,11 @@ const Navbar = ({ onSocialClick, onCallClick, onOrderClick }) => {
             </div>
           </div>
         </div>
+         {/* Wave */}
+         {scrolled && (
+            <NavWave className="pointer-events-none absolute mb-6 left-0 w-full h-6 md:h-10 text-soft-cream dark:text-dark-bg opacity-90 z-10" />
+          )}
+
       </header>
 
       <AnimatePresence>
@@ -149,6 +155,7 @@ const Navbar = ({ onSocialClick, onCallClick, onOrderClick }) => {
             </motion.div>
           </motion.div>
         )}
+         
       </AnimatePresence>
     </>
   );
