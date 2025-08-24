@@ -82,7 +82,7 @@ const HeroSection = ({ onOrderClick, onMenuClick }) => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45, ease: 'easeOut' }}
-                className="font-display text-4xl sm:text-5xl md:text-7xl font-bold leading-tight"
+                className="font-display text-4xl sm:text-5xl md:text-7xl font-bold leading-tight w-[70%] mx-auto sm:w-full"
               >
                 {slide.headline}
               </motion.h1>
