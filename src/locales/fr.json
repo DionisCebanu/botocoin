@@ -31,12 +31,12 @@
 
   "bestsellers_title": "Nos Best-Sellers",
   "bestsellers_items": [
-    { "name": "Beignet Suprême", "category": "Donut • Sucré", "price": "3.50€", "discount": "-20%" },
-    { "name": "Le Classique revisité", "category": "Donut • Classique", "price": "3.00€" },
-    { "name": "Trio Gourmand", "category": "Mini • Assortiment", "price": "5.00€" },
-    { "name": "Folie Chocolat", "category": "Fourré • Riche", "price": "4.00€" },
-    { "name": "Zeste d'Agrumes", "category": "Glacé • Fruité", "price": "3.50€" },
-    { "name": "Le Royal Coco", "category": "Donut • Tropical", "price": "3.75€" }
+    { "name": "Beignet Suprême", "category": "Donut • Sucré", "price": "3.50$", "discount": "-20%" },
+    { "name": "Le Classique revisité", "category": "Donut • Classique", "price": "3.00$" },
+    { "name": "Trio Gourmand", "category": "Mini • Assortiment", "price": "5.00$" },
+    { "name": "Folie Chocolat", "category": "Fourré • Riche", "price": "4.00$" },
+    { "name": "Zeste d'Agrumes", "category": "Glacé • Fruité", "price": "3.50$" },
+    { "name": "Le Royal Coco", "category": "Donut • Tropical", "price": "3.75$" }
   ],
   "order_button": "Commander",
   

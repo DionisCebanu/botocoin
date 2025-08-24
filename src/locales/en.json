@@ -31,12 +31,12 @@
 
   "bestsellers_title": "Our Best-Sellers",
   "bestsellers_items": [
-    { "name": "Supreme Donut", "category": "Donut • Sweet", "price": "€3.50", "discount": "-20%" },
-    { "name": "Classic Revisited", "category": "Donut • Classic", "price": "€3.00" },
-    { "name": "Gourmet Trio", "category": "Mini • Assortment", "price": "€5.00" },
-    { "name": "Chocolate Madness", "category": "Filled • Rich", "price": "€4.00" },
-    { "name": "Citrus Zest", "category": "Glazed • Fruity", "price": "€3.50" },
-    { "name": "Royal Coconut", "category": "Donut • Tropical", "price": "€3.75" }
+    { "name": "Supreme Donut", "category": "Donut • Sweet", "price": "$3.50", "discount": "-20%" },
+    { "name": "Classic Revisited", "category": "Donut • Classic", "price": "$3.00" },
+    { "name": "Gourmet Trio", "category": "Mini • Assortment", "price": "$5.00" },
+    { "name": "Chocolate Madness", "category": "Filled • Rich", "price": "$4.00" },
+    { "name": "Citrus Zest", "category": "Glazed • Fruity", "price": "$3.50" },
+    { "name": "Royal Coconut", "category": "Donut • Tropical", "price": "$3.75" }
   ],
   "order_button": "Order",
 

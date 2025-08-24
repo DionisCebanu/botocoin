@@ -15,7 +15,7 @@ const DonutsSection = ({ onOrderClick }) => {
       className="section-wrapper bg-white dark:bg-dark-surface"
     >
       <div className="section-container text-center">
-         <motion.h2 variants={itemVariants} className="section-title">{t('donuts_title')}</motion.h2>
+         <motion.h2 variants={itemVariants} className="section-title section-title-underline">{t('donuts_title')}</motion.h2>
           <motion.p variants={itemVariants} className="section-subtitle mx-auto mt-4 mb-16">
             {t('donuts_subtitle')}
           </motion.p>
@@ -63,6 +63,7 @@ const DonutsSection = ({ onOrderClick }) => {
             </motion.li>
           ))}
         </motion.ul>
+        
       </div>
     </AnimatedSection>
   );
