@@ -118,7 +118,7 @@ const BestSellersSection = ({ onOrderClick }) => {
       </AnimatedSection>
 
       {/* The divider wave lives OUTSIDE the section, so it "exits" it */}
-      <div aria-hidden className="relative bottom-[-40px] z-30">
+      <div aria-hidden className="relative bottom-[-20px] sm:bottom-[-40px] z-30">
         {/* Set these colors to the NEXT section’s background for a seamless transition */}
         <NavWave className="block w-full h-6 md:h-10 bottom-[-40px] text-soft-cream dark:text-dark-bg opacity-90" />
       </div>
