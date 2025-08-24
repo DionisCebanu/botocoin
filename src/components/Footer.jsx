@@ -43,7 +43,7 @@ const Footer = ({ onSocialClick }) => {
           <p className="mt-1">
             {t('footer_credit')}{' '}
             <a 
-              href="https://dioniscode.com" 
+              href="https://webcraft.dioniscode.com" 
               target="_blank" 
               rel="noopener noreferrer"
               className="font-semibold text-amber-orange hover:underline"
