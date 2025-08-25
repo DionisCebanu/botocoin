@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const DonutCard = ({ name, description, imageSrc, ctaLabel, onOrder, variants }) => {
   return (
     <motion.li variants={variants} className="h-full">
-      <article className="group flex h-full flex-col overflow-hidden rounded-2xl bg-soft-cream/70 dark:bg-dark-bg ring-1 ring-brown/10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+      <article className="group flex h-full flex-col overflow-hidden rounded-2xl bg-soft-cream/70 dark:bg-dark-bg shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
         {/* Image : ratio uniforme */}
         <div className="relative aspect-[4/3] w-full overflow-hidden">
           <img

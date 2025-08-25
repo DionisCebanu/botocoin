@@ -10,7 +10,7 @@ import LanguageSwitcher from '@/components/LanguageSwitcher';
 const Logo = () => (
   <a href="/" className="relative flex items-center justify-center group" aria-label="Le Botocoin Home">
     {/* Circle background */}
-    <div className="w-20 h-20 bg-[rgb(249,175,7)] dark:bg-dark-surface rounded-full shadow-md transition-all duration-300 group-hover:scale-110 flex items-center justify-center">
+    <div className="w-20 h-20 bg-[rgb(249,175,7)]  rounded-full shadow-md transition-all duration-300 group-hover:scale-110 flex items-center justify-center">
       {/* Ensure the image stays inside the circle */}
       <img src="/img/logo/logo.png" alt="Le Botocoin Logo" className="w-12 h-12 object-contain" />
     </div>
