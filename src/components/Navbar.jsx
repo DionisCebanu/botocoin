@@ -8,13 +8,16 @@ import ThemeToggle from '@/components/ThemeToggle';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 const Logo = () => (
-  <a href="#" className="relative flex items-center justify-center group" aria-label="Le Botocoin Home">
-    <div className="absolute w-20 h-20 bg-soft-cream dark:bg-dark-surface rounded-full shadow-md transition-all duration-300 group-hover:scale-110" />
-    <span className="relative font-logo text-3xl font-bold text-chocolate-brown dark:text-amber-orange z-10">
-      LB
-    </span>
+  <a href="/" className="relative flex items-center justify-center group" aria-label="Le Botocoin Home">
+    {/* Circle background */}
+    <div className="w-20 h-20 bg-[rgb(249,175,7)] dark:bg-dark-surface rounded-full shadow-md transition-all duration-300 group-hover:scale-110 flex items-center justify-center">
+      {/* Ensure the image stays inside the circle */}
+      <img src="/img/logo/logo.png" alt="Le Botocoin Logo" className="w-12 h-12 object-contain" />
+    </div>
   </a>
 );
+
+
 
 const Navbar = ({ onSocialClick, onCallClick, onOrderClick }) => {
   const { t } = useTranslation();
