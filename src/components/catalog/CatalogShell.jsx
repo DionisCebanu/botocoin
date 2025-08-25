@@ -10,21 +10,21 @@ import Pagination from './Pagination';
 import { Frown } from 'lucide-react';
 
 const allProducts = [
-    {id: 1, title: 'Classic Sugar', cat: 'donuts', price: 2.50, rating: 4.8, img: '/img/catalog/donut-1.png', newest: true},
-    {id: 2, title: 'Chocolate Glaze', cat: 'donuts', price: 3.00, rating: 4.9, img: '/img/catalog/donut-2.png'},
-    {id: 3, title: 'Banana Cream', cat: 'donuts', price: 3.50, rating: 4.7, img: '/img/catalog/donut-3.png', popular: true},
-    {id: 4, title: 'Hibiscus Ring', cat: 'donuts', price: 3.25, rating: 4.6, img: '/img/catalog/donut-4.png', newest: true},
-    {id: 5, title: 'Spiced Delight', cat: 'donuts', price: 3.00, rating: 4.5, img: '/img/catalog/donut-5.png'},
-    {id: 6, title: 'Caramel Filled', cat: 'donuts', price: 3.75, rating: 4.9, img: '/img/catalog/donut-6.png', popular: true},
-    {id: 7, title: 'Ginger Juice', cat: 'drinks', price: 4.50, rating: 4.9, img: '/img/catalog/drink-1.png', popular: true, newest: true},
-    {id: 8, title: 'Bissap (Hibiscus)', cat: 'drinks', price: 4.00, rating: 4.8, img: '/img/catalog/drink-2.png'},
-    {id: 9, title: 'Mango Smoothie', cat: 'drinks', price: 5.00, rating: 4.7, img: '/img/catalog/drink-3.png'},
-    {id: 10, 'title': 'Fresh Mint Tea', 'cat': 'drinks', 'price': 3.00, 'rating': 4.6, 'img': '/img/catalog/drink-4.png'},
-    {id: 11, 'title': 'Mini Donut Box', 'cat': 'donuts', 'price': 10.00, 'rating': 4.8, 'img': '/img/catalog/donut-7.png', popular: true},
-    {id: 12, 'title': 'Coconut Dream', 'cat': 'donuts', 'price': 3.50, 'rating': 4.7, 'img': '/img/catalog/donut-8.png'},
-    {id: 13, 'title': 'Iced Coffee', 'cat': 'drinks', 'price': 4.75, 'rating': 4.8, 'img': '/img/catalog/drink-5.png', newest: true},
-    {id: 14, 'title': 'Assortment Box', 'cat': 'donuts', 'price': 15.00, 'rating': 4.9, 'img': '/img/catalog/donut-9.png'},
-    {id: 15, 'title': 'Passion Fruit Juice', 'cat': 'drinks', 'price': 4.50, 'rating': 4.9, 'img': '/img/catalog/drink-6.png'},
+    {id: 1, title: 'Classic Sugar', cat: 'donuts', price: 2.50, rating: 4.8, img: '/img/catalog/hero-1.png', newest: true},
+    {id: 2, title: 'Chocolate Glaze', cat: 'donuts', price: 3.00, rating: 4.9, img: '/img/catalog/hero-2.png'},
+    {id: 3, title: 'Banana Cream', cat: 'donuts', price: 3.50, rating: 4.7, img: '/img/catalog/hero-3.png', popular: true},
+    {id: 4, title: 'Hibiscus Ring', cat: 'donuts', price: 3.25, rating: 4.6, img: '/img/catalog/hero-4.png', newest: true},
+    {id: 5, title: 'Spiced Delight', cat: 'donuts', price: 3.00, rating: 4.5, img: '/img/catalog/hero-5.png'},
+    {id: 6, title: 'Caramel Filled', cat: 'donuts', price: 3.75, rating: 4.9, img: '/img/catalog/hero-6.png', popular: true},
+    {id: 7, title: 'Ginger Juice', cat: 'drinks', price: 4.50, rating: 4.9, img: '/img/catalog/hero-2.png', popular: true, newest: true},
+    {id: 8, title: 'Bissap (Hibiscus)', cat: 'drinks', price: 4.00, rating: 4.8, img: '/img/catalog/hero-3.png'},
+    {id: 9, title: 'Mango Smoothie', cat: 'drinks', price: 5.00, rating: 4.7, img: '/img/catalog/hero-4.png'},
+    {id: 10, 'title': 'Fresh Mint Tea', 'cat': 'drinks', 'price': 3.00, 'rating': 4.6, 'img': '/img/catalog/hero-5.png'},
+    {id: 11, 'title': 'Mini Donut Box', 'cat': 'donuts', 'price': 10.00, 'rating': 4.8, 'img': '/img/catalog/hero-6.png', popular: true},
+    {id: 12, 'title': 'Coconut Dream', 'cat': 'donuts', 'price': 3.50, 'rating': 4.7, 'img': '/img/catalog/hero-3.png'},
+    {id: 13, 'title': 'Iced Coffee', 'cat': 'drinks', 'price': 4.75, 'rating': 4.8, 'img': '/img/catalog/hero-2.png', newest: true},
+    {id: 14, 'title': 'Assortment Box', 'cat': 'donuts', 'price': 15.00, 'rating': 4.9, 'img': '/img/catalog/hero-4.png'},
+    {id: 15, 'title': 'Passion Fruit Juice', 'cat': 'drinks', 'price': 4.50, 'rating': 4.9, 'img': '/img/catalog/hero-5.png'},
 ];
 
 const ITEMS_PER_PAGE = 6;
