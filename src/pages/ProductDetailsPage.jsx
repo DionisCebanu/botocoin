@@ -13,6 +13,7 @@ import AddToCartBar from '@/components/details/AddToCartBar';
 import Breadcrumbs from '@/components/details/Breadcrumbs';
 import RelatedProducts from '@/components/details/RelatedProducts';
 import ProductInfo from '@/components/details/ProductInfo';
+import NavWave from '../components/ui/NavWave';
 import { Button } from '@/components/ui/button';
 
 const ProductDetailsPage = () => {
@@ -145,6 +146,11 @@ const ProductDetailsPage = () => {
                         </div>
                     </motion.div>
                 </AnimatedSection>
+                {/* The divider wave lives OUTSIDE the section, so it "exits" it */}
+                <div aria-hidden className="relative bottom-[-20px] sm:bottom-[-40px] z-30">
+                    {/* Set these colors to the NEXT section’s background for a seamless transition */}
+                    <NavWave className="block w-full h-6 md:h-10 bottom-[-40px] text-soft-cream dark:text-dark-bg opacity-90" />
+                </div>
                 
                 <RelatedProducts currentItemId={item.id} category={item.cat} />
             </div>
