@@ -2,10 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Instagram, Phone, Menu as MenuIcon, X } from 'lucide-react';
+import { Instagram, Phone, Menu as MenuIcon, X, ShoppingCart } from 'lucide-react';
 import NavWave from './ui/NavWave';
 import ThemeToggle from '@/components/ThemeToggle';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { useCart } from '@/context/CartContext';
+import { useNavigate } from 'react-router-dom';
 
 const Logo = () => (
   <a href="/" className="relative flex items-center justify-center group" aria-label="Le Botocoin Home">
@@ -21,6 +23,8 @@ const Logo = () => (
 
 const Navbar = ({ onSocialClick, onCallClick, onOrderClick }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { count } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('');
@@ -47,9 +51,10 @@ const Navbar = ({ onSocialClick, onCallClick, onOrderClick }) => {
 
   const navLinks = [
     { name: t('nav_menu'), href: '#bestsellers' },
-    { name: t('nav_quality'), href: '#quality' },
+    { name: t('nav_catalog'), href: '/catalog' },
+    /* { name: t('nav_quality'), href: '#quality' }, */
     { name: t('nav_news'), href: '#news' },
-    { name: t('nav_gallery'), href: '#gallery' },
+    /* { name: t('nav_gallery'), href: '#gallery' }, */
     { name: t('nav_contact'), href: '#contact' },
   ];
 
@@ -94,11 +99,27 @@ const Navbar = ({ onSocialClick, onCallClick, onOrderClick }) => {
               <button onClick={onCallClick} className="p-2 text-chocolate-brown dark:text-soft-cream/90 hover:text-amber-orange dark:hover:text-amber-orange transition-colors">
                 <Phone size={22} />
               </button>
-              <button onClick={onOrderClick} className="btn-primary ml-2 !px-6 !py-2.5">{t('nav_order')}</button>
+               <button onClick={() => navigate('/cart')} className="btn-primary ml-2 !px-6 !py-2.5 relative">
+                <ShoppingCart className="mr-2 h-5 w-5" />
+                {t('nav_order')}
+                {count > 0 && (
+                  <span className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-xs font-bold text-white">
+                    {count}
+                  </span>
+                )}
+              </button>
             </div>
             <div className="md:hidden flex items-center gap-2">
               <LanguageSwitcher />
               <ThemeToggle />
+              <button onClick={() => navigate('/cart')} className="text-chocolate-brown dark:text-soft-cream z-50 relative p-2" aria-label="Open cart">
+                <ShoppingCart size={28} />
+                {count > 0 && (
+                  <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs font-bold text-white">
+                    {count}
+                  </span>
+                )}
+              </button>
               <button onClick={() => setIsOpen(!isOpen)} className="text-chocolate-brown dark:text-soft-cream z-50 relative" aria-label="Open menu">
                 {isOpen ? <X size={28} /> : <MenuIcon size={28} />}
               </button>
