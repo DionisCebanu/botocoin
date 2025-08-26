@@ -76,7 +76,7 @@ const ProductCard = ({ product }) => {
         </div>
 
         <div className="mt-auto pt-4 flex-col justify-between items-center">
-          <p className="text-xl font-bold text-chocolate-brown dark:text-soft-cream">
+          <p className="text-xl font-bold text-chocolate-brown dark:text-soft-cream mb-5">
             ${product.price.toFixed(2)}
           </p>
           <div className="flex gap-2">
