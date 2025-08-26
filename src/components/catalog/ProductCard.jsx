@@ -50,6 +50,9 @@ const ProductCard = ({ product }) => {
             loading="lazy"
           />
         </Link>
+        <Button onClick={handleAddToCart} size="sm" className="bg-amber-orange hover:bg-[rgb(204,135,19)] transition-all duration-500 text-white font-bold absolute top-1 right-3">
+            <ShoppingCart className="h-4 w-4 mr-2" /> {t('catalog_add_to_cart')}
+        </Button>
       </div>
 
       <div className="p-5 text-left flex flex-col flex-grow">
@@ -72,19 +75,17 @@ const ProductCard = ({ product }) => {
           <span className="text-sm text-warm-gray">({product.rating.toFixed(1)})</span>
         </div>
 
-        <div className="mt-auto pt-4 flex justify-between items-center">
+        <div className="mt-auto pt-4 flex-col justify-between items-center">
           <p className="text-xl font-bold text-chocolate-brown dark:text-soft-cream">
             ${product.price.toFixed(2)}
           </p>
           <div className="flex gap-2">
-            <Button asChild variant="outline" size="sm">
+            <Button asChild size="sm" className="w-full bg-amber-orange hover:bg-[rgb(204,135,19)] transition-all duration-500 text-white font-bold">
               <Link to={`/details/${product.id}`} state={{ from: location.search }}>
                 {t('catalog_details')}
               </Link>
             </Button>
-            <Button onClick={handleAddToCart} size="sm">
-              <ShoppingCart className="h-4 w-4 mr-2" /> {t('catalog_add_to_cart')}
-            </Button>
+           
           </div>
         </div>
       </div>

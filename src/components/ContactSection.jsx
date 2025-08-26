@@ -186,7 +186,7 @@ const ContactSection = ({ onFormSubmit }) => {
             <FloatingLabelTextarea id="message" label={t('form_message_label')} required className="min-h-[120px]" />
 
             <div className="flex justify-end">
-              <button type="submit" className="btn-primary inline-flex items-center">
+              <button type="submit" className="inline-flex items-center">
                 <Send className="mr-2 h-5 w-5" />
                 {t('form_submit_button')}
               </button>
