@@ -17,7 +17,7 @@ import NavWave from '../components/ui/NavWave';
 import { Button } from '@/components/ui/button';
 
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://127.0.0.1:8000/api';
+const API_BASE = import.meta.env.VITE_API_BASE || 'https://event-api.dioniscode.com/public/api';
 
 const ProductDetailsPage = () => {
   const { id } = useParams(); // dynamic id

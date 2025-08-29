@@ -6,7 +6,7 @@ import ProductCard from '@/components/catalog/ProductCard';
 import AnimatedSection from '@/components/AnimatedSection';
 import { containerVariants, itemVariants } from '@/lib/animations';
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://127.0.0.1:8000/api';
+const API_BASE = import.meta.env.VITE_API_BASE || 'https://event-api.dioniscode.com/public/api';
 
 const RelatedProducts = ({ currentItemId, category }) => {
   const { t } = useTranslation();
