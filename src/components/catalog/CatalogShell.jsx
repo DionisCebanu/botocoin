@@ -79,7 +79,7 @@ export default function CatalogShell() {
           title: p.title,
           cat: p.category?.slug || 'uncategorized',
           price: Number(p.price ?? 0),
-          rating: 0,              // API has no rating; keep 0 to preserve sorting code
+          rating: p.rating === null || p.rating === undefined ? 4 : Number(p.rating),
           img: p.coverUrl || '',  // used by ProductsGrid
           popular: false,         // not in API; default
           newest: false,          // not in API; default

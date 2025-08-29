@@ -71,8 +71,8 @@ const ProductCard = ({ product }) => {
             {[...Array(5 - Math.floor(product.rating))].map((_, i) => (
               <Star key={i} size={16} className="text-amber-orange/30" />
             ))}
+            <p className='text-sm text-warm-gray'>({Number(product.rating ?? 0).toFixed(1)})</p>
           </div>
-          <span className="text-sm text-warm-gray">({product.rating.toFixed(1)})</span>
         </div>
 
         <div className="mt-auto pt-4 flex-col justify-between items-center">

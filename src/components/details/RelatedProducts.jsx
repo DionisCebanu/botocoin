@@ -33,7 +33,7 @@ const RelatedProducts = ({ currentItemId, category }) => {
             title: p.title,
             cat: p.category?.slug || category,
             price: Number(p.price ?? 0),
-            rating: 0,                 // API has no rating
+            rating: p.rating === null || p.rating === undefined ? 4 : Number(p.rating),                // API has no rating
             img: p.coverUrl || '',     // ProductCard usually uses product.img
             _raw: p,
           }));

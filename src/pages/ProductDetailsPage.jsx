@@ -45,7 +45,7 @@ const ProductDetailsPage = () => {
       // keep fields used elsewhere in this page:
       img: imageUrls[0] || '',          // first image as primary
       images: imageUrls,                // gallery expects array of URLs
-      rating: 0,                        // backend has no rating; keep 0
+      rating: p.rating === null || p.rating === undefined ? 4 : Number(p.rating),                       // backend has no rating; keep 0
       reviewCount: 0,                   // optional
       _raw: p,                          // preserve original in case you need more
     };
