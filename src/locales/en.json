@@ -245,9 +245,9 @@
   "about_team_title": "Meet the Team",
   "about_team_subtitle": "The passionate faces behind your favorite donuts.",
   "about_team_members": [
-    { "name": "Aya Koné", "role": "Founder & Head Chef", "bio": "Aya is the heart and soul of Le Botocoin. Her recipes, inherited from her grandmother, are the foundation of our success." },
-    { "name": "David Tremblay", "role": "Operations Manager", "bio": "David ensures that every donut is perfect and that your experience in our store is unforgettable. A master of logistics and good humor." },
-    { "name": "Chloé Dubois", "role": "Marketing & Community", "bio": "Chloé shares our story and our passion with the world. She's the one who makes our community so vibrant." }
+    { "name": "Aya Koné", "role": "Founder & Head Chef", "bio": "Aya is the heart and soul of Le Botocoin. Her recipes, inherited from her grandmother, are the foundation of our success.", "image":"/img/staff/staff-1.jpg" },
+    { "name": "David Tremblay", "role": "Operations Manager", "bio": "David ensures that every donut is perfect and that your experience in our store is unforgettable. A master of logistics and good humor.", "image":"/img/staff/staff-2.jpg" },
+    { "name": "Chloé Dubois", "role": "Marketing & Community", "bio": "Chloé shares our story and our passion with the world. She's the one who makes our community so vibrant.", "image":"/img/staff/staff-3.jpg" }
   ],
 
   "about_franchise_title": "Open Your Own Botocoin",

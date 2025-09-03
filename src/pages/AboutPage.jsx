@@ -11,6 +11,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { toast } from '@/components/ui/use-toast';
+import { appearContainer, appearItem } from '@/lib/animations';
 import AnimatedSection from '@/components/AnimatedSection';
 import { containerVariants, itemVariants } from '@/lib/animations';
 import CtaBanner from '@/components/CtaBanner';
@@ -30,7 +31,7 @@ const AboutHero = () => {
     const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
     return (
-        <section className="relative overflow-hidden bg-chocolate-brown text-white">
+        <section className="relative overflow-hidden bg-[#4385d7] text-white">
             <FlyingDecor className="z-0 opacity-20" />
             <div className="relative z-10 section-container h-[80vh] min-h-[600px] flex items-center justify-center text-center">
                 <motion.div variants={containerVariants} initial="hidden" animate="visible">
@@ -108,8 +109,8 @@ const ValuesSection = () => {
                                 key={index} 
                                 className="bg-white/95 dark:bg-dark-surface/95 p-8 rounded-2xl shadow-soft"
                             >
-                                <div className="w-11 h-11 bg-amber-100 text-amber-700 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
-                                    {React.cloneElement(icons[index], { size: 24 })}
+                                <div className="w-32 h-32 bg-amber-100 text-amber-700 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+                                    {React.cloneElement(icons[index], { size: 28 })}
                                 </div>
                                 <h3 className="text-xl font-bold mb-2">{value.title}</h3>
                                 <p className="text-warm-gray">{value.description}</p>
@@ -150,7 +151,7 @@ const TeamSection = () => {
                                 <img 
                                     className="w-full aspect-square rounded-md object-cover"
                                     alt={`Portrait of ${member.name}`}
-                                    src="https://images.unsplash.com/photo-1603991414220-51b87b89a371" />
+                                    src={member.image} />
                             </div>
                             <h3 className="text-xl font-bold">{member.name}</h3>
                             <p className="text-amber-orange font-semibold mb-4">{member.role}</p>
@@ -165,27 +166,27 @@ const TeamSection = () => {
 
 const GalleryStrip = () => {
     const { t } = useTranslation();
-    const images = [...Array(6)].map((_, i) => `https://images.unsplash.com/photo-1551024601-BEC782862a79?q=80&w=400&h=400&fit=crop&ixid=${i}`);
+    const images = [...Array(8)].map((_, i) => `https://images.unsplash.com/photo-1551024601-BEC782862a79?q=80&w=400&h=400&fit=crop&ixid=${i}`);
+    
     return (
-        <AnimatedSection className="!py-10">
-            <div className="relative group overflow-hidden">
-                <motion.div 
-                    className="flex gap-4"
-                    animate={{ x: ['0%', '-50%'] }}
-                    transition={{ ease: 'linear', duration: 30, repeat: Infinity }}
-                >
-                    {[...images, ...images].map((src, i) => (
-                         <div key={i} className="flex-shrink-0 w-64 h-64 overflow-hidden">
-                            <img 
-                                className="w-full h-full object-cover rounded-xl shadow-sm transition-transform duration-500 ease-in-out group-hover:scale-110"
-                                alt={t(`gallery_images.${i % 6}.alt`)}
-                                src={src}
-                            />
-                        </div>
-                    ))}
-                </motion.div>
-            </div>
-        </AnimatedSection>
+        <div className="py-16 md:py-20 group overflow-hidden">
+            <motion.div 
+                className="flex gap-4"
+                animate={{ x: ['0%', '-100%'] }}
+                transition={{ ease: 'linear', duration: 40, repeat: Infinity }}
+            >
+                {[...images, ...images].map((src, i) => (
+                     <div key={i} className="flex-shrink-0 w-64 h-64 overflow-hidden">
+                        <motion.div whileHover={{scale: 1.05}} className="w-full h-full">
+                        <img  
+                            className="w-full h-full object-cover rounded-xl shadow-sm"
+                            alt={t(`gallery_images.${i % 6}.alt`, {defaultValue: `Botocoin delicacy ${i}`})}
+                         src="https://images.unsplash.com/photo-1589997215919-84ed3a2d51f4" />
+                        </motion.div>
+                    </div>
+                ))}
+            </motion.div>
+        </div>
     );
 };
 
@@ -235,74 +236,61 @@ const FranchiseSection = () => {
     return (
         <section id="franchise" className="section-wrapper bg-white dark:bg-dark-surface relative overflow-hidden">
             <FlyingDecor className="z-0 opacity-10" />
-            <div className="absolute -z-10 blur-3xl opacity-30 w-96 h-96 rounded-full bg-gradient-to-br from-amber-300/30 to-rose-300/30 -bottom-20 -right-20" />
             <div className="section-container relative z-10">
-                <AnimatedSection>
-                    <motion.div variants={itemVariants} className="text-center mb-16">
-                        <h2 className="section-title mb-4">{t('about_franchise_title')}</h2>
-                        <p className="section-subtitle mx-auto">{t('about_franchise_subtitle')}</p>
+                <motion.div 
+                    variants={appearContainer} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }}
+                    className="text-center mb-16"
+                >
+                    <motion.h2 variants={appearItem} className="section-title mb-4">{t('about_franchise_title')}</motion.h2>
+                    <motion.p variants={appearItem} className="section-subtitle mx-auto">{t('about_franchise_subtitle')}</motion.p>
+                </motion.div>
+                
+                <motion.div variants={appearContainer} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className="space-y-16">
+                    <div className="grid md:grid-cols-2 gap-8">
+                        <motion.div variants={appearItem} className="bg-soft-cream/50 dark:bg-dark-bg/50 p-8 rounded-2xl">
+                            <h3 className="text-2xl font-bold mb-4">{t('about_franchise_benefits_title')}</h3>
+                            <ul className="space-y-2">
+                                {t('about_franchise_benefits_list', { returnObjects: true }).map(item => (
+                                    <li key={item} className="flex items-start gap-3"><Check size={20} className="text-green-500 mt-1 flex-shrink-0" /> {item}</li>
+                                ))}
+                            </ul>
+                        </motion.div>
+                        <motion.div variants={appearItem} className="bg-soft-cream/50 dark:bg-dark-bg/50 p-8 rounded-2xl">
+                            <h3 className="text-2xl font-bold mb-4">{t('about_franchise_requirements_title')}</h3>
+                            <ul className="space-y-2">
+                                {t('about_franchise_requirements_list', { returnObjects: true }).map(item => (
+                                    <li key={item} className="flex items-start gap-3"><Check size={20} className="text-green-500 mt-1 flex-shrink-0" /> {item}</li>
+                                ))}
+                            </ul>
+                        </motion.div>
+                    </div>
+
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {t('about_franchise_investment_items', { returnObjects: true }).map(item => (
+                            <motion.div variants={appearItem} key={item.label} className="bg-soft-cream/50 dark:bg-dark-bg/50 p-4 rounded-xl text-center">
+                                <p className="font-bold text-lg">{item.value}</p>
+                                <p className="text-sm text-warm-gray">{item.label}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </motion.div>
+                
+
+                <div className="grid lg:grid-cols-5 gap-16 items-start">
+                    <motion.div variants={appearContainer} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className="lg:col-span-2 space-y-8 relative">
+                        <div className="absolute top-1/2 left-4 w-0.5 h-full bg-amber-200 dark:bg-amber-800 -translate-y-1/2" />
+                        {t('about_franchise_steps_list', { returnObjects: true }).map((step, index) => (
+                            <motion.div variants={appearItem} key={step} className="flex items-center gap-4 relative">
+                                <div className="z-10 flex-shrink-0 w-8 h-8 bg-amber-500 text-white rounded-full flex items-center justify-center font-bold">{index + 1}</div>
+                                <p>{step}</p>
+                            </motion.div>
+                        ))}
                     </motion.div>
 
-                    <div className="grid lg:grid-cols-5 gap-16">
-                        <motion.div variants={containerVariants} className="lg:col-span-3 space-y-12">
-                            <div className="grid md:grid-cols-2 gap-8">
-                                <motion.div variants={itemVariants}>
-                                    <h3 className="text-2xl font-bold mb-4">{t('about_franchise_benefits_title')}</h3>
-                                    <ul className="space-y-2">
-                                        {t('about_franchise_benefits_list', { returnObjects: true }).map(item => (
-                                            <li key={item} className="flex items-start gap-3 before:content-['✓'] before:text-amber-600 before:mr-2"> {item}</li>
-                                        ))}
-                                    </ul>
-                                </motion.div>
-                                <motion.div variants={itemVariants}>
-                                    <h3 className="text-2xl font-bold mb-4">{t('about_franchise_requirements_title')}</h3>
-                                    <ul className="space-y-2">
-                                        {t('about_franchise_requirements_list', { returnObjects: true }).map(item => (
-                                            <li key={item} className="flex items-start gap-3 before:content-['✓'] before:text-amber-600 before:mr-2"> {item}</li>
-                                        ))}
-                                    </ul>
-                                </motion.div>
-                            </div>
-                            <motion.div variants={itemVariants}>
-                                <h3 className="text-2xl font-bold mb-4">{t('about_franchise_investment_title')}</h3>
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                    {t('about_franchise_investment_items', { returnObjects: true }).map(item => (
-                                        <div key={item.label} className="bg-soft-cream/50 dark:bg-dark-bg p-4 rounded-xl text-center">
-                                            <p className="font-bold text-lg">{item.value}</p>
-                                            <p className="text-sm text-warm-gray">{item.label}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </motion.div>
-                            <motion.div variants={itemVariants}>
-                                <h3 className="text-2xl font-bold mb-6">{t('about_franchise_steps_title')}</h3>
-                                <div className="flex flex-wrap gap-x-4 gap-y-2">
-                                    {t('about_franchise_steps_list', { returnObjects: true }).map((step, index) => (
-                                        <React.Fragment key={step}>
-                                            <div className="flex items-center gap-2 text-sm bg-gray-100 dark:bg-dark-surface-alt px-3 py-1 rounded-full">
-                                                <span className="font-bold text-amber-orange">{index + 1}</span>
-                                                <span>{step}</span>
-                                            </div>
-                                            {index < t('about_franchise_steps_list', { returnObjects: true }).length - 1 && <span className="text-warm-gray self-center">&rarr;</span>}
-                                        </React.Fragment>
-                                    ))}
-                                </div>
-                            </motion.div>
-                            <motion.div variants={itemVariants}>
-                                <h3 className="text-2xl font-bold mb-4">{t('about_franchise_faq_title')}</h3>
-                                <Accordion type="single" collapsible className="w-full">
-                                    {t('about_franchise_faq_items', { returnObjects: true }).map((item, i) => (
-                                        <AccordionItem key={i} value={`item-${i}`}>
-                                            <AccordionTrigger>{item.q}</AccordionTrigger>
-                                            <AccordionContent>{item.a}</AccordionContent>
-                                        </AccordionItem>
-                                    ))}
-                                </Accordion>
-                            </motion.div>
-                        </motion.div>
-
-                        <motion.div variants={itemVariants} className="lg:col-span-2">
-                            <form onSubmit={handleSubmit} className="bg-white/80 dark:bg-dark-surface/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-dark-surface/60 p-8 rounded-2xl shadow-soft space-y-4 sticky top-28">
+                    <motion.div variants={appearItem} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="lg:col-span-3">
+                        <div className="sticky top-28">
+                             <div className="absolute -z-10 blur-3xl opacity-40 w-80 h-80 rounded-full bg-gradient-to-tr from-amber-300/30 to-rose-300/30 -top-10 -left-10" />
+                            <form onSubmit={handleSubmit} className="bg-white/70 dark:bg-dark-surface/70 backdrop-blur supports-[backdrop-filter]:bg-white/50 dark:supports-[backdrop-filter]:bg-dark-surface/50 p-8 rounded-2xl shadow-soft space-y-4">
                                 <h3 className="text-2xl font-bold font-display mb-4 text-center">{t('about_franchise_form_title')}</h3>
                                 <div className="grid grid-cols-2 gap-4">
                                     <Input name="fname" placeholder={t('about_franchise_form_fname') + '*'} value={formData.fname} onChange={handleInputChange} className={errors.fname ? 'border-red-500' : ''}/>
@@ -310,39 +298,25 @@ const FranchiseSection = () => {
                                 </div>
                                 <Input name="email" type="email" placeholder={t('about_franchise_form_email') + '*'} value={formData.email} onChange={handleInputChange} className={errors.email ? 'border-red-500' : ''}/>
                                 <Input name="phone" placeholder={t('about_franchise_form_phone')} value={formData.phone} onChange={handleInputChange} />
-                                <div className="grid grid-cols-2 gap-4">
-                                    <Input name="city" placeholder={t('about_franchise_form_city')} value={formData.city} onChange={handleInputChange} />
-                                    <Input name="province" placeholder={t('about_franchise_form_province')} value={formData.province} onChange={handleInputChange} />
-                                </div>
-                                <Input name="country" placeholder={t('about_franchise_form_country')} value={formData.country} onChange={handleInputChange} />
                                 <Select name="capital" onValueChange={(v) => handleSelectChange('capital', v)}>
                                     <SelectTrigger><SelectValue placeholder={t('about_franchise_form_capital_placeholder')} /></SelectTrigger>
-                                    <SelectContent>
-                                        {t('about_franchise_form_capital_options', {returnObjects: true}).map(opt => <SelectItem key={opt} value={opt}>{opt}</SelectItem>)}
-                                    </SelectContent>
-                                </Select>
-                                <Select name="timeframe" onValueChange={(v) => handleSelectChange('timeframe', v)}>
-                                    <SelectTrigger><SelectValue placeholder={t('about_franchise_form_timeframe_placeholder')} /></SelectTrigger>
-                                    <SelectContent>
-                                        {t('about_franchise_form_timeframe_options', {returnObjects: true}).map(opt => <SelectItem key={opt} value={opt}>{opt}</SelectItem>)}
-                                    </SelectContent>
+                                    <SelectContent>{t('about_franchise_form_capital_options', {returnObjects: true}).map(opt => <SelectItem key={opt} value={opt}>{opt}</SelectItem>)}</SelectContent>
                                 </Select>
                                 <Textarea name="message" placeholder={t('about_franchise_form_message')} value={formData.message} onChange={handleInputChange} />
                                 <div className="flex items-center space-x-2 pt-2">
                                     <Checkbox id="consent" name="consent" checked={formData.consent} onCheckedChange={(c) => handleInputChange({target: {name: 'consent', type:'checkbox', checked:c}})} className={errors.consent ? 'border-red-500' : ''}/>
-                                    <label htmlFor="consent" className="text-sm text-warm-gray leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">{t('about_franchise_form_consent')}</label>
+                                    <label htmlFor="consent" className="text-sm text-warm-gray leading-none">{t('about_franchise_form_consent')}</label>
                                 </div>
                                 <SparkleButton type="submit" className="w-full !mt-6" size="lg"><Plus className="mr-2 h-4 w-4" />{t('about_franchise_form_submit')}</SparkleButton>
                                 <Button type="button" onClick={() => handleNotImplemented('Franchise Brochure Download')} variant="outline" className="w-full btn-secondary !mt-2" size="lg"><FileText className="mr-2 h-4 w-4" />{t('about_franchise_brochure_button')}</Button>
                             </form>
-                        </motion.div>
-                    </div>
-                </AnimatedSection>
+                        </div>
+                    </motion.div>
+                </div>
             </div>
         </section>
     );
 };
-
 
 const AboutPage = () => {
     const { t } = useTranslation();

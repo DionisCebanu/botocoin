@@ -245,9 +245,9 @@
   "about_team_title": "Rencontrez l'Équipe",
   "about_team_subtitle": "Les visages passionnés derrière vos beignets préférés.",
   "about_team_members": [
-    { "name": "Aya Koné", "role": "Fondatrice & Cheffe Pâtissière", "bio": "Aya est le cœur et l'âme de Le Botocoin. Ses recettes, héritées de sa grand-mère, sont le fondement de notre succès." },
-    { "name": "David Tremblay", "role": "Directeur des Opérations", "bio": "David s'assure que chaque beignet est parfait et que votre expérience en boutique est inoubliable. Un maître de la logistique et de la bonne humeur." },
-    { "name": "Chloé Dubois", "role": "Marketing & Communauté", "bio": "Chloé partage notre histoire et notre passion avec le monde. C'est elle qui rend notre communauté si vivante." }
+    { "name": "Aya Koné", "role": "Fondatrice & Cheffe Pâtissière", "bio": "Aya est le cœur et l'âme de Le Botocoin. Ses recettes, héritées de sa grand-mère, sont le fondement de notre succès.", "image":"/img/staff/staff-1.jpg" },
+    { "name": "David Tremblay", "role": "Directeur des Opérations", "bio": "David s'assure que chaque beignet est parfait et que votre expérience en boutique est inoubliable. Un maître de la logistique et de la bonne humeur.", "image":"/img/staff/staff-2.jpg" },
+    { "name": "Chloé Dubois", "role": "Marketing & Communauté", "bio": "Chloé partage notre histoire et notre passion avec le monde. C'est elle qui rend notre communauté si vivante.", "image":"/img/staff/staff-3.jpg" }
   ],
 
   "about_franchise_title": "Ouvrez Votre Propre Botocoin",
