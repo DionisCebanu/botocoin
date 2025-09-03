@@ -7,6 +7,7 @@
   "nav_order": "Commander",
   "nav_news": "Actualités",
   "nav_catalog": "Catalogue",
+  "nav_about": "À Propos",
 
   "hero_promo_badge": "Promo de la semaine {{index}}",
   "hero_slides": [
@@ -216,5 +217,90 @@
   "order_success_pickup_time": "L'heure de retrait que vous avez choisie est :",
   "order_success_payment_notice": "Veuillez vous préparer à payer au restaurant. Nous acceptons les espèces, le débit et les cartes de crédit.",
   "order_success_add_to_calendar": "Ajouter au calendrier",
-  "order_success_back_home": "Retour à l'accueil"
+  "order_success_back_home": "Retour à l'accueil",
+
+   "about_seo_title": "À Propos - Le Botocoin",
+  "about_seo_description": "Découvrez l'histoire de Le Botocoin, nos valeurs, et comment vous pouvez rejoindre notre famille en démarrant une franchise.",
+  "about_hero_title": "À Propos de Le Botocoin",
+  "about_hero_subtitle": "Beignets africains artisanaux, faits avec amour à Montréal.",
+  "about_hero_cta_team": "L'Équipe",
+  "about_hero_cta_franchise": "Devenir Franchisé",
+  "about_address": "3881 Rue Rachel Est, Montréal, QC H1X 1Z2",
+
+  "about_story_title": "Notre Histoire, Notre Mission",
+  "about_story_content": "Nous célébrons les saveurs de l'Afrique de l'Ouest avec une touche montréalaise. Pâte pétrie chaque jour, frite à la perfection, et finie avec nos glaçages et épices maison. Des réunions de famille aux envies de fin de soirée, nous créons de la joie—une bouchée à la fois.",
+  "about_story_timeline": [
+    { "year": "2018", "event": "Première fournée" },
+    { "year": "2021", "event": "Ouverture de la boutique" },
+    { "year": "2025", "event": "Programme de franchise" }
+  ],
+  
+  "about_values_title": "Nos Valeurs",
+  "about_values_items": [
+    { "title": "Ingrédients Frais", "description": "Locaux, de saison, et toujours de la plus haute qualité pour un goût authentique." },
+    { "title": "Recettes Authentiques", "description": "Un héritage familial transmis et perfectionné avec passion." },
+    { "title": "Ambiance Chaleureuse", "description": "Plus qu'une boulangerie, un lieu où chacun se sent chez soi." }
+  ],
+
+  "about_team_title": "Rencontrez l'Équipe",
+  "about_team_subtitle": "Les visages passionnés derrière vos beignets préférés.",
+  "about_team_members": [
+    { "name": "Aya Koné", "role": "Fondatrice & Cheffe Pâtissière", "bio": "Aya est le cœur et l'âme de Le Botocoin. Ses recettes, héritées de sa grand-mère, sont le fondement de notre succès." },
+    { "name": "David Tremblay", "role": "Directeur des Opérations", "bio": "David s'assure que chaque beignet est parfait et que votre expérience en boutique est inoubliable. Un maître de la logistique et de la bonne humeur." },
+    { "name": "Chloé Dubois", "role": "Marketing & Communauté", "bio": "Chloé partage notre histoire et notre passion avec le monde. C'est elle qui rend notre communauté si vivante." }
+  ],
+
+  "about_franchise_title": "Ouvrez Votre Propre Botocoin",
+  "about_franchise_subtitle": "Apportez les saveurs authentiques des beignets africains dans votre ville avec notre formation, nos manuels et notre soutien au lancement.",
+  "about_franchise_benefits_title": "Les Avantages",
+  "about_franchise_benefits_list": [
+    "Une marque aimée et reconnue", "Formation complète et manuels opérationnels", "Aide à la sélection du site", "Soutien marketing au lancement", "Accès à des fournisseurs privilégiés"
+  ],
+  "about_franchise_requirements_title": "Les Prérequis",
+  "about_franchise_requirements_list": [
+    "Passion pour l'hospitalité et la qualité", "Opérateur direct ou gestionnaire dédié", "Capital liquide de 60 000 $ CA+", "Espace de 600–1 200 pi²", "Capacité à obtenir les permis et gérer un bac à graisse", "Emplacement avec un bon achalandage"
+  ],
+  "about_franchise_investment_title": "L'Investissement",
+  "about_franchise_investment_items": [
+    { "label": "Frais de Franchise", "value": "25 000 $ CA" },
+    { "label": "Investissement Initial", "value": "120 000 $ – 250 000 $ CA" },
+    { "label": "Redevances", "value": "6% des ventes brutes" },
+    { "label": "Fonds de Marque", "value": "2% des ventes brutes" }
+  ],
+  "about_franchise_steps_title": "Les Étapes vers l'Ouverture",
+  "about_franchise_steps_list": ["Demande Initiale", "Appel de Découverte", "Plan d'Affaires et Finances", "Approbation du Site", "Formation de 2–3 semaines", "Marketing de Pré-ouverture", "Grande Ouverture"],
+  
+  "about_franchise_faq_title": "Foire Aux Questions",
+  "about_franchise_faq_items": [
+    { "q": "Quel est le délai typique pour ouvrir ?", "a": "De la signature à la grande ouverture, le processus prend généralement de 3 à 6 mois, selon la sélection du site et la construction." },
+    { "q": "L'expérience en restauration est-elle requise ?", "a": "Bien qu'utile, ce n'est pas obligatoire. Nous offrons une formation complète. La passion pour la qualité et le service client est le plus important." },
+    { "q": "Puis-je convertir un emplacement existant ?", "a": "Oui, nous sommes ouverts aux conversions si l'emplacement répond à nos critères et peut être adapté à nos normes de marque." },
+    { "q": "Est-ce que j'obtiens un territoire protégé ?", "a": "Oui, chaque franchisé reçoit un territoire protégé défini par des données démographiques et la densité de population." }
+  ],
+
+  "about_franchise_form_title": "Formulaire de Demande de Franchise",
+  "about_franchise_form_fname": "Prénom",
+  "about_franchise_form_lname": "Nom",
+  "about_franchise_form_email": "Courriel",
+  "about_franchise_form_phone": "Téléphone",
+  "about_franchise_form_city": "Ville",
+  "about_franchise_form_province": "Province/État",
+  "about_franchise_form_country": "Pays",
+  "about_franchise_form_capital": "Capital Liquide Disponible",
+  "about_franchise_form_capital_placeholder": "Sélectionnez un montant",
+  "about_franchise_form_capital_options": ["< 75k $", "75k $ - 150k $", "150k $ - 250k $", "> 250k $"],
+  "about_franchise_form_timeframe": "Délai d'Ouverture Souhaité",
+  "about_franchise_form_timeframe_placeholder": "Sélectionnez un délai",
+  "about_franchise_form_timeframe_options": ["3-6 mois", "6-12 mois", "12+ mois"],
+  "about_franchise_form_message": "Votre Message",
+  "about_franchise_form_consent": "Je consens à être contacté par l'équipe de Le Botocoin concernant ma demande de franchise.",
+  "about_franchise_form_submit": "Soumettre la Demande",
+  "about_franchise_form_success_title": "Demande Envoyée !",
+  "about_franchise_form_success_desc": "Merci de votre intérêt. Nous vous contacterons sous peu.",
+  "about_franchise_brochure_button": "Télécharger la Brochure de Franchise (PDF)",
+
+  "about_cta_banner_title": "Goûtez à la Tradition — Rejoignez la Famille Botocoin !",
+  "about_cta_banner_button": "Devenir Franchisé",
+
+  "about_plan_visit_button": "Planifiez Votre Visite"
 }

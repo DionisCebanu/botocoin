@@ -12,6 +12,7 @@ import HomePage from '@/pages/HomePage';
 import CatalogPage from '@/pages/CatalogPage';
 import ProductDetailsPage from '@/pages/ProductDetailsPage';
 import CartPage from '@/pages/CartPage';
+import AboutPage from './pages/AboutPage';
 import CheckoutPage from '@/pages/CheckoutPage';
 import { CartProvider } from '@/context/CartContext';
 
@@ -34,6 +35,7 @@ const AppContent = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/details/:id" element={<ProductDetailsPage />} />
           <Route path="/cart" element={<CartPage />} />

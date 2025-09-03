@@ -7,6 +7,7 @@
   "nav_order": "Order Now",
   "nav_news": "News",
   "nav_catalog": "Catalog",
+  "nav_about": "About Us",
 
   "hero_promo_badge": "Promo of the week {{index}}",
   "hero_slides": [
@@ -216,5 +217,90 @@
   "order_success_pickup_time": "Your selected pickup time is:",
   "order_success_payment_notice": "Please be ready to pay at the restaurant. We accept cash, debit, and credit cards.",
   "order_success_add_to_calendar": "Add to Calendar",
-  "order_success_back_home": "Back to Home"
+  "order_success_back_home": "Back to Home",
+
+  "about_seo_title": "About Us - Le Botocoin",
+  "about_seo_description": "Discover the story of Le Botocoin, our values, and how you can join our family by starting a franchise.",
+  "about_hero_title": "About Le Botocoin",
+  "about_hero_subtitle": "Handcrafted African donuts, made with love in Montréal.",
+  "about_hero_cta_team": "Meet the Team",
+  "about_hero_cta_franchise": "Start a Franchise",
+  "about_address": "3881 Rue Rachel Est, Montréal, QC H1X 1Z2",
+
+  "about_story_title": "Our Story, Our Mission",
+  "about_story_content": "We celebrate West African flavors with a Montréal twist. Dough mixed daily, fried golden, finished with house glazes & spices. From family gatherings to late-night cravings, we make joy—one bite at a time.",
+  "about_story_timeline": [
+    { "year": "2018", "event": "First batch" },
+    { "year": "2021", "event": "Storefront opening" },
+    { "year": "2025", "event": "Franchise program" }
+  ],
+
+  "about_values_title": "Our Values",
+  "about_values_items": [
+    { "title": "Fresh Ingredients", "description": "Local, seasonal, and always of the highest quality for an authentic taste." },
+    { "title": "Authentic Recipes", "description": "A family heritage passed down and perfected with passion." },
+    { "title": "Warm Atmosphere", "description": "More than a bakery, a place where everyone feels at home." }
+  ],
+  
+  "about_team_title": "Meet the Team",
+  "about_team_subtitle": "The passionate faces behind your favorite donuts.",
+  "about_team_members": [
+    { "name": "Aya Koné", "role": "Founder & Head Chef", "bio": "Aya is the heart and soul of Le Botocoin. Her recipes, inherited from her grandmother, are the foundation of our success." },
+    { "name": "David Tremblay", "role": "Operations Manager", "bio": "David ensures that every donut is perfect and that your experience in our store is unforgettable. A master of logistics and good humor." },
+    { "name": "Chloé Dubois", "role": "Marketing & Community", "bio": "Chloé shares our story and our passion with the world. She's the one who makes our community so vibrant." }
+  ],
+
+  "about_franchise_title": "Open Your Own Botocoin",
+  "about_franchise_subtitle": "Bring authentic African donuts to your city with our training, playbooks, and launch support.",
+  "about_franchise_benefits_title": "The Benefits",
+  "about_franchise_benefits_list": [
+    "A beloved and recognized brand", "Complete training & operational playbooks", "Assistance with site selection", "Launch marketing support", "Access to preferred vendors"
+  ],
+  "about_franchise_requirements_title": "The Requirements",
+  "about_franchise_requirements_list": [
+    "Passion for hospitality and quality", "Hands-on operator or dedicated manager", "Liquid capital of CA$60,000+", "Space of 600–1,200 sq ft", "Ability to obtain permits & manage a grease trap", "Location with good foot traffic"
+  ],
+  "about_franchise_investment_title": "The Investment",
+  "about_franchise_investment_items": [
+    { "label": "Franchise Fee", "value": "CA$25,000" },
+    { "label": "Initial Investment", "value": "CA$120,000 – 250,000" },
+    { "label": "Royalty Fee", "value": "6% of gross sales" },
+    { "label": "Brand Fund", "value": "2% of gross sales" }
+  ],
+  "about_franchise_steps_title": "The Steps to Opening",
+  "about_franchise_steps_list": ["Initial Inquiry", "Discovery Call", "Business Plan & Financials", "Site Approval", "2–3 Week Training", "Pre-Opening Marketing", "Grand Opening"],
+  
+  "about_franchise_faq_title": "Frequently Asked Questions",
+  "about_franchise_faq_items": [
+    { "q": "What is the typical timeline to open?", "a": "From signing to grand opening, the process typically takes 3 to 6 months, depending on site selection and construction." },
+    { "q": "Is restaurant experience required?", "a": "While helpful, it's not mandatory. We provide comprehensive training. A passion for quality and customer service is most important." },
+    { "q": "Can I convert an existing location?", "a": "Yes, we are open to conversions if the location meets our criteria and can be adapted to our brand standards." },
+    { "q": "Do I get a protected territory?", "a": "Yes, each franchisee receives a protected territory defined by demographic data and population density." }
+  ],
+
+  "about_franchise_form_title": "Franchise Inquiry Form",
+  "about_franchise_form_fname": "First Name",
+  "about_franchise_form_lname": "Last Name",
+  "about_franchise_form_email": "Email",
+  "about_franchise_form_phone": "Phone",
+  "about_franchise_form_city": "City",
+  "about_franchise_form_province": "Province/State",
+  "about_franchise_form_country": "Country",
+  "about_franchise_form_capital": "Liquid Capital Available",
+  "about_franchise_form_capital_placeholder": "Select an amount",
+  "about_franchise_form_capital_options": ["< $75k", "$75k - $150k", "$150k - $250k", "> $250k"],
+  "about_franchise_form_timeframe": "Desired Timeframe to Open",
+  "about_franchise_form_timeframe_placeholder": "Select a timeframe",
+  "about_franchise_form_timeframe_options": ["3-6 months", "6-12 months", "12+ months"],
+  "about_franchise_form_message": "Your Message",
+  "about_franchise_form_consent": "I consent to be contacted by the Le Botocoin team regarding my franchise inquiry.",
+  "about_franchise_form_submit": "Submit Inquiry",
+  "about_franchise_form_success_title": "Inquiry Sent!",
+  "about_franchise_form_success_desc": "Thank you for your interest. We will be in touch shortly.",
+  "about_franchise_brochure_button": "Download Franchise Brochure (PDF)",
+
+  "about_cta_banner_title": "Taste the Tradition — Join the Botocoin Family!",
+  "about_cta_banner_button": "Start a Franchise",
+
+  "about_plan_visit_button": "Plan Your Visit"
 }

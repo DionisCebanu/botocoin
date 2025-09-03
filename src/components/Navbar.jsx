@@ -52,6 +52,7 @@ const Navbar = ({ onSocialClick, onCallClick, onOrderClick }) => {
   const navLinks = [
     { name: t('nav_menu'), href: '#bestsellers' },
     { name: t('nav_catalog'), href: '/catalog' },
+    { name: t('nav_about'), href: '/about' },
     /* { name: t('nav_quality'), href: '#quality' }, */
     { name: t('nav_news'), href: '#news' },
     /* { name: t('nav_gallery'), href: '#gallery' }, */
