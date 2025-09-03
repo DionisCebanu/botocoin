@@ -49,7 +49,7 @@ const AboutHero = () => {
             {/* The divider wave lives OUTSIDE the section, so it "exits" it */}
             <div aria-hidden className="relative bottom-[0px] sm:bottom-[0px] z-30 rotate-180">
                 {/* Set these colors to the NEXT section’s background for a seamless transition */}
-                <NavWave className="block w-full h-6 md:h-10 bottom-[-40px] text-soft-cream dark:text-dark-bg opacity-90" />
+                <NavWave className="block w-full h-6 md:h-10 bottom-[-40px] text-soft-cream dark:text-dark-bg" />
             </div>
         </section>
     );
