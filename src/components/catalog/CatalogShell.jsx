@@ -9,7 +9,7 @@ import ProductsGrid from './ProductsGrid';
 import Pagination from './Pagination';
 import { Frown } from 'lucide-react';
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'https://event-api.dioniscode.com/public/api';
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000/api';
 const ITEMS_PER_PAGE = 6;
 
 const useProductFilters = () => {
@@ -23,49 +23,78 @@ const useProductFilters = () => {
     page: Number(searchParams.get('page')) || 1,
   };
 
-  const setFilters = useCallback((newFilters) => {
-    const currentParams = new URLSearchParams(searchParams);
-    Object.entries(newFilters).forEach(([key, value]) => {
-      if (
-        value === undefined ||
-        value === null ||
-        (typeof value === 'string' && value === '')
-      ) {
-        currentParams.delete(key);
-      } else {
-        currentParams.set(key, Array.isArray(value) ? value.join(',') : value);
-      }
-    });
+  const setFilters = useCallback(
+    (newFilters) => {
+      const currentParams = new URLSearchParams(searchParams);
+      Object.entries(newFilters).forEach(([key, value]) => {
+        if (
+          value === undefined ||
+          value === null ||
+          (typeof value === 'string' && value === '')
+        ) {
+          currentParams.delete(key);
+        } else {
+          currentParams.set(key, Array.isArray(value) ? value.join(',') : value);
+        }
+      });
 
-    if (newFilters.page === undefined) currentParams.set('page', '1');
-    setSearchParams(currentParams);
-  }, [searchParams, setSearchParams]);
+      // reset page if we're changing anything except page itself
+      if (newFilters.page === undefined) currentParams.set('page', '1');
+      setSearchParams(currentParams);
+    },
+    [searchParams, setSearchParams]
+  );
 
   return [filters, setFilters];
 };
 
+// normalize 'en-US' -> 'en', 'fr-CA' -> 'fr'
+const normalizeLang = (l) => {
+  if (!l) return null;
+  const lc = String(l).toLowerCase();
+  if (lc.startsWith('fr')) return 'fr';
+  if (lc.startsWith('en')) return 'en';
+  return null;
+};
+
 export default function CatalogShell() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [filters, setFilters] = useProductFilters();
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [apiItems, setApiItems] = useState([]); // mapped UI shape
+  const [serverPages, setServerPages] = useState(1); // from API meta
 
-  // Fetch products when category changes (all vs specific category)
+  // Fetch products whenever category/page/searchTerm/lang changes
   useEffect(() => {
     let alive = true;
     setLoading(true);
     setError('');
 
+    const lang = normalizeLang(i18n.language) || 'en';
+
     const fetchProducts = async () => {
       try {
         let url;
+
         if (filters.category === 'all') {
+          // /api/products supports q, page, per_page, lang
           url = new URL(`${API_BASE}/products`);
-          // you could also pass q/active here if you want server filtering
+          url.searchParams.set('per_page', String(ITEMS_PER_PAGE));
+          url.searchParams.set('page', String(filters.page));
+          url.searchParams.set('lang', lang);
+          if (filters.searchTerm) url.searchParams.set('q', filters.searchTerm);
+          // If you want only active:
+          // url.searchParams.set('active', '1');
         } else {
+          // /api/categories/{slug}/products supports per_page, page, active, lang
           url = new URL(`${API_BASE}/categories/${filters.category}/products`);
+          url.searchParams.set('per_page', String(ITEMS_PER_PAGE));
+          url.searchParams.set('page', String(filters.page));
+          url.searchParams.set('lang', lang);
+          // optional: url.searchParams.set('active','1');
+          // NOTE: byCategory doesn't support 'q' in backend; we'll filter client-side below if needed
         }
 
         const res = await fetch(url.toString());
@@ -73,33 +102,50 @@ export default function CatalogShell() {
         const json = await res.json();
 
         const items = Array.isArray(json?.data) ? json.data : [];
-        // Map API → UI shape your grid expects
+
+        // Map API → UI (include both legacy fields and full raw data)
         const mapped = items.map((p) => ({
+          // legacy fields used by existing grid/card
           id: p.id,
-          title: p.title,
+          title: p?.translated?.title ?? p.title ?? '',
           cat: p.category?.slug || 'uncategorized',
           price: Number(p.price ?? 0),
-          rating: p.rating === null || p.rating === undefined ? 4 : Number(p.rating),
-          img: p.coverUrl || '',  // used by ProductsGrid
-          popular: false,         // not in API; default
-          newest: false,          // not in API; default
+          rating: p.rating == null ? 0 : Number(p.rating),
+          img: p.coverUrl || p.images?.[0]?.url || '',
+
+          // richer fields for the new ProductCard
+          coverUrl: p.coverUrl,
+          images: p.images,
+          category: p.category,
+          translated: p.translated,
+          slug: p.slug,
+          description: p?.translated?.description ?? p.description ?? '',
+
+          // flags your sorter expects
+          popular: false,
+          newest: false,
+
           _raw: p,
         }));
 
-        if (alive) setApiItems(mapped);
+        if (!alive) return;
+        setApiItems(mapped);
+        setServerPages(Number(json?.meta?.last_page ?? 1));
       } catch (err) {
-        if (alive) {
-          setError(err.message || 'Failed to load products');
-          setApiItems([]);
-        }
+        if (!alive) return;
+        setError(err.message || 'Failed to load products');
+        setApiItems([]);
+        setServerPages(1);
       } finally {
         if (alive) setLoading(false);
       }
     };
 
     fetchProducts();
-    return () => { alive = false; };
-  }, [filters.category]);
+    return () => {
+      alive = false;
+    };
+  }, [filters.category, filters.page, filters.searchTerm, i18n.language]);
 
   const handleFilterChange = (newFilter) => setFilters(newFilter);
   const handleCategoryChange = (newCategory) => setFilters({ cat: newCategory });
@@ -108,17 +154,17 @@ export default function CatalogShell() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Client-side filter/sort (same logic you had)
+  // Client-side filter/sort over the current page results
   const filteredAndSortedProducts = useMemo(() => {
     let products = apiItems.slice();
 
-    // Search
-    if (filters.searchTerm) {
+    // If using /categories/{slug}/products, 'q' isn't server-filtered → filter here
+    if (filters.category !== 'all' && filters.searchTerm) {
       const q = filters.searchTerm.toLowerCase();
       products = products.filter((p) => p.title.toLowerCase().includes(q));
     }
 
-    // Price
+    // Price filter
     products = products.filter(
       (p) => p.price >= filters.priceRange[0] && p.price <= filters.priceRange[1]
     );
@@ -145,22 +191,15 @@ export default function CatalogShell() {
     }
 
     return products;
-  }, [apiItems, filters.searchTerm, filters.priceRange, filters.sortBy]);
+  }, [apiItems, filters.category, filters.searchTerm, filters.priceRange, filters.sortBy]);
 
-  // Pagination (client-side)
-  const paginatedProducts = useMemo(() => {
-    const startIndex = (filters.page - 1) * ITEMS_PER_PAGE;
-    return filteredAndSortedProducts.slice(
-      startIndex,
-      startIndex + ITEMS_PER_PAGE
-    );
-  }, [filters.page, filteredAndSortedProducts]);
+  // Since we now use server-side pagination, the page slice is already handled by the API.
+  const paginatedProducts = filteredAndSortedProducts;
 
-  const totalPages = Math.ceil(
-    filteredAndSortedProducts.length / ITEMS_PER_PAGE
-  );
+  // Use API-reported last_page for pagination controls
+  const totalPages = serverPages;
 
-  // Dynamic max price for FiltersBar based on current dataset
+  // Dynamic max price for FiltersBar based on current dataset/page
   const maxPrice = useMemo(() => {
     const max = Math.max(0, ...apiItems.map((p) => p.price));
     return Math.max(20, Math.ceil(max));

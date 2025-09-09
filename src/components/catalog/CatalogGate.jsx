@@ -12,7 +12,8 @@ const iconBySlug = {
 };
 const defaultIcon = LayoutGrid;
 
-const API_BASE = import.meta.env.VITE_API_BASE || "https://event-api.dioniscode.com/public/api"; 
+/* const API_BASE = import.meta.env.VITE_API_BASE || "https://event-api.dioniscode.com/public/api";  */
+const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8000/api"; 
 
 const CatalogGate = ({ onSelectCategory }) => {
   const { t, i18n } = useTranslation();
