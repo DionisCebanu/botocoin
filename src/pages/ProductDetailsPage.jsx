@@ -17,11 +17,20 @@ import NavWave from '../components/ui/NavWave';
 import { Button } from '@/components/ui/button';
 
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'https://event-api.dioniscode.com/public/api';
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000/api';
+
+// normalize 'en-US' -> 'en', 'fr-CA' -> 'fr'
+const normalizeLang = (l) => {
+  if (!l) return null;
+  const lc = String(l).toLowerCase();
+  if (lc.startsWith('fr')) return 'fr';
+  if (lc.startsWith('en')) return 'en';
+  return null;
+};
 
 const ProductDetailsPage = () => {
   const { id } = useParams(); // dynamic id
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -31,32 +40,36 @@ const ProductDetailsPage = () => {
 
   // Helper: map API product -> UI shape used by the page
   function mapApiToUi(p) {
-    const imageUrls =
-      Array.isArray(p.images) && p.images.length
-        ? p.images.map((i) => i.url)
-        : (p.coverUrl ? [p.coverUrl] : []);
+      const title = p?.translated?.title ?? p?.title ?? '';
+      const description = p?.translated?.description ?? p?.description ?? '';
 
-    return {
-      id: p.id,
-      title: p.title,
-      description: p.description,
-      price: Number(p.price ?? 0),
-      cat: p.category?.slug || 'uncategorized',
-      // keep fields used elsewhere in this page:
-      img: imageUrls[0] || '',          // first image as primary
-      images: imageUrls,                // gallery expects array of URLs
-      rating: p.rating === null || p.rating === undefined ? 4 : Number(p.rating),                       // backend has no rating; keep 0
-      reviewCount: 0,                   // optional
-      _raw: p,                          // preserve original in case you need more
-    };
-  }
+      const imageUrls =
+        Array.isArray(p.images) && p.images.length
+          ? p.images.map((i) => i.url)
+          : (p.coverUrl ? [p.coverUrl] : []);
+
+      return {
+        id: p.id,
+        title,
+        description,
+        price: Number(p.price ?? 0),
+        cat: p.category?.slug || 'uncategorized',
+        img: imageUrls[0] || '/img/promo/hero-1.png',
+        images: imageUrls,
+        rating: p.rating === null || p.rating === undefined ? 0 : Number(p.rating),
+        reviewCount: 0,
+        _raw: p,
+      };
+    }
 
   useEffect(() => {
     let alive = true;
     setLoading(true);
     setError('');
 
-    fetch(`${API_BASE}/products/${id}`)
+    const lang = normalizeLang(i18n.language) || 'en';
+
+    fetch(`${API_BASE}/products/${id}?lang=${lang}`)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to load product');
         return res.json();
@@ -73,7 +86,7 @@ const ProductDetailsPage = () => {
       .finally(() => alive && setLoading(false));
 
     return () => { alive = false; };
-  }, [id]);
+  }, [id, i18n.language]);
 
   const handleBackToResults = () => {
     navigate(`/catalog${location.state?.from || ''}`);
