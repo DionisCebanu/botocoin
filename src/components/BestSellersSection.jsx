@@ -7,10 +7,11 @@ import AnimatedSection from '@/components/AnimatedSection';
 import { itemVariants, containerVariants } from '@/lib/animations';
 import NavWave from './ui/NavWave';
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000/api';
+const API_BASE = import.meta.env.VITE_API_BASE || 'https://event-api.dioniscode.com/public/api';
 const DEBUG = true;
 
 const BestSellersSection = ({ onOrderClick }) => {
+  console.log('BestSellersSection render');
   const { t, i18n } = useTranslation();
   const [items, setItems] = useState([]);
   const [emblaRef, emblaApi] = useEmblaCarousel({
