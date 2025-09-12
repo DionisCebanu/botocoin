@@ -29,10 +29,11 @@ const ProductCard = ({ product }) => {
 
   // --- Cover image fallback chain: coverUrl -> first image -> placeholder ---
   const cover =
+    product?.img ||
     product?.coverUrl ||
     product?.images?.[0]?.url ||
-    '/img/promo/hero-1.png';
-
+    '/img/promo/hero-2.png';
+  
   // --- Category label (API returns base category name) ---
   const catLabel = product?.category?.name ?? '';
 

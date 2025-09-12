@@ -1,7 +1,6 @@
 import React, { useMemo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-/* import allProducts from '@/data/allProducts.json'; */
 import ProductCard from '@/components/catalog/ProductCard';
 import AnimatedSection from '@/components/AnimatedSection';
 import { containerVariants, itemVariants } from '@/lib/animations';
@@ -9,34 +8,40 @@ import { containerVariants, itemVariants } from '@/lib/animations';
 const API_BASE = import.meta.env.VITE_API_BASE || 'https://event-api.dioniscode.com/public/api';
 
 const RelatedProducts = ({ currentItemId, category }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch products for the same category
+  // Fetch products for the same category, localized
   useEffect(() => {
     let alive = true;
     if (!category) { setItems([]); setLoading(false); return; }
 
     setLoading(true);
-    fetch(`${API_BASE}/categories/${category}/products`)
+    const url = new URL(`${API_BASE}/categories/${category}/products`);
+    url.searchParams.set('lang', i18n.language || 'en');
+
+    fetch(url.toString())
       .then(res => { if (!res.ok) throw new Error('Failed to load'); return res.json(); })
       .then(json => {
         if (!alive) return;
         const arr = Array.isArray(json?.data) ? json.data : [];
 
-        // Map API -> UI shape ProductCard expects
         const mapped = arr
           .filter(p => p.id !== currentItemId)
-          .map(p => ({
-            id: p.id,
-            title: p.title,
-            cat: p.category?.slug || category,
-            price: Number(p.price ?? 0),
-            rating: p.rating === null || p.rating === undefined ? 4 : Number(p.rating),                // API has no rating
-            img: p.coverUrl || '',     // ProductCard usually uses product.img
-            _raw: p,
-          }));
+          .map(p => {
+            const tl = p.translated || {};
+            return {
+              id: p.id,
+              title: tl.title || p.title,                      // <-- localized title
+              cat: p.category?.slug || category,
+              price: Number(p.price ?? 0),
+              rating: p.rating === null || p.rating === undefined ? 4 : Number(p.rating),
+              img: p.coverUrl || (p.images?.[0]?.url) || p.image_url || '',
+              _raw: p,
+            };
+          });
+          console.log('Related products:', mapped.map(p => p.img));
 
         setItems(mapped);
       })
@@ -44,7 +49,7 @@ const RelatedProducts = ({ currentItemId, category }) => {
       .finally(() => alive && setLoading(false));
 
     return () => { alive = false; };
-  }, [category, currentItemId]);
+  }, [category, currentItemId, i18n.language]);
 
   // Randomize and take up to 4 items
   const relatedItems = useMemo(() => {
