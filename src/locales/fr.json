@@ -15,19 +15,25 @@
       "headline": "Saveurs Exotiques à Découvrir",
       "text": "Profitez de -20% sur nos délicieux beignets à la banane.",
       "cta1": "Commander Maintenant",
-      "cta2": "Voir le Menu"
+      "cta2": "Voir le Menu",
+      "link_category": "/catalog?cat=donuts",
+      "link_product": "/details/2"
     },
     {
       "headline": "Le Combo Parfait",
       "text": "Un beignet acheté, un jus de gingembre à moitié prix.",
       "cta1": "Profiter de l'offre",
-      "cta2": "Nos Jus"
+      "cta2": "Nos Jus",
+      "link_category": "/catalog?cat=drinks",
+      "link_product": "/details/9"
     },
     {
       "headline": "Faites Plaisir à vos Collègues",
       "text": "Égayez le bureau avec notre boîte découverte.",
       "cta1": "Commander pour le bureau",
-      "cta2": "Traiteur"
+      "cta2": "Traiteur",
+      "link_category": "/catalog?cat=all",
+      "link_product": "/details/14"
     }
   ],
 

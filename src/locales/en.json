@@ -15,19 +15,25 @@
       "headline": "Exotic Flavors to Discover",
       "text": "Enjoy -20% on our delicious banana donuts.",
       "cta1": "Order Now",
-      "cta2": "See Menu"
+      "cta2": "See Menu",
+      "link_category": "/catalog?cat=donuts",
+      "link_product": "/details/2"
     },
     {
       "headline": "The Perfect Combo",
       "text": "Buy a donut, get a ginger juice for half price.",
       "cta1": "Get the Offer",
-      "cta2": "Our Juices"
+      "cta2": "Our Juices",
+      "link_category": "/catalog?cat=drinks",
+      "link_product": "/details/9"
     },
     {
       "headline": "Treat Your Colleagues",
       "text": "Brighten up the office with our discovery box.",
       "cta1": "Order for the Office",
-      "cta2": "Catering"
+      "cta2": "Catering",
+      "link_category": "/catalog?cat=all",
+      "link_product": "/details/14"
     }
   ],
 

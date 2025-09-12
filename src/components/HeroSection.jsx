@@ -100,11 +100,13 @@ const HeroSection = ({ onOrderClick, onMenuClick }) => {
                 transition={{ duration: 0.45, delay: 0.2, ease: 'easeOut' }}
                 className="flex flex-wrap justify-center gap-3 sm:gap-4 mt-6 sm:mt-8"
               >
-                <button onClick={() => onOrderClick(slide.cta1)} className="btn-primary">
+                <button 
+                  onClick={() => window.location.href = slide.link_product}
+                  className="btn-primary">
                   {slide.cta1}
                 </button>
                 <button
-                  onClick={() => onMenuClick(slide.cta2)}
+                  onClick={() => window.location.href = slide.link_category}
                   className="btn-secondary !text-white !border-white/80 hover:!bg-white hover:!text-chocolate-brown"
                 >
                   {slide.cta2}
