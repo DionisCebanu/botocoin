@@ -41,7 +41,7 @@ const DonutsSection = ({ onOrderClick }) => {
               name={donut.name}
               description={donut.description}
               imageSrc={`/img/donuts/hero-${index + 1}.png`}
-              ctaLabel={t('add_to_cart_button')}
+              ctaLabel={t('order_button')}
               onOrder={() => onOrderClick(donut.name)}
             />
           ))}
@@ -52,7 +52,7 @@ const DonutsSection = ({ onOrderClick }) => {
         <motion.div variants={itemVariants} className="mt-12">
             <button 
                 onClick={() => navigate('/catalog')}
-                className="btn-secondary"
+                className="btn-secondary btn-accent"
             >
                 {t('view_full_catalog_button')}
             </button>

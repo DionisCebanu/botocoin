@@ -28,7 +28,7 @@ const DonutCard = ({ name, description, imageSrc, ctaLabel, onOrder, variants })
           <div className="mt-auto pt-5">
             <button
               onClick={onOrder}
-              className="w-full btn-secondary py-3 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-amber-500"
+              className="w-full btn-primary py-3 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-amber-500"
             >
               {ctaLabel}
             </button>

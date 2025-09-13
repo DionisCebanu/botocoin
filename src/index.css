@@ -68,7 +68,7 @@
   }
   
   .btn-secondary {
-    @apply btn bg-transparent border-2 border-chocolate-brown text-chocolate-brown hover:bg-chocolate-brown hover:text-white dark:border-soft-cream dark:text-soft-cream dark:hover:bg-soft-cream dark:hover:text-chocolate-brown;
+    @apply btn bg-transparent border-2 border-amber-orange text-amber-orange font-bold hover:bg-amber-orange hover:text-white dark:border-soft-cream dark:text-soft-cream dark:hover:bg-soft-cream dark:hover:text-chocolate-brown;
   }
 }
 

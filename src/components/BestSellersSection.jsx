@@ -166,7 +166,7 @@ const BestSellersSection = ({ onOrderClick }) => {
                             onClick={() => window.location.href = `/details/${item.id}` || '#'}
                             className="btn-primary py-2 px-5 text-sm"
                           >
-                            {t('order_button')}
+                            {t('order_button')} +
                           </button>
                         </div>
                       </div>
