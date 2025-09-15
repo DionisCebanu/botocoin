@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useSearchParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { itemVariants } from '@/lib/animations';
+import { LayoutGrid, ChevronRight } from "lucide-react";
 import CategoryTabs from './CategoryTabs';
 import FiltersBar from './FiltersBar';
 import ProductsGrid from './ProductsGrid';
@@ -210,9 +211,35 @@ export default function CatalogShell() {
       <motion.div variants={itemVariants} initial="hidden" animate="visible">
         <div className="text-center mb-12">
           <h1 className="section-title">{t('catalog_shell_title')}</h1>
-          <p className="section-subtitle mx-auto mt-4">{t('catalog_shell_subtitle')}</p>
-          <Link to="/catalog" className="text-amber-orange hover:underline mt-4 inline-block">
-            {t('catalog_change_category')}
+          <p className="section-subtitle mx-auto mt-4 mb-4">{t('catalog_shell_subtitle')}</p>
+          <Link
+            to="/catalog"
+            className="
+              group inline-flex items-center gap-2
+              px-4 py-2 rounded-full
+              text-amber-orange hover:text-amber-700
+              bg-amber-50/60 dark:bg-amber-400/10
+              ring-1 ring-amber-300/50 hover:ring-amber-400/70
+              transition-all
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/70
+              active:scale-[0.98]
+            "
+          >
+            <LayoutGrid
+              className="
+                w-4 h-4
+                transition-transform duration-200
+                group-hover:rotate-6 group-hover:scale-110
+              "
+            />
+            <span className="font-bold">{t('catalog_change_category')}</span>
+            <ChevronRight
+              className="
+                w-4 h-4 opacity-0 -translate-x-1
+                transition-all duration-200
+                group-hover:opacity-100 group-hover:translate-x-0
+              "
+            />
           </Link>
         </div>
 
