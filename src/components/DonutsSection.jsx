@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import AnimatedSection from '@/components/AnimatedSection';
 import { containerCardsVariants, itemCardsVariants, itemVariants } from '@/lib/animations';
 import DonutCard from '@/cards/DonutCard';
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://127.0.0.1:8000/api';
+const API_BASE = import.meta.env.VITE_API_BASE || 'https://event-api.dioniscode.com/public/api';
 
 const DonutsSection = ({ onOrderClick }) => {
   const navigate = useNavigate();

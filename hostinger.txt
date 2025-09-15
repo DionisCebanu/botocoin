@@ -1,0 +1,3 @@
+[u798886467@us-bos-web1852 ~]$ cd ~/domains/botocoin.dioniscode.com/public_html
+[u798886467@us-bos-web1852 public_html]$ find . -type d -exec chmod 755 {} \;
+[u798886467@us-bos-web1852 public_html]$ find . -type f -exec chmod 644 {} \;
