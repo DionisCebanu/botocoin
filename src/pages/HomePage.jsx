@@ -11,10 +11,11 @@ import ContactSection from '@/components/ContactSection';
 import CtaBanner from '@/components/CtaBanner';
 import BestSellersSection from '@/components/BestSellersSection';
 import NewsGrid from '@/components/NewsGrid';
+import useHashScroll from '@/hooks/useHashScroll';
 
 const HomePage = () => {
     const { t } = useTranslation();
-
+    useHashScroll();
     const handleNotImplemented = (feature) => {
         toast({
             title: `🚧 ${feature} is not implemented yet`,
