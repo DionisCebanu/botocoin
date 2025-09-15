@@ -7,7 +7,7 @@ import { itemVariants } from '@/lib/animations';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import MapCard from '@/components/MapCard';
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://127.0.0.1:8000'; // e.g. https://api.yourbakery.com
+const API_BASE = import.meta.env.VITE_API_BASE || 'https://event-api.dioniscode.com/public/'; // e.g. https://api.yourbakery.com
 const CONTACT_URL = `${API_BASE}/api/contact`;
 
 /* ------------ Inputs with floating labels ------------ */
