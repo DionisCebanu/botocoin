@@ -255,21 +255,23 @@ const RightLinks = navLinks.slice(2);
 </nav>
 
             {/* Actions Desktop */}
-            <div className="hidden md:flex items-center space-x-2">
-              <LanguageSwitcher />
-              <ThemeToggle />
-              <button
-                onClick={() => onSocialClick("Instagram")}
-                className="p-2 text-chocolate-brown dark:text-soft-cream/90 hover:text-amber-orange dark:hover:text-amber-orange transition-colors"
-              >
-                <Instagram size={22} />
-              </button>
-              <button
-                onClick={onCallClick}
-                className="p-2 text-chocolate-brown dark:text-soft-cream/90 hover:text-amber-orange dark:hover:text-amber-orange transition-colors"
-              >
-                <Phone size={22} />
-              </button>
+            <div className="hidden md:flex items-center space-x-2 text-white">
+                <div className="isolate flex items-center gap-2 p-1 rounded-full bg-white/60 dark:bg-stone-900/60 ring-1 ring-black/5 dark:ring-white/10 backdrop-blur supports-[backdrop-filter]:bg-white/40">
+                  <LanguageSwitcher/>
+                  <ThemeToggle />
+                  <button
+                    onClick={() => onSocialClick("Instagram")}
+                    className="p-2 text-chocolate-brown dark:text-soft-cream/90 hover:text-amber-orange dark:hover:text-amber-orange transition-colors"
+                  >
+                    <Instagram size={22} />
+                  </button>
+                  <button
+                    onClick={onCallClick}
+                    className="p-2 text-chocolate-brown dark:text-soft-cream/90 hover:text-amber-orange dark:hover:text-amber-orange transition-colors"
+                  >
+                    <Phone size={22} />
+                  </button>
+                </div>
               <button
                 onClick={() => navigate("/cart")}
                 className="btn-primary ml-2 !px-6 !py-2.5 relative"
