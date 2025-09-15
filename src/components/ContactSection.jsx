@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Send, MapPin, Clock, Phone, ArrowRight, Mail } from 'lucide-react';
+import { Send, MapPin, Clock, Phone, Mail } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 import { itemVariants } from '@/lib/animations';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import MapCard from '@/components/MapCard';
+
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://127.0.0.1:8000'; // e.g. https://api.yourbakery.com
+const CONTACT_URL = `${API_BASE}/api/contact`;
 
 /* ------------ Inputs with floating labels ------------ */
 
 const FloatingLabelInput = ({ id, label, name, className = '', ...props }) => {
   const [focused, setFocused] = useState(false);
   const [hasValue, setHasValue] = useState(!!props.defaultValue);
-
   const isFloating = focused || hasValue;
 
   return (
@@ -48,7 +50,6 @@ const FloatingLabelInput = ({ id, label, name, className = '', ...props }) => {
 const FloatingLabelTextarea = ({ id, label, name, className = '', ...props }) => {
   const [focused, setFocused] = useState(false);
   const [hasValue, setHasValue] = useState(!!props.defaultValue);
-
   const isFloating = focused || hasValue;
 
   return (
@@ -83,8 +84,48 @@ const FloatingLabelTextarea = ({ id, label, name, className = '', ...props }) =>
 
 /* -------------------- Section -------------------- */
 
-const ContactSection = ({ onFormSubmit }) => {
+const ContactSection = () => {
   const { t } = useTranslation();
+  const [topic, setTopic] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [notice, setNotice] = useState(null); // {type: 'success'|'error', text: string}
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setNotice(null);
+    setLoading(true);
+
+    const form = e.currentTarget;
+    const payload = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      phone: form.phone.value.trim(),
+      topic: topic || null,
+      message: form.message.value.trim(),
+      nickname: form.nickname.value, // honeypot
+    };
+
+    try {
+      const res = await fetch(CONTACT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || data.ok === false) {
+        throw new Error(data.message || 'Something went wrong. Please try again.');
+      }
+
+      setNotice({ type: 'success', text: data.message || t('form_success_message') });
+      form.reset();
+      setTopic('');
+    } catch (err) {
+      setNotice({ type: 'error', text: err.message || t('form_error_message') });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <AnimatedSection as="section" id="contact" className="section-wrapper bg-soft-cream dark:bg-dark-bg">
@@ -96,7 +137,6 @@ const ContactSection = ({ onFormSubmit }) => {
           </motion.p>
         </div>
 
-        {/* NEW GRID: 12 cols, 2 rows (map spans row 2) */}
         <div className="grid xl:grid-cols-12 gap-8 lg:gap-10 items-stretch">
           {/* Left: info card */}
           <motion.aside variants={itemVariants} className="xl:col-span-4 self-stretch">
@@ -138,6 +178,7 @@ const ContactSection = ({ onFormSubmit }) => {
                     </a>
                   </div>
                 </li>
+
                 <li className="flex gap-4">
                   <div className="h-10 w-10 rounded-full bg-amber-orange/15 text-amber-orange flex items-center justify-center flex-shrink-0">
                     <Mail size={20} />
@@ -153,13 +194,22 @@ const ContactSection = ({ onFormSubmit }) => {
             </div>
           </motion.aside>
 
-          {/* Right: form (slightly more compact) */}
+          {/* Right: form */}
           <motion.form
             variants={itemVariants}
-            onSubmit={onFormSubmit}
+            onSubmit={handleSubmit}
             className="xl:col-span-8 rounded-2xl bg-white/80 dark:bg-dark-surface/80 backdrop-blur
                        ring-1 ring-black/5 dark:ring-white/5 p-6 md:p-8 lg:p-10 shadow-md space-y-6"
           >
+            {/* Honeypot */}
+            <input type="text" name="nickname" tabIndex="-1" autoComplete="off" className="hidden" />
+
+            {notice && (
+              <div className={`rounded-lg px-4 py-3 text-sm ${notice.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
+                {notice.text}
+              </div>
+            )}
+
             <div className="grid md:grid-cols-2 gap-6">
               <FloatingLabelInput id="name" label={t('form_name_label')} type="text" required />
               <FloatingLabelInput id="email" label={t('form_email_label')} type="email" required />
@@ -168,8 +218,7 @@ const ContactSection = ({ onFormSubmit }) => {
             <FloatingLabelInput id="phone" label={t('form_phone_label')} type="tel" />
 
             <div>
-              <Select>
-                {/* reduced height for a tighter form */}
+              <Select value={topic} onValueChange={setTopic} name="topic">
                 <SelectTrigger className="w-full h-14 rounded-xl bg-soft-cream/60 dark:bg-dark-bg/70 ring-1 ring-black/5 dark:ring-white/5 text-warm-gray">
                   <SelectValue placeholder={t('form_topic_placeholder')} />
                 </SelectTrigger>
@@ -182,18 +231,21 @@ const ContactSection = ({ onFormSubmit }) => {
               </Select>
             </div>
 
-            {/* slightly shorter textarea */}
             <FloatingLabelTextarea id="message" label={t('form_message_label')} required className="min-h-[120px]" />
 
             <div className="flex justify-end">
-              <button type="submit" className="inline-flex items-center">
+              <button
+                type="submit"
+                className="btn-primary inline-flex items-center disabled:opacity-60"
+                disabled={loading}
+              >
                 <Send className="mr-2 h-5 w-5" />
-                {t('form_submit_button')}
+                {loading ? t('form_sending') : t('form_submit_button')}
               </button>
             </div>
           </motion.form>
 
-          {/* Row 2: map spans full width */}
+          {/* Row 2: map */}
           <motion.div variants={itemVariants} className="xl:col-span-12">
             <div className="h-64 md:h-80 w-full rounded-2xl overflow-hidden shadow-soft ring-1 ring-black/5 dark:ring-white/5 bg-white/70 dark:bg-dark-surface/70 backdrop-blur">
               <MapCard />
@@ -204,6 +256,5 @@ const ContactSection = ({ onFormSubmit }) => {
     </AnimatedSection>
   );
 };
-
 
 export default ContactSection;
