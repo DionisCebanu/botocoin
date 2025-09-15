@@ -97,3 +97,31 @@
 .leaflet-marker-icon {
   filter: hue-rotate(20deg) saturate(3);
 }
+
+
+/* Alignement & épaisseur du shadcn/radix Slider */
+.slider-compact {
+  --slider-track-h: 6px;   /* épaisseur du rail */
+  --slider-thumb: 16px;    /* diamètre du thumb */
+}
+
+/* Track */
+.slider-compact [data-radix-slider-track] {
+  height: var(--slider-track-h);
+  border-radius: 9999px;
+  background-color: rgba(0,0,0,0.06); /* light rail */
+}
+
+/* Range (partie active) */
+.slider-compact [data-radix-slider-range] {
+  background-color: #f59e0b; /* amber-500 */
+}
+
+/* Thumb */
+.slider-compact [data-radix-slider-thumb] {
+  width: var(--slider-thumb);
+  height: var(--slider-thumb);
+  border-radius: 9999px;
+  background: #fff;
+  box-shadow: 0 0 0 2px #f59e0b; /* anneau ambre */
+}
