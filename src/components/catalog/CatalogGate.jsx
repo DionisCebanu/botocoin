@@ -236,10 +236,10 @@ const CatalogGate = ({ onSelectCategory }) => {
               initial="hidden"
               animate="visible"
               onClick={handleBack}
-              className="mt-6 inline-flex items-center gap-2 text-warm-gray hover:text-chocolate-brown dark:hover:text-soft-cream transition-colors"
+              className="btn-secondary mt-6 inline-flex items-center gap-2 text-warm-gray hover:text-chocolate-brown dark:hover:text-soft-cream transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
-              {t('back') || 'Back'}
+              {t('catalog_back') || 'Back'}
             </motion.button>
 
             {subLoading ? (
