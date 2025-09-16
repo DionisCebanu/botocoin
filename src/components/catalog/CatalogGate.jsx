@@ -162,8 +162,9 @@ const CatalogGate = ({ onSelectCategory }) => {
         subId: sub.id,
       });
     // route carries both cat and sub; your Catalog page can use `sub` if present
-    navigate(`/catalog?cat=${encodeURIComponent(activeCat.slug)}&sub=${encodeURIComponent(sub.slug)}`);
-    if (typeof onSelectCategory === 'function') onSelectCategory(activeCat.slug);
+    navigate(
+      `/catalog?cat=${encodeURIComponent(activeCat.slug)}&subcat=${encodeURIComponent(sub.slug)}`
+    );
   };
 
   // ---------- RENDER ----------
