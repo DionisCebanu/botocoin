@@ -18,34 +18,32 @@ const useProductFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filters = {
-    category: searchParams.get('cat') || 'all',
+    category:   searchParams.get('cat') || 'all',
+    subcategory: searchParams.get('subcat') || '',           // <-- NEW
     searchTerm: searchParams.get('q') || '',
     priceRange: searchParams.get('price')?.split(',').map(Number) || [0, 20],
-    sortBy: searchParams.get('sort') || 'popular',
-    page: Number(searchParams.get('page')) || 1,
+    sortBy:     searchParams.get('sort') || 'popular',
+    page:       Number(searchParams.get('page')) || 1,
   };
 
-  const setFilters = useCallback(
-    (newFilters) => {
-      const currentParams = new URLSearchParams(searchParams);
-      Object.entries(newFilters).forEach(([key, value]) => {
-        if (
-          value === undefined ||
-          value === null ||
-          (typeof value === 'string' && value === '')
-        ) {
-          currentParams.delete(key);
-        } else {
-          currentParams.set(key, Array.isArray(value) ? value.join(',') : value);
-        }
-      });
+  const setFilters = useCallback((newFilters) => {
+    const currentParams = new URLSearchParams(searchParams);
+    Object.entries(newFilters).forEach(([key, value]) => {
+      if (
+        value === undefined ||
+        value === null ||
+        (typeof value === 'string' && value === '')
+      ) {
+        currentParams.delete(key);
+      } else {
+        currentParams.set(key, Array.isArray(value) ? value.join(',') : value);
+      }
+    });
 
-      // reset page if we're changing anything except page itself
-      if (newFilters.page === undefined) currentParams.set('page', '1');
-      setSearchParams(currentParams);
-    },
-    [searchParams, setSearchParams]
-  );
+    // If anything except page changed, reset page to 1
+    if (newFilters.page === undefined) currentParams.set('page', '1');
+    setSearchParams(currentParams);
+  }, [searchParams, setSearchParams]);
 
   return [filters, setFilters];
 };
@@ -64,11 +62,11 @@ export default function CatalogShell() {
   const [filters, setFilters] = useProductFilters();
 
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const [apiItems, setApiItems] = useState([]); // mapped UI shape
-  const [serverPages, setServerPages] = useState(1); // from API meta
+  const [error, setError]     = useState('');
+  const [apiItems, setApiItems] = useState([]);
+  const [serverPages, setServerPages] = useState(1);
 
-  // Fetch products whenever category/page/searchTerm/lang changes
+  // Fetch products whenever category/subcategory/page/searchTerm/lang changes
   useEffect(() => {
     let alive = true;
     setLoading(true);
@@ -81,22 +79,25 @@ export default function CatalogShell() {
         let url;
 
         if (filters.category === 'all') {
-          // /api/products supports q, page, per_page, lang
+          // /api/products
           url = new URL(`${API_BASE}/products`);
           url.searchParams.set('per_page', String(ITEMS_PER_PAGE));
           url.searchParams.set('page', String(filters.page));
           url.searchParams.set('lang', lang);
           if (filters.searchTerm) url.searchParams.set('q', filters.searchTerm);
-          // If you want only active:
-          // url.searchParams.set('active', '1');
-        } else {
-          // /api/categories/{slug}/products supports per_page, page, active, lang
-          url = new URL(`${API_BASE}/categories/${filters.category}/products`);
+          // url.searchParams.set('active', '1'); // optional
+        } else if (filters.subcategory) {
+          // /api/categories/{category}/subcategories/{subcategory}/products
+          url = new URL(`${API_BASE}/categories/${encodeURIComponent(filters.category)}/subcategories/${encodeURIComponent(filters.subcategory)}/products`);
           url.searchParams.set('per_page', String(ITEMS_PER_PAGE));
           url.searchParams.set('page', String(filters.page));
           url.searchParams.set('lang', lang);
-          // optional: url.searchParams.set('active','1');
-          // NOTE: byCategory doesn't support 'q' in backend; we'll filter client-side below if needed
+        } else {
+          // /api/categories/{category}/products
+          url = new URL(`${API_BASE}/categories/${encodeURIComponent(filters.category)}/products`);
+          url.searchParams.set('per_page', String(ITEMS_PER_PAGE));
+          url.searchParams.set('page', String(filters.page));
+          url.searchParams.set('lang', lang);
         }
 
         const res = await fetch(url.toString());
@@ -105,9 +106,7 @@ export default function CatalogShell() {
 
         const items = Array.isArray(json?.data) ? json.data : [];
 
-        // Map API → UI (include both legacy fields and full raw data)
         const mapped = items.map((p) => ({
-          // legacy fields used by existing grid/card
           id: p.id,
           title: p?.translated?.title ?? p.title ?? '',
           cat: p.category?.slug || 'uncategorized',
@@ -115,7 +114,6 @@ export default function CatalogShell() {
           rating: p.rating == null ? 0 : Number(p.rating),
           img: p.coverUrl || p.images?.[0]?.url || '',
 
-          // richer fields for the new ProductCard
           coverUrl: p.coverUrl,
           images: p.images,
           category: p.category,
@@ -123,7 +121,6 @@ export default function CatalogShell() {
           slug: p.slug,
           description: p?.translated?.description ?? p.description ?? '',
 
-          // flags your sorter expects
           popular: false,
           newest: false,
 
@@ -144,13 +141,14 @@ export default function CatalogShell() {
     };
 
     fetchProducts();
-    return () => {
-      alive = false;
-    };
-  }, [filters.category, filters.page, filters.searchTerm, i18n.language]);
+    return () => { alive = false; };
+  }, [filters.category, filters.subcategory, filters.page, filters.searchTerm, i18n.language]);
 
   const handleFilterChange = (newFilter) => setFilters(newFilter);
-  const handleCategoryChange = (newCategory) => setFilters({ cat: newCategory });
+
+  // When switching category via tabs, clear any subcategory in URL
+  const handleCategoryChange = (newCategory) => setFilters({ cat: newCategory, subcat: '' });
+
   const handlePageChange = (newPage) => {
     setFilters({ page: newPage });
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -160,7 +158,7 @@ export default function CatalogShell() {
   const filteredAndSortedProducts = useMemo(() => {
     let products = apiItems.slice();
 
-    // If using /categories/{slug}/products, 'q' isn't server-filtered → filter here
+    // If using category/subcategory endpoints, 'q' isn't server-filtered → filter here
     if (filters.category !== 'all' && filters.searchTerm) {
       const q = filters.searchTerm.toLowerCase();
       products = products.filter((p) => p.title.toLowerCase().includes(q));
@@ -195,13 +193,9 @@ export default function CatalogShell() {
     return products;
   }, [apiItems, filters.category, filters.searchTerm, filters.priceRange, filters.sortBy]);
 
-  // Since we now use server-side pagination, the page slice is already handled by the API.
   const paginatedProducts = filteredAndSortedProducts;
-
-  // Use API-reported last_page for pagination controls
   const totalPages = serverPages;
 
-  // Dynamic max price for FiltersBar based on current dataset/page
   const maxPrice = useMemo(() => {
     const max = Math.max(0, ...apiItems.map((p) => p.price));
     return Math.max(20, Math.ceil(max));
@@ -226,21 +220,9 @@ export default function CatalogShell() {
               active:scale-[0.98]
             "
           >
-            <LayoutGrid
-              className="
-                w-4 h-4
-                transition-transform duration-200
-                group-hover:rotate-6 group-hover:scale-110
-              "
-            />
+            <LayoutGrid className="w-4 h-4 transition-transform duration-200 group-hover:rotate-6 group-hover:scale-110" />
             <span className="font-bold">{t('catalog_change_category')}</span>
-            <ChevronRight
-              className="
-                w-4 h-4 opacity-0 -translate-x-1
-                transition-all duration-200
-                group-hover:opacity-100 group-hover:translate-x-0
-              "
-            />
+            <ChevronRight className="w-4 h-4 opacity-0 -translate-x-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0" />
           </Link>
         </div>
 
