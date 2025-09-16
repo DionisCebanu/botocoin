@@ -10,7 +10,8 @@ import ProductsGrid from './ProductsGrid';
 import Pagination from './Pagination';
 import { Frown } from 'lucide-react';
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'https://event-api.dioniscode.com/public/api';
+/* const API_BASE = import.meta.env.VITE_API_BASE || 'https://event-api.dioniscode.com/public/api'; */
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://127.0.0.1:8000/api';
 const ITEMS_PER_PAGE = 6;
 
 const useProductFilters = () => {

@@ -1,12 +1,12 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { Coffee, Cookie, LayoutGrid } from 'lucide-react';
+import { Coffee, Cookie, LayoutGrid, ArrowLeft } from 'lucide-react';
 import { containerVariants, itemVariants } from '@/lib/animations';
 import { cn } from '@/lib/utils';
 
-// Map slug -> icon
+// Map category slug -> icon
 const iconBySlug = {
   donuts: Cookie,
   drinks: Coffee,
@@ -14,7 +14,8 @@ const iconBySlug = {
 const defaultIcon = LayoutGrid;
 
 /* const API_BASE = import.meta.env.VITE_API_BASE || "https://event-api.dioniscode.com/public/api";  */
-const API_BASE = import.meta.env.VITE_API_BASE || "https://event-api.dioniscode.com/public/api";
+const API_BASE = import.meta.env.VITE_API_BASE || "http://127.0.0.1:8000/api";
+
 
 const CatalogGate = ({ onSelectCategory }) => {
   const { t, i18n } = useTranslation();
@@ -24,7 +25,20 @@ const CatalogGate = ({ onSelectCategory }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Charger les catégories
+  // step state
+  const [mode, setMode] = useState('categories'); // 'categories' | 'subcategories'
+  const [activeCat, setActiveCat] = useState(null); // { slug, title, desc }
+  const [subcats, setSubcats] = useState([]);
+  const [subLoading, setSubLoading] = useState(false);
+  const [subError, setSubError] = useState('');
+
+  // Icons for subcategory
+  const SubIcon = React.useMemo(
+    () => (activeCat ? (iconBySlug[activeCat.slug] || Cookie) : defaultIcon),
+    [activeCat]
+  );
+
+  // Load categories
   useEffect(() => {
     let alive = true;
     setLoading(true);
@@ -49,12 +63,10 @@ const CatalogGate = ({ onSelectCategory }) => {
       })
       .finally(() => alive && setLoading(false));
 
-    return () => {
-      alive = false;
-    };
+    return () => { alive = false; };
   }, [i18n.language]);
 
-  // Construire la liste d’affichage : "Tous" + catégories API
+  // Build display list: "All" + API categories
   const displayCats = useMemo(() => {
     const allTile = {
       id: 'all',
@@ -67,26 +79,94 @@ const CatalogGate = ({ onSelectCategory }) => {
       const Icon = iconBySlug[c.slug] || defaultIcon;
       const translated = c.translated || {};
       const title = translated.name || c.name || c.slug;
-      const desc = translated.description || c.description || '';
+      const desc  = translated.description || c.description || '';
       return { id: c.slug, icon: Icon, title, desc };
     });
 
     return [allTile, ...apiTiles];
   }, [cats, t]);
 
-  // Click = mémoriser + redirection immédiate
-  const handleSelect = (id) => {
+  // Fetch subcategories for a category slug
+  const loadSubcategories = useCallback(async (cat) => {
+    setSubLoading(true);
+    setSubError('');
+    setSubcats([]);
+
+    try {
+      const url = new URL(`${API_BASE}/categories/${encodeURIComponent(cat.slug)}/subcategories`);
+      // If your endpoint later supports lang, you can pass it here:
+      // url.searchParams.set('lang', i18n.language || 'en');
+
+      const res = await fetch(url.toString());
+      if (!res.ok) throw new Error('Failed to load subcategories');
+      const json = await res.json();
+      const arr = Array.isArray(json?.data) ? json.data : [];
+
+      if (arr.length > 0) {
+        setActiveCat(cat);
+        setSubcats(arr);
+        setMode('subcategories');
+      } else {
+        // No subcategories: go straight to catalog
+        console.log('[CatalogGate] Navigating (no subcategories):', `/catalog?cat=${cat.slug}`);
+        navigate(`/catalog?cat=${encodeURIComponent(cat.slug)}`);
+        if (typeof onSelectCategory === 'function') onSelectCategory(cat.slug);
+      }
+    } catch (e) {
+      setSubError(e?.message || 'Failed to load subcategories');
+      console.error('[CatalogGate] Subcategory load error:', e);
+    } finally {
+      setSubLoading(false);
+    }
+  }, [navigate, onSelectCategory /*, i18n.language*/]);
+
+  // Click handlers
+  const handleSelectCategory = (id) => {
+    console.log('[CatalogGate] Category tile clicked:', { id });
     localStorage.setItem('lastCatalogCategory', id);
-    if (typeof onSelectCategory === 'function') {
-      onSelectCategory(id);
-    }
+
     if (id === 'all') {
+      console.log('[CatalogGate] Navigating to ALL products');
       navigate('/catalog?cat=all');
-    } else {
-      navigate(`/catalog?cat=${encodeURIComponent(id)}`);
+      if (typeof onSelectCategory === 'function') onSelectCategory('all');
+      return;
     }
+
+    const cat = displayCats.find((c) => c.id === id);
+    if (!cat) return;
+
+    // Try to load subcategories; if none, it will navigate directly
+    loadSubcategories({ slug: id, title: cat.title, desc: cat.desc });
   };
 
+  const handleBack = () => {
+    setMode('categories');
+    setActiveCat(null);
+    setSubcats([]);
+    setSubLoading(false);
+    setSubError('');
+  };
+
+  const handleChooseAllInCategory = () => {
+    if (!activeCat) return;
+    console.log('[CatalogGate] All-in-category tile clicked:', { category: activeCat.slug });
+    navigate(`/catalog?cat=${encodeURIComponent(activeCat.slug)}`);
+    if (typeof onSelectCategory === 'function') onSelectCategory(activeCat.slug);
+  };
+
+  const handleChooseSubcategory = (sub) => {
+    if (!activeCat) return;
+    console.log('[CatalogGate] Subcategory tile clicked:', {
+        category: activeCat.slug,
+        subcategory: sub.slug,
+        subId: sub.id,
+      });
+    // route carries both cat and sub; your Catalog page can use `sub` if present
+    navigate(`/catalog?cat=${encodeURIComponent(activeCat.slug)}&sub=${encodeURIComponent(sub.slug)}`);
+    if (typeof onSelectCategory === 'function') onSelectCategory(activeCat.slug);
+  };
+
+  // ---------- RENDER ----------
   return (
     <AnimatePresence>
       <motion.div
@@ -100,46 +180,117 @@ const CatalogGate = ({ onSelectCategory }) => {
             variants={itemVariants}
             className="font-display text-4xl md:text-6xl font-bold text-chocolate-brown dark:text-soft-cream"
           >
-            {t('catalog_gate_title')}
+            {mode === 'categories'
+              ? t('catalog_gate_title')
+              : (activeCat?.title || t('catalog_gate_title'))}
           </motion.h1>
           <motion.p variants={itemVariants} className="mt-4 text-lg text-warm-gray dark:text-dark-subtle max-w-2xl mx-auto">
-            {t('catalog_gate_subtitle')}
+            {mode === 'categories'
+              ? t('catalog_gate_subtitle')
+              : t('catalog_gate_subtitle')}
           </motion.p>
         </motion.div>
 
-        {/* Loading / Error */}
-        {loading ? (
-          <div className="mt-12 text-warm-gray">{t('loading') || 'Loading…'}</div>
-        ) : error ? (
-          <div className="mt-12 text-red-600">{error}</div>
-        ) : (
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 w-full max-w-5xl"
-          >
-            {displayCats.map((cat) => {
-              const Icon = cat.icon;
-              return (
+        {/* Loading / Error (Categories) */}
+        {mode === 'categories' && (
+          loading ? (
+            <div className="mt-12 text-warm-gray">{t('loading') || 'Loading…'}</div>
+          ) : error ? (
+            <div className="mt-12 text-red-600">{error}</div>
+          ) : (
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 w-full max-w-5xl"
+            >
+              {displayCats.map((cat) => {
+                const Icon = cat.icon;
+                return (
+                  <motion.button
+                    key={cat.id}
+                    variants={itemVariants}
+                    onClick={() => handleSelectCategory(cat.id)}
+                    className={cn(
+                      'p-8 rounded-2xl border-4 transition-all duration-300 text-left flex flex-col items-center justify-center text-center',
+                      'border-transparent bg-white dark:bg-dark-surface hover:bg-soft-cream/50 dark:hover:bg-dark-surface/50 shadow-soft hover:shadow-lg hover:scale-[1.02]'
+                    )}
+                  >
+                    <Icon className="w-16 h-16 mb-4 text-amber-orange" />
+                    <h3 className="text-2xl font-bold font-display text-chocolate-brown dark:text-soft-cream">
+                      {cat.title}
+                    </h3>
+                    {cat.desc && <p className="mt-2 text-warm-gray dark:text-dark-subtle">{cat.desc}</p>}
+                  </motion.button>
+                );
+              })}
+            </motion.div>
+          )
+        )}
+
+        {/* Subcategories Step */}
+        {mode === 'subcategories' && (
+          <>
+            <motion.button
+              variants={itemVariants}
+              initial="hidden"
+              animate="visible"
+              onClick={handleBack}
+              className="mt-6 inline-flex items-center gap-2 text-warm-gray hover:text-chocolate-brown dark:hover:text-soft-cream transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              {t('back') || 'Back'}
+            </motion.button>
+
+            {subLoading ? (
+              <div className="mt-12 text-warm-gray">{t('loading') || 'Loading…'}</div>
+            ) : subError ? (
+              <div className="mt-12 text-red-600">{subError}</div>
+            ) : (
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 w-full max-w-5xl"
+              >
+                {/* All {Category} tile */}
                 <motion.button
-                  key={cat.id}
                   variants={itemVariants}
-                  onClick={() => handleSelect(cat.id)}
+                  onClick={handleChooseAllInCategory}
                   className={cn(
                     'p-8 rounded-2xl border-4 transition-all duration-300 text-left flex flex-col items-center justify-center text-center',
                     'border-transparent bg-white dark:bg-dark-surface hover:bg-soft-cream/50 dark:hover:bg-dark-surface/50 shadow-soft hover:shadow-lg hover:scale-[1.02]'
                   )}
                 >
-                  <Icon className="w-16 h-16 mb-4 text-amber-orange" />
+                  <LayoutGrid className="w-16 h-16 mb-4 text-amber-orange" />
                   <h3 className="text-2xl font-bold font-display text-chocolate-brown dark:text-soft-cream">
-                    {cat.title}
+                    {`${t('catalog_gate_all')} ${activeCat?.title ?? ''}`}
                   </h3>
-                  {cat.desc && <p className="mt-2 text-warm-gray dark:text-dark-subtle">{cat.desc}</p>}
                 </motion.button>
-              );
-            })}
-          </motion.div>
+
+                {/* Subcategory tiles */}
+                {subcats.map((s) => (
+                  <motion.button
+                    key={s.id}
+                    variants={itemVariants}
+                    onClick={() => handleChooseSubcategory(s)}
+                    className={cn(
+                      'p-8 rounded-2xl border-4 transition-all duration-300 text-left flex flex-col items-center justify-center text-center',
+                      'border-transparent bg-white dark:bg-dark-surface hover:bg-soft-cream/50 dark:hover:bg-dark-surface/50 shadow-soft hover:shadow-lg hover:scale-[1.02]'
+                    )}
+                  >
+                    <SubIcon className="w-16 h-16 mb-4 text-amber-orange" />
+                    <h3 className="text-2xl font-bold font-display text-chocolate-brown dark:text-soft-cream">
+                      {s.name}
+                    </h3>
+                    {s.description && (
+                      <p className="mt-2 text-warm-gray dark:text-dark-subtle">{s.description}</p>
+                    )}
+                  </motion.button>
+                ))}
+              </motion.div>
+            )}
+          </>
         )}
       </motion.div>
     </AnimatePresence>
