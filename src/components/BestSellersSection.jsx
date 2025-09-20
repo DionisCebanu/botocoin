@@ -126,7 +126,7 @@ const BestSellersSection = ({ onOrderClick }) => {
                     variants={itemVariants}
                     className="embla__slide flex-[0_0_90%] sm:flex-[0_0_50%] md:flex-[0_0_40%] lg:flex-[0_0_33.33%] xl:flex-[0_0_25%] min-w-0 pr-4"
                   >
-                    <div className="bg-white dark:bg-dark-surface rounded-2xl shadow-soft overflow-hidden group transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col h-full">
+                    <div className="bg-white dark:bg-dark-surface rounded-3xl border border-soft-cream/60 dark:border-dark-subtle group overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.03] flex flex-col h-full">
                       <div className="aspect-[4/3] overflow-hidden relative">
                         <img
                           alt={item.title}

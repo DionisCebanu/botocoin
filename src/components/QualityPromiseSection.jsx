@@ -23,13 +23,17 @@ const QualityPromiseSection = () => {
           {features.map((feature, index) => {
             const Icon = icons[index];
             return (
-              <motion.div key={feature.title} variants={itemVariants} className="flex flex-col items-center p-8 bg-white dark:bg-dark-surface rounded-2xl shadow-soft">
-                <div className="flex-shrink-0 w-24 h-24 bg-green-leaf text-white rounded-full flex items-center justify-center mb-6 transition-transform duration-300 hover:scale-110">
-                  <Icon size={42} />
-                </div>
-                <h3 className="text-2xl font-bold font-display text-chocolate-brown dark:text-soft-cream mb-3">{feature.title}</h3>
-                <p className="text-warm-gray leading-relaxed">{feature.description}</p>
-              </motion.div>
+              <motion.div
+                    key={feature.title}
+                    variants={itemVariants}
+                    className="bg-white dark:bg-dark-surface rounded-3xl border border-soft-cream/60 dark:border-dark-subtle group overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.03] flex flex-col h-full items-center p-8"
+                  >
+                    <div className="flex-shrink-0 w-24 h-24 bg-green-leaf text-white rounded-full flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
+                      <Icon size={42} />
+                    </div>
+                    <h3 className="text-2xl font-bold font-display text-chocolate-brown dark:text-soft-cream mb-3">{feature.title}</h3>
+                    <p className="text-warm-gray leading-relaxed">{feature.description}</p>
+                </motion.div>
             );
           })}
         </motion.div>

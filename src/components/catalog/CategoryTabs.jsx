@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { Coffee, Cookie, LayoutGrid } from "lucide-react";
 
-/* const API_BASE = import.meta.env.VITE_API_BASE || "https://event-api.dioniscode.com/public/api"; */
-const API_BASE = import.meta.env.VITE_API_BASE || "http://127.0.0.1:8000/api";
+const API_BASE = import.meta.env.VITE_API_BASE || "https://event-api.dioniscode.com/public/api";
+/* const API_BASE = import.meta.env.VITE_API_BASE || "http://127.0.0.1:8000/api"; */
 
 const iconBySlug = { donuts: Cookie, drinks: Coffee };
 const defaultIcon = LayoutGrid;
