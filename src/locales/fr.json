@@ -189,6 +189,8 @@
   "catalog_shell_title": "Notre Catalogue",
   "catalog_shell_subtitle": "Trouvez votre prochain plaisir coupable parmi nos créations artisanales.",
   "catalog_change_category": "Changer de catégorie",
+  "catalog_categories": "Catégories",
+  "catalog_filters": "Filtres",
   "filters_search_placeholder": "Rechercher par nom...",
   "filters_price_range": "Fourchette de prix",
   "filters_sort_by": "Trier par",

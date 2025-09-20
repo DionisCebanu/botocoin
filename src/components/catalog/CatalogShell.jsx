@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useSearchParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { itemVariants } from '@/lib/animations';
-import { LayoutGrid, ChevronRight } from "lucide-react";
+import { LayoutGrid, ChevronRight, Filter, List } from "lucide-react";
 import CategoryTabs from './CategoryTabs';
 import FiltersBar from './FiltersBar';
 import ProductsGrid from './ProductsGrid';
@@ -65,6 +65,10 @@ export default function CatalogShell() {
   const [error, setError]     = useState('');
   const [apiItems, setApiItems] = useState([]);
   const [serverPages, setServerPages] = useState(1);
+
+  //FILTERS & CATEGORY MOBILE RESPONSIVE
+  const [showCategories, setShowCategories] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
 
   // Fetch products whenever category/subcategory/page/searchTerm/lang changes
   useEffect(() => {
@@ -205,29 +209,66 @@ export default function CatalogShell() {
     <div className="section-container pb-24">
       <motion.div variants={itemVariants} initial="hidden" animate="visible">
         <div className="relative text-center mb-12 mt-12 px-4 py-10 rounded-3xl bg-white/10 dark:bg-dark-bg/30 backdrop-blur-md border border-soft-cream/30 dark:border-dark-subtle/40 shadow-lg transition-all duration-500 hover:shadow-2xl hover:scale-[1.01]">
-  <h1 className="section-title drop-shadow-lg text-chocolate-brown dark:text-soft-cream transition-colors duration-300">{t('catalog_shell_title')}</h1>
-  <p className="section-subtitle mx-auto mt-4 mb-4 text-warm-gray dark:text-dark-subtle text-lg transition-colors duration-300">{t('catalog_shell_subtitle')}</p>
-  <Link
-      to="/catalog"
-      className="
-        group inline-flex items-center gap-2
-        px-6 py-3 rounded-full font-bold
-        text-white hover:text-white
-        bg-amber-orange/80 hover:bg-amber-orange
-        shadow-md hover:shadow-xl
-        ring-2 ring-amber-orange/30 hover:ring-amber-orange/60
-        transition-all duration-300
-        focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-orange/70
-        active:scale-95
-      "
-    >
-      <LayoutGrid className="w-5 h-5 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-125" />
-      <span>{t('catalog_change_category')}</span>
-      <ChevronRight className="w-5 h-5 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
-    </Link>
-  </div>
+          <h1 className="section-title drop-shadow-lg text-chocolate-brown dark:text-soft-cream transition-colors duration-300">{t('catalog_shell_title')}</h1>
+          <p className="section-subtitle mx-auto mt-4 mb-4 text-warm-gray dark:text-dark-subtle text-lg transition-colors duration-300">{t('catalog_shell_subtitle')}</p>
+          <Link
+              to="/catalog"
+              className="
+                group inline-flex items-center gap-2
+                px-6 py-3 rounded-full font-bold
+                text-white hover:text-white
+                bg-amber-orange/80 hover:bg-amber-orange
+                shadow-md hover:shadow-xl
+                ring-2 ring-amber-orange/30 hover:ring-amber-orange/60
+                transition-all duration-300
+                focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-orange/70
+                active:scale-95
+              "
+            >
+              <LayoutGrid className="w-5 h-5 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-125" />
+              <span>{t('catalog_change_category')}</span>
+              <ChevronRight className="w-5 h-5 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
+            </Link>
+          </div>
 
-        <CategoryTabs
+         {/* Mobile toggle buttons */}
+        <div className="flex gap-4 justify-between mb-6 md:hidden">
+          <button
+            onClick={() => setShowCategories((v) => !v)}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-soft-cream text-chocolate-brown font-semibold shadow hover:bg-amber-orange/20 transition-all"
+          >
+            <List className="w-5 h-5" />
+            {t('catalog_categories')}
+          </button>
+          <button
+            onClick={() => setShowFilters((v) => !v)}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-soft-cream text-chocolate-brown font-semibold shadow hover:bg-amber-orange/20 transition-all"
+          >
+            <Filter className="w-5 h-5" />
+            {t('catalog_filters')}
+          </button>
+        </div>
+
+        {/* Panels for mobile, always visible on desktop */}
+        <div className="md:grid md:grid-cols-1 md:gap-5">
+          {/* CategoryTabs */}
+          <div className={`mb-4 ${showCategories ? '' : 'hidden'} md:block`}>
+            <CategoryTabs
+              activeCategory={filters.category}
+              onCategoryChange={handleCategoryChange}
+            />
+          </div>
+          {/* FiltersBar */}
+          <div className={`mb-4 ${showFilters ? '' : 'hidden'} md:block`}>
+            <FiltersBar
+              filters={filters}
+              onFilterChange={handleFilterChange}
+              maxPrice={maxPrice}
+            />
+          </div>
+        </div>
+
+        {/* <CategoryTabs
           activeCategory={filters.category}
           onCategoryChange={handleCategoryChange}
         />
@@ -235,7 +276,7 @@ export default function CatalogShell() {
           filters={filters}
           onFilterChange={handleFilterChange}
           maxPrice={maxPrice}
-        />
+        /> */}
       </motion.div>
 
       {loading ? (

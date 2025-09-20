@@ -189,6 +189,8 @@
   "catalog_shell_title": "Our Catalog",
   "catalog_shell_subtitle": "Find your next favorite treat among our artisanal creations.",
   "catalog_change_category": "Change category",
+  "catalog_categories": "Categories",
+  "catalog_filters": "Filters",
   "filters_search_placeholder": "Search by name...",
   "filters_price_range": "Price Range",
   "filters_sort_by": "Sort by",
