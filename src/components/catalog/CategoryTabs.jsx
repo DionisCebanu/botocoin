@@ -52,15 +52,16 @@ const CategoryTabs = ({ activeCategory, onCategoryChange }) => {
   }, [cats, t]);
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 mb-6">
+    <div className="mx-auto w-full max-w-6xl mb-6">
       <div className="bg-white dark:bg-dark-surface p-1 rounded-full shadow-soft">
         <div
           role="tablist"
           aria-label={t("categories") || "Categories"}
           className="
-            flex flex-nowrap items-center gap-2
+           flex flex-nowrap items-center gap-2
             overflow-x-auto no-scrollbar
             snap-x snap-mandatory justify-around
+            mobile-scrollbar
           "
         >
           {tabs.map((cat) => {
