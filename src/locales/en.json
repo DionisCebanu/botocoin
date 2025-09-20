@@ -74,9 +74,51 @@
   "news_title": "Latest News",
   "news_subtitle": "Discover our latest creations and stories.",
   "news_items": [
-    { "category": "New Product", "date": "August 20, 2025", "title": "The Baobab Donut has arrived!", "excerpt": "Discover our new creation with exotic and tangy notes, a true journey for the taste buds.", "read_more": "Read more" },
-    { "category": "Event", "date": "August 15, 2025", "title": "Le Botocoin at the AfroMontréal Festival", "excerpt": "Come meet us at our stand for three days of festivities, music, and of course, donuts.", "read_more": "Read more" },
-    { "category": "Behind the Scenes", "date": "August 10, 2025", "title": "The Secret of our Ginger Juice", "excerpt": "We reveal some secrets behind our famous homemade ginger juice, a family recipe.", "read_more": "Read more" }
+    { 
+      "slug": "baobab-donut-launch",
+      "category": "New Product", 
+      "date": "August 20, 2025", 
+      "title": "The Baobab Donut has arrived!", 
+      "excerpt": "Discover our new creation with exotic and tangy notes, a true journey for the taste buds.", 
+      "read_more": "Read more",
+      "image_prompt": "A beautiful baobab-flavored donut with white icing and baobab fruit powder, on a wooden table.",
+      "image_src": "https://ik.imagekit.io/e7yxvoeog/uploads/news/news-1.png?updatedAt=1756406437324",
+      "content": [
+        "We are thrilled to announce the latest addition to our family of flavors: the Baobab Donut! This unique creation is a tribute to the iconic African 'tree of life'.",
+        "The baobab fruit, known for its high vitamin C content and tangy, citrus-like flavor, is the star of this new recipe. We've incorporated its powder into a light, airy dough and a delicate glaze, creating a perfect balance of sweetness and tartness.",
+        "Come and taste this little wonder in our store starting today. It's a limited edition, so don't wait too long to embark on this gustatory journey!"
+      ]
+    },
+    { 
+      "slug": "afromontreal-festival",
+      "category": "Event", 
+      "date": "August 15, 2025", 
+      "title": "Le Botocoin at the AfroMontréal Festival", 
+      "excerpt": "Come meet us at our stand for three days of festivities, music, and of course, donuts.", 
+      "read_more": "Read more",
+      "image_src": "https://ik.imagekit.io/e7yxvoeog/uploads/news/news-2.png?updatedAt=1756406437345",
+      "image_prompt": "A vibrant festival scene with a food stall for 'Le Botocoin', people enjoying donuts.",
+      "content": [
+        "Le Botocoin is proud to be a partner of the AfroMontréal Festival this year! Join us from August 22nd to 24th at Parc Jean-Drapeau for an unforgettable celebration of African and Caribbean cultures.",
+        "Our stand will be offering our greatest classics, as well as some exclusive surprises specially created for the event. It's the perfect opportunity to share a gourmet moment with family or friends in a festive and colorful atmosphere.",
+        "We look forward to seeing many of you there to dance, sing, and feast with us!"
+      ]
+    },
+    { 
+      "slug": "ginger-juice-secret",
+      "category": "Behind the Scenes", 
+      "date": "August 10, 2025", 
+      "title": "The Secret of our Ginger Juice", 
+      "excerpt": "We reveal some secrets behind our famous homemade ginger juice, a family recipe.", 
+      "read_more": "Read more",
+      "image_src": "https://ik.imagekit.io/e7yxvoeog/uploads/news/news-3.png?updatedAt=1756406436975",
+      "image_prompt": "Close-up on a glass of iced ginger juice with a slice of lemon and mint leaves.",
+      "content": [
+        "You often ask us for the secret to our ginger juice, so invigorating and flavorful. While we can't reveal everything (a family recipe is a family recipe!), we can share some of our principles.",
+        "It all starts with the selection of fresh, high-quality ginger, which we press ourselves to extract all its potency. We then add a hint of pineapple for sweetness and a touch of lemon for freshness. No artificial flavors, no preservatives, just the pure taste of good ingredients.",
+        "This drink, passed down from generation to generation, is more than just a beverage for us; it's a concentrate of energy and well-being, perfect to accompany our donuts."
+      ]
+    }
   ],
 
   "gallery_title": "Gourmet Gallery",
@@ -310,5 +352,10 @@
   "about_cta_banner_title": "Taste the Tradition — Join the Botocoin Family!",
   "about_cta_banner_button": "Start a Franchise",
 
-  "about_plan_visit_button": "Plan Your Visit"
+  "about_plan_visit_button": "Plan Your Visit",
+  
+  "news_article_not_found": "Article not found",
+  "news_article_not_found_desc": "The article you are looking for does not exist or has been moved.",
+  "news_article_back_to_news": "Back to News"
+
 }

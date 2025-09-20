@@ -14,6 +14,7 @@ import ProductDetailsPage from '@/pages/ProductDetailsPage';
 import CartPage from '@/pages/CartPage';
 import AboutPage from './pages/AboutPage';
 import CheckoutPage from '@/pages/CheckoutPage';
+import NewsArticlePage from '@/pages/NewsArticlePage';
 import { CartProvider } from '@/context/CartContext';
 
 const AppContent = () => {
@@ -40,6 +41,7 @@ const AppContent = () => {
           <Route path="/details/:id" element={<ProductDetailsPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/news/:slug" element={<NewsArticlePage />} />
         </Routes>
         <Footer />
         <Toaster />

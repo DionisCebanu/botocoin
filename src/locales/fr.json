@@ -74,9 +74,51 @@
   "news_title": "Dernières Actualités",
   "news_subtitle": "Découvrez nos dernières créations et histoires.",
   "news_items": [
-    { "category": "Nouveau Produit", "date": "20 Août 2025", "title": "Le beignet au Baobab est arrivé !", "excerpt": "Découvrez notre nouvelle création aux notes exotiques et acidulées, un véritable voyage pour les papilles.", "read_more": "Lire la suite" },
-    { "category": "Événement", "date": "15 Août 2025", "title": "Le Botocoin au Festival AfroMontréal", "excerpt": "Retrouvez-nous à notre stand pour trois jours de festivités, de musique, et bien sûr, de beignets.", "read_more": "Lire la suite" },
-    { "category": "Coulisses", "date": "10 Août 2025", "title": "Le secret de notre jus de gingembre", "excerpt": "On vous dévoile quelques secrets derrière notre fameux jus de gingembre maison, une recette de famille.", "read_more": "Lire la suite" }
+    {
+      "slug": "lancement-beignet-baobab",
+      "category": "Nouveau Produit",
+      "date": "20 Août 2025",
+      "title": "Le beignet au Baobab est arrivé !",
+      "excerpt": "Découvrez notre nouvelle création aux notes exotiques et acidulées, un véritable voyage pour les papilles.",
+      "read_more": "Lire la suite",
+      "image_src": "https://ik.imagekit.io/e7yxvoeog/uploads/news/news-1.png?updatedAt=1756406437324",
+      "image_prompt": "Un magnifique beignet à la saveur de baobab avec un glaçage blanc et de la poudre de fruit de baobab, sur une table en bois.",
+      "content": [
+        "Nous sommes ravis de vous annoncer le dernier né de notre famille de saveurs : le Beignet au Baobab ! Cette création unique est un hommage à l'arbre de vie emblématique d'Afrique.",
+        "Le fruit du baobab, connu pour sa richesse en vitamine C et son goût acidulé rappelant les agrumes, est la star de cette nouvelle recette. Nous avons incorporé sa poudre dans une pâte légère et aérée ainsi que dans un glaçage délicat, créant un équilibre parfait entre douceur et acidité.",
+        "Venez déguster cette petite merveille dans notre boutique dès aujourd'hui. C'est une édition limitée, alors ne tardez pas à embarquer pour ce voyage gustatif !"
+      ]
+    },
+    {
+      "slug": "festival-afromontreal",
+      "category": "Événement",
+      "date": "15 Août 2025",
+      "title": "Le Botocoin au Festival AfroMontréal",
+      "excerpt": "Retrouvez-nous à notre stand pour trois jours de festivités, de musique, et bien sûr, de beignets.",
+      "read_more": "Lire la suite",
+      "image_src": "https://ik.imagekit.io/e7yxvoeog/uploads/news/news-2.png?updatedAt=1756406437345",
+      "image_prompt": "Une scène de festival animée avec un stand de nourriture pour 'Le Botocoin', des gens dégustant des beignets.",
+      "content": [
+        "Le Botocoin est fier d'être partenaire du Festival AfroMontréal cette année ! Rejoignez-nous du 22 au 24 août au Parc Jean-Drapeau pour une célébration inoubliable des cultures africaines et caribéennes.",
+        "Notre stand vous proposera nos plus grands classiques, ainsi que quelques surprises exclusives créées spécialement pour l'événement. C'est l'occasion parfaite de partager un moment gourmand en famille ou entre amis dans une ambiance festive et colorée.",
+        "Nous vous attendons nombreux pour danser, chanter et vous régaler avec nous !"
+      ]
+    },
+    {
+      "slug": "secret-jus-gingembre",
+      "category": "Coulisses",
+      "date": "10 Août 2025",
+      "title": "Le secret de notre jus de gingembre",
+      "excerpt": "On vous dévoile quelques secrets derrière notre fameux jus de gingembre maison, une recette de famille.",
+      "read_more": "Lire la suite",
+      "image_src": "https://ik.imagekit.io/e7yxvoeog/uploads/news/news-3.png?updatedAt=1756406436975",
+      "image_prompt": "Gros plan sur un verre de jus de gingembre glacé avec une tranche de citron et des feuilles de menthe.",
+      "content": [
+        "Vous nous demandez souvent le secret de notre jus de gingembre, si revigorant et parfumé. Si nous ne pouvons pas tout vous révéler (une recette de famille, c'est une recette de famille !), nous pouvons partager quelques-uns de nos principes.",
+        "Tout commence par la sélection d'un gingembre frais et de qualité, que nous pressons nous-mêmes pour en extraire toute la puissance. Nous y ajoutons ensuite une pointe d'ananas pour la douceur et un trait de citron pour la fraîcheur. Pas d'arômes artificiels, pas de conservateurs, juste le goût pur des bons ingrédients.",
+        "Cette boisson, transmise de génération en génération, est pour nous plus qu'une simple boisson ; c'est un concentré d'énergie et de bien-être, parfait pour accompagner nos beignets."
+      ]
+    }
   ],
 
   "gallery_title": "Galerie Gourmande",
@@ -310,5 +352,9 @@
   "about_cta_banner_title": "Goûtez à la Tradition — Rejoignez la Famille Botocoin !",
   "about_cta_banner_button": "Devenir Franchisé",
 
-  "about_plan_visit_button": "Planifiez Votre Visite"
+  "about_plan_visit_button": "Planifiez Votre Visite",
+
+  "news_article_not_found": "Article non trouvé",
+  "news_article_not_found_desc": "L'article que vous recherchez n'existe pas ou a été déplacé.",
+  "news_article_back_to_news": "Retour aux actualités"
 }

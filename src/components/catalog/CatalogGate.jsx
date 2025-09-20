@@ -213,8 +213,11 @@ const CatalogGate = ({ onSelectCategory }) => {
                     variants={itemVariants}
                     onClick={() => handleSelectCategory(cat.id)}
                     className={cn(
-                      'p-8 rounded-2xl border-4 transition-all duration-300 text-left flex flex-col items-center justify-center text-center',
-                      'border-transparent bg-white dark:bg-dark-surface hover:bg-soft-cream/50 dark:hover:bg-dark-surface/50 shadow-soft hover:shadow-lg hover:scale-[1.02]'
+                      'p-8 rounded-3xl border-4 transition-all duration-300 text-left flex flex-col items-center justify-center text-center group overflow-hidden',
+                      'border-soft-cream/40 dark:border-dark-subtle bg-white dark:bg-dark-surface shadow-xl',
+                      'hover:bg-gradient-to-br hover:from-soft-cream/80 hover:to-amber-orange/20 dark:hover:bg-gradient-to-br dark:hover:from-dark-surface dark:hover:to-dark-subtle',
+                      'hover:shadow-2xl hover:-translate-y-2 hover:scale-105',
+                      'focus-visible:ring-4 focus-visible:ring-amber-orange/40'
                     )}
                   >
                     <Icon className="w-16 h-16 mb-4 text-amber-orange" />
@@ -276,8 +279,11 @@ const CatalogGate = ({ onSelectCategory }) => {
                     variants={itemVariants}
                     onClick={() => handleChooseSubcategory(s)}
                     className={cn(
-                      'p-8 rounded-2xl border-4 transition-all duration-300 text-left flex flex-col items-center justify-center text-center',
-                      'border-transparent bg-white dark:bg-dark-surface hover:bg-soft-cream/50 dark:hover:bg-dark-surface/50 shadow-soft hover:shadow-lg hover:scale-[1.02]'
+                      'p-8 rounded-3xl border-4 transition-all duration-300 text-left flex flex-col items-center justify-center text-center group overflow-hidden',
+                      'border-soft-cream/40 dark:border-dark-subtle bg-white dark:bg-dark-surface shadow-xl',
+                      'hover:bg-gradient-to-br hover:from-soft-cream/80 hover:to-amber-orange/20 dark:hover:bg-gradient-to-br dark:hover:from-dark-surface dark:hover:to-dark-subtle',
+                      'hover:shadow-2xl hover:-translate-y-2 hover:scale-105',
+                      'focus-visible:ring-4 focus-visible:ring-amber-orange/40'
                     )}
                   >
                     <SubIcon className="w-16 h-16 mb-4 text-amber-orange" />
