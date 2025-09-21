@@ -8,6 +8,7 @@
   "nav_news": "News",
   "nav_catalog": "Catalog",
   "nav_about": "About Us",
+  "nav_events": "Events",
 
   "hero_promo_badge": "Promo of the week {{index}}",
   "hero_slides": [

@@ -11,6 +11,7 @@ import {
   Info,
   Newspaper,
   Mail,
+  PartyPopper
 } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -86,7 +87,7 @@ const Navbar = ({ onSocialClick, onCallClick, onOrderClick }) => {
     () => [
       { name: t("nav_catalog"), to: "/catalog", type: "route", icon: ShoppingBag },
       { name: t("nav_about"), to: "/about", type: "route", icon: Info },
-      { name: t("nav_news"), to: "#news", type: "hash", icon: Newspaper },
+      { name: t("nav_events"), to: "/events", type: "route", icon: PartyPopper },
       { name: t("nav_contact"), to: "#contact", type: "hash", icon: Mail },
     ],
     [t]
