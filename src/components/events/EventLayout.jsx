@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { MapPin, CheckCircle2, Utensils, Truck, Clock, Users } from 'lucide-react';
+import { MapPin, CheckCircle2, Utensils, Truck, Clock, Users, Quote } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { appearContainer, appearItem } from '@/lib/animations';
 import FlyingDecor from '@/components/decor/FlyingDecor';
 import EventForm from '@/components/events/EventForm';
-import WaveDivider from '@/components/WaveDivider';
-
+import NavWave from '@/components/ui/NavWave';
+import CtaBanner from '@/components/CtaBanner';
 const EventLayout = ({ eventType }) => {
   const { t } = useTranslation();
   const content = t(`events.${eventType}`, { returnObjects: true });
@@ -57,12 +57,20 @@ const EventLayout = ({ eventType }) => {
           >
             <motion.h1 variants={appearItem} className="font-display text-5xl md:text-7xl font-bold text-soft-cream mb-4">{content.hero.title}</motion.h1>
             <motion.p variants={appearItem} className="text-xl md:text-2xl text-soft-cream/80 max-w-3xl mx-auto mb-8">{content.hero.subtitle}</motion.p>
-            <motion.div variants={appearItem}>
-              <Button onClick={() => scrollTo('event-form')} size="lg" className="btn-primary">{t('events.cta_quote')}</Button>
+            <motion.div variants={appearItem} className='flex justify-center'>
+              <Button onClick={() => scrollTo('event-form')} size="lg" className="px-8 py-4 rounded-full font-bold text-white bg-gradient-to-br from-amber-orange via-amber-400 to-amber-orange shadow-md hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-3 focus-visible:ring-4 focus-visible:ring-amber-orange/70 active:scale-95">
+                <Quote className="w-5 h-5" />
+                {t('events.cta_quote')}
+                </Button>
             </motion.div>
           </motion.div>
-          <WaveDivider className="absolute -bottom-px left-0 w-full text-soft-cream dark:text-dark-bg" />
+          {/* <WaveDivider className="absolute -bottom-px left-0 w-full text-soft-cream dark:text-dark-bg" /> */}
         </section>
+          {/* The divider wave lives OUTSIDE the section, so it "exits" it */}
+          <div aria-hidden className="relative bg-[#59371e] bottom-[0px] sm:bottom-[0px] z-30 rotate-180">
+              {/* Set these colors to the NEXT section’s background for a seamless transition */}
+              <NavWave className="block w-full h-6 md:h-10 bottom-[-40px] text-soft-cream dark:text-dark-bg" />
+          </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div variants={appearContainer} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }}>
@@ -107,7 +115,7 @@ const EventLayout = ({ eventType }) => {
                         </ul>
                         <p className="text-sm text-warm-gray/80 italic">{tier.notes}</p>
                       </div>
-                      <Button onClick={() => handleTierSelect(tier.value)} className="w-full mt-8 btn-primary">{t('events.select_tier')}</Button>
+                      <Button onClick={() => handleTierSelect(tier.value)} className="w-full mt-8 btn-secondary color-orange">{t('events.select_tier')}</Button>
                     </motion.div>
                   ))}
                 </div>
@@ -164,22 +172,16 @@ const EventLayout = ({ eventType }) => {
             </div>
 
             {/* Visit Us */}
-            <section className="py-16 md:py-24">
-              <motion.div variants={appearItem} className="max-w-2xl mx-auto text-center bg-white dark:bg-dark-surface p-8 rounded-2xl shadow-soft">
-                <h3 className="text-2xl font-bold mb-4">{t('events.visit_us_title')}</h3>
-                <p className="text-warm-gray mb-4">{t('events.visit_us_desc')}</p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <Button asChild variant="outline">
-                    <a href="https://www.openstreetmap.org/?mlat=45.5492&mlon=-73.5729#map=17/45.5492/-73.5729" target="_blank" rel="noopener noreferrer">
-                      <MapPin className="mr-2 h-4 w-4" /> {t('about_address')}
-                    </a>
-                  </Button>
-                  <div className="w-24 h-24 bg-gray-200 rounded-md flex items-center justify-center text-xs text-gray-500">QR Code</div>
-                </div>
-              </motion.div>
-            </section>
+            
+
           </motion.div>
         </div>
+            <CtaBanner 
+                title={t('events.visit_us_title')}
+                subtitle={t('events.visit_us_desc')}
+                buttonText={t('events.visit_us_title')}
+                onButtonClick={() => window.location.href = 'https://www.google.com/maps/place/Le+Botocoin/@45.5525862,-73.5591895,17z/data=!3m1!4b1!4m6!3m5!1s0x4cc91de9e403968d:0x48c4aeb7e3cc74dd!8m2!3d45.5525825!4d-73.5566146!16s%2Fg%2F11nmqs3wxn?entry=ttu&g_ep=EgoyMDI1MDkxNy4wIKXMDSoASAFQAw%3D%3D'}
+            />
         <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-dark-surface/80 backdrop-blur-sm p-4 border-t border-chocolate-brown/10 dark:border-warm-gray/20 z-40" style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom))' }}>
           <Button onClick={() => scrollTo('event-form')} className="w-full btn-primary">{t('events.cta_quote')}</Button>
         </div>
