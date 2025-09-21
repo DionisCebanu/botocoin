@@ -176,16 +176,24 @@ const CatalogGate = ({ onSelectCategory }) => {
         exit={{ opacity: 0 }}
         className="flex flex-col items-center justify-center min-h-[calc(100vh-6rem)] p-4"
       >
-        <motion.div variants={containerVariants} initial="hidden" animate="visible" className="text-center">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="relative text-center mx-auto mb-10 mt-10 px-6 py-10 rounded-3xl bg-white/10 dark:bg-dark-bg/40 backdrop-blur-lg border-2 border-amber-orange/30 dark:border-amber-orange/40 shadow-xl transition-all duration-500 hover:shadow-2xl hover:scale-[1.01] max-w-3xl"
+        >
           <motion.h1
             variants={itemVariants}
-            className="font-display text-4xl md:text-6xl font-bold text-chocolate-brown dark:text-soft-cream"
+            className="font-display text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-amber-orange via-chocolate-brown to-amber-orange dark:from-amber-orange dark:via-soft-cream dark:to-amber-orange drop-shadow-lg mb-4 transition-colors duration-300"
           >
             {mode === 'categories'
               ? t('catalog_gate_title')
               : (activeCat?.title || t('catalog_gate_title'))}
           </motion.h1>
-          <motion.p variants={itemVariants} className="mt-4 text-lg text-warm-gray dark:text-dark-subtle max-w-2xl mx-auto">
+          <motion.p
+            variants={itemVariants}
+            className="mt-2 text-lg md:text-xl text-chocolate-brown dark:text-soft-cream/80 max-w-2xl mx-auto font-medium tracking-wide transition-colors duration-300"
+          >
             {mode === 'categories'
               ? t('catalog_gate_subtitle')
               : t('catalog_gate_subtitle')}

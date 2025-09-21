@@ -112,7 +112,7 @@ const DonutsSection = ({ onOrderClick }) => {
         {/* View all (catalog filtered to donuts) */}
         <motion.div variants={itemVariants} className="mt-12">
           <button 
-            onClick={() => navigate('/catalog?cat=donuts')}
+            onClick={() => window.location.href = '/catalog?cat=donuts'}
             className="btn-secondary btn-accent"
           >
             {t('view_full_catalog_button')}

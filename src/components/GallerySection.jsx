@@ -46,11 +46,11 @@ const GallerySection = ({ onViewAllClick }) => {
                         </motion.div>
                     ))}
                 </motion.div>
-                <motion.div variants={itemVariants} className="mt-12">
+                {/* <motion.div variants={itemVariants} className="mt-12">
                     <button onClick={onViewAllClick} className="btn-secondary">
                         {t('gallery_button')}
                     </button>
-                </motion.div>
+                </motion.div> */}
             </div>
         </AnimatedSection>
     );
