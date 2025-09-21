@@ -358,5 +358,142 @@
 
   "news_article_not_found": "Article non trouvé",
   "news_article_not_found_desc": "L'article que vous recherchez n'existe pas ou a été déplacé.",
-  "news_article_back_to_news": "Retour aux actualités"
+  "news_article_back_to_news": "Retour aux actualités",
+
+  "events": {
+    "seo_title": "Événements & Traiteur",
+    "menu_title": "Événements & Traiteur",
+    "menu_subtitle": "Menus personnalisés pour événements scolaires, fêtes et réunions d'entreprise.",
+    "menu_cta_choose": "Choisir un Type d'Événement",
+    "menu_cta_quote": "Contactez-nous pour un devis",
+    "menu_how_it_works_title": "Comment Ça Marche",
+    "menu_how_it_works_steps": [
+      { "title": "Sélectionnez Votre Événement", "description": "Choisissez le type de rassemblement que vous organisez." },
+      { "title": "Choisissez un Niveau de Budget", "description": "Trouvez l'option parfaite pour vos besoins et le nombre d'invités." },
+      { "title": "Demandez un Devis", "description": "Remplissez notre formulaire et nous vous répondrons rapidement." }
+    ],
+    "menu_cards": {
+      "party": { "title": "Fêtes & Célébrations", "desc": "Assortiments festifs pour anniversaires, showers, et plus encore." },
+      "school": { "title": "Événements Scolaires", "desc": "Options sécuritaires (sans noix) et adaptées aux enfants pour toute fonction scolaire." },
+      "corporate": { "title": "Entreprises & Bureaux", "desc": "Service traiteur soigné et professionnel pour les réunions et les équipes." }
+    },
+    "footer_banner_title": "Besoin de quelque chose de personnalisé ?",
+    "footer_banner_desc": "Nous créerons un menu adapté à votre budget.",
+    "cta_quote": "Demander un Devis",
+    "overview_title": "Notre Approche",
+    "tiers_title": "Choisissez Votre Forfait",
+    "select_tier": "Sélectionner ce Forfait",
+    "logistics_title": "Logistique & Service",
+    "dietary_title": "Informations Diététiques",
+    "dietary_badges": ["Options Végétaliennes", "Végétarien", "Préparé sans noix", "Halal", "Options sans gluten"],
+    "dietary_disclaimer": "Veuillez noter : bien que nous proposions des options pour divers besoins alimentaires, notre cuisine manipule des noix, du gluten et d'autres allergènes. Une contamination croisée est possible.",
+    "faq_title": "Foire Aux Questions",
+    "download_menu": "Télécharger le Menu Événements (PDF)",
+    "visit_us_title": "Visitez-Nous en Personne",
+    "visit_us_desc": "Vous voulez discuter de votre événement ? Passez nous voir à notre boutique à Montréal.",
+    "budget_options": [
+      { "value": "bronze", "label": "Forfait Bronze" },
+      { "value": "silver", "label": "Forfait Argent" },
+      { "value": "gold", "label": "Forfait Or" }
+    ],
+    "form": {
+      "title": "Demander un Devis",
+      "event_details": "Détails de l'événement",
+      "notes_title": "Notes Additionnelles",
+      "name": "Nom Complet",
+      "email": "Adresse E-mail",
+      "phone": "Numéro de Téléphone",
+      "organization": "Organisation / École (Optionnel)",
+      "date": "Date de l'Événement",
+      "time": "Heure de l'Événement",
+      "guests": "Nombre d'Invités",
+      "budget": "Budget par Personne",
+      "venue": "Adresse du Lieu",
+      "dietary": "Notes sur les Régimes (Optionnel)",
+      "message": "Message Supplémentaire (Optionnel)",
+      "consent": "Je consens à être contacté par l'équipe de Le Botocoin concernant ma demande d'événement.",
+      "submit": "Demander un Devis",
+      "success_title": "Demande de Devis Envoyée !",
+      "success_desc": "Merci ! Nous avons reçu votre demande et vous contacterons bientôt.",
+      "error_title": "Veuillez remplir tous les champs obligatoires."
+    },
+    "party": {
+      "hero": {
+        "title": "Fêtes & Célébrations",
+        "subtitle": "Gourmandises à partager, glaçages colorés et organisation sans effort pour votre journée spéciale."
+      },
+      "overview": [
+        "Des anniversaires aux baby showers, nous créons des assortiments festifs qui voyagent bien et s'installent rapidement, apportant une touche de joie artisanale à toute célébration.",
+        "Choisissez un niveau de budget et nous adapterons le mélange de nos beignets signatures et de nos boissons rafraîchissantes pour ravir vos invités et rendre votre événement mémorable."
+      ],
+      "tiers": [
+        { "value": "bronze", "name": "Bronze", "price": "8–10 $ / personne", "includes": ["Sélection de beignets signatures", "1 choix de boisson", "Emballage standard"], "notes": "Minimum 20 invités", "highlight": false },
+        { "value": "silver", "name": "Argent", "price": "12–14 $ / personne", "includes": ["Plus grande variété de beignets", "Touches décoratives", "2 choix de boissons", "Étiquettes personnalisées"], "notes": "Minimum 20 invités", "highlight": true },
+        { "value": "gold", "name": "Or", "price": "16–18 $ / personne", "includes": ["Assortiment premium et spécialités", "Assortiment de mini-beignets", "Boissons améliorées", "Installation personnalisée"], "notes": "Minimum 20 invités", "highlight": false }
+      ],
+      "logistics": [
+        { "title": "Nombre d'Invités", "details": "Un minimum de 20 invités est requis pour les commandes traiteur de fête." },
+        { "title": "Délai de Préparation", "details": "Veuillez nous aviser 48 à 72 heures à l'avance pour que nous puissions préparer votre commande à la perfection." },
+        { "title": "Livraison & Cueillette", "details": "Cueillette pratique à notre emplacement de Montréal ou livraison locale disponible (frais basés sur la distance)." },
+        { "title": "Personnel/Installation", "details": "Nos boîtes traiteur sont conçues pour une installation facile. Du personnel sur place est disponible pour les événements de niveau Or." }
+      ],
+      "faq": [
+        { "q": "Combien de temps d'installation est nécessaire ?", "a": "Minimal ! Nos beignets arrivent dans des boîtes faciles à présenter. Vous pouvez avoir une belle table prête en 10-15 minutes." },
+        { "q": "Quelles sont vos suggestions de service ?", "a": "Nous recommandons 1,5 beignet par personne. Pour plus de variété, mélangez des beignets standards avec nos populaires boîtes de mini-beignets." },
+        { "q": "Vos beignets conviennent-ils aux événements extérieurs ?", "a": "Oui, ils se tiennent bien. Nous recommandons de les garder dans un endroit frais et ombragé, surtout par temps chaud." }
+      ]
+    },
+    "school": {
+      "hero": {
+        "title": "Événements Scolaires & Levées de Fonds",
+        "subtitle": "Menus adaptés aux enfants avec des options préparées sans noix et un service rapide et fiable."
+      },
+      "overview": [
+        "Ravivez vos élèves et votre personnel avec des sélections équilibrées conçues pour les assemblées, les clubs, les ventes de pâtisseries et les levées de fonds. Nous priorisons la sécurité avec une manipulation sans noix.",
+        "Nos emballages sont conçus pour une distribution facile et sans dégâts, simplifiant la gestion pour les éducateurs et les bénévoles."
+      ],
+      "tiers": [
+        { "value": "bronze", "name": "Bronze", "price": "6–8 $ / élève", "includes": ["Sélection de beignets sans noix", "1 boisson standard", "Emballage en vrac"], "notes": "Minimum 30 élèves", "highlight": false },
+        { "value": "silver", "name": "Argent", "price": "9–11 $ / élève", "includes": ["Assortiment varié de beignets", "Boissons améliorées (jus)", "Option d'emballage individuel", "Rabais pour éducateurs"], "notes": "Minimum 30 élèves", "highlight": true },
+        { "value": "gold", "name": "Or", "price": "12–14 $ / élève", "includes": ["Sélection de beignets premium", "Station de café pour le personnel", "Options de levée de fonds personnalisées", "Livraison gratuite"], "notes": "Minimum 30 élèves", "highlight": false }
+      ],
+      "logistics": [
+        { "title": "Nombre d'Élèves", "details": "Un minimum de 30 élèves est requis pour les commandes d'événements scolaires." },
+        { "title": "Manipulation sans Noix", "details": "Nos menus pour événements scolaires sont préparés avec des protocoles stricts sans noix pour renforcer la sécurité." },
+        { "title": "Livraison & Cueillette", "details": "Nous offrons une livraison programmée directement à votre école (des frais s'appliquent) ou une cueillette gratuite à notre magasin." },
+        { "title": "Levée de Fonds", "details": "Renseignez-vous sur nos programmes de levée de fonds, où une partie des ventes est reversée à votre école !" }
+      ],
+      "faq": [
+        { "q": "Comment gérez-vous les allergies ?", "a": "Nos menus scolaires sont préparés sans noix. Pour d'autres allergies spécifiques, veuillez les noter dans le formulaire de demande afin que nous puissions vous conseiller sur les options appropriées. Nous ne pouvons garantir un environnement 100% sans allergènes." },
+        { "q": "Offrez-vous des rabais pour les éducateurs ?", "a": "Oui ! Nous offrons un rabais de 10% pour les enseignants et le personnel scolaire sur toutes les commandes traiteur. Veuillez le mentionner dans votre demande." },
+        { "q": "Quel est votre processus de facturation ?", "a": "Nous pouvons fournir une facture détaillée pour le service comptable de votre école et acceptons les paiements par chèque ou carte de crédit." }
+      ]
+    },
+    "corporate": {
+      "hero": {
+        "title": "Réunions d'Entreprise & Traiteur de Bureau",
+        "subtitle": "Présentation soignée, portions individuelles et livraison ponctuelle pour votre équipe."
+      },
+      "overview": [
+        "Des réunions matinales aux conseils d'administration, nous livrons des assortiments soignés et délicieux avec un étiquetage clair pour garder votre équipe énergisée et concentrée.",
+        "Nous offrons des options flexibles pour les horaires récurrents et pouvons accommoder un large éventail de besoins alimentaires pour que tout le monde se sente inclus."
+      ],
+      "tiers": [
+        { "value": "bronze", "name": "Bronze", "price": "10–12 $ / personne", "includes": ["Sélection de beignets signatures", "Café et thé standard", "Emballage en vrac"], "notes": "Minimum 15 invités", "highlight": false },
+        { "value": "silver", "name": "Argent", "price": "14–16 $ / personne", "includes": ["Variété de beignets élargie", "Portions individuelles étiquetées", "Boissons améliorées", "Garantie de livraison à temps"], "notes": "Minimum 15 invités", "highlight": true },
+        { "value": "gold", "name": "Or", "price": "18–22 $ / personne", "includes": ["Assortiment premium complet", "Boissons de spécialité", "Service d'installation sur place", "Rabais pour commandes récurrentes"], "notes": "Minimum 15 invités", "highlight": false }
+      ],
+      "logistics": [
+        { "title": "Nombre d'Invités", "details": "Un minimum de 15 invités est requis pour le service traiteur d'entreprise." },
+        { "title": "Délai de Préparation", "details": "Veuillez prévoir un préavis de 48 à 72 heures. Pour les commandes importantes ou personnalisées, un délai plus long est apprécié." },
+        { "title": "Livraison", "details": "Nous offrons une livraison fiable et ponctuelle avec des fenêtres de sélection pour s'adapter à votre horaire de réunion." },
+        { "title": "Présentation", "details": "Toutes les commandes arrivent dans un emballage professionnel et facile à servir. L'installation complète est disponible avec notre niveau Or." }
+      ],
+      "faq": [
+        { "q": "Quelles sont vos conditions de paiement et de facturation ?", "a": "Nous offrons une facturation nette à 30 jours pour les comptes d'entreprise. Le paiement peut être effectué par carte de crédit, chèque ou virement direct." },
+        { "q": "Pouvez-vous accommoder les livraisons tôt le matin ?", "a": "Oui, nous pouvons organiser des livraisons en dehors de nos heures d'ouverture standard pour respecter l'horaire de votre équipe. Veuillez préciser l'heure dans votre demande." },
+        { "q": "Comment gérez-vous l'accès aux immeubles et la sécurité ?", "a": "Notre équipe de livraison est professionnelle et expérimentée avec les protocoles des immeubles de bureaux. Veuillez fournir toute instruction spécifique dans le formulaire." }
+      ]
+    }
+  }
 }

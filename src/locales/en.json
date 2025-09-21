@@ -358,6 +358,143 @@
   
   "news_article_not_found": "Article not found",
   "news_article_not_found_desc": "The article you are looking for does not exist or has been moved.",
-  "news_article_back_to_news": "Back to News"
+  "news_article_back_to_news": "Back to News",
+
+  "events": {
+    "seo_title": "Events & Catering",
+    "menu_title": "Events & Catering",
+    "menu_subtitle": "Curated menus for school events, parties, and corporate meetings.",
+    "menu_cta_choose": "Choose an Event Type",
+    "menu_cta_quote": "Contact us for a quote",
+    "menu_how_it_works_title": "How It Works",
+    "menu_how_it_works_steps": [
+      { "title": "Select Your Event", "description": "Choose the type of gathering you're hosting." },
+      { "title": "Pick a Budget Tier", "description": "Find the perfect fit for your needs and guest count." },
+      { "title": "Request a Quote", "description": "Fill out our form and we'll get back to you shortly." }
+    ],
+    "menu_cards": {
+      "party": { "title": "Parties & Celebrations", "desc": "Festive assortments for birthdays, showers, and more." },
+      "school": { "title": "School Events", "desc": "Nut-aware and kid-friendly options for any school function." },
+      "corporate": { "title": "Corporate & Office", "desc": "Polished, professional catering for meetings and teams." }
+    },
+    "footer_banner_title": "Need something custom?",
+    "footer_banner_desc": "We’ll build a menu for your budget.",
+    "cta_quote": "Request a Quote",
+    "overview_title": "Our Approach",
+    "tiers_title": "Choose Your Tier",
+    "select_tier": "Select this Tier",
+    "logistics_title": "Logistics & Service",
+    "dietary_title": "Dietary Information",
+    "dietary_badges": ["Vegan Options", "Vegetarian", "Nut-Aware", "Halal", "Gluten-Friendly"],
+    "dietary_disclaimer": "Please note: while we offer options for various dietary needs, our kitchen handles nuts, gluten, and other allergens. Cross-contamination is possible.",
+    "faq_title": "Frequently Asked Questions",
+    "download_menu": "Download Events Menu (PDF)",
+    "visit_us_title": "Visit Us in Person",
+    "visit_us_desc": "Want to discuss your event? Come by our shop in Montréal.",
+    "budget_options": [
+      { "value": "bronze", "label": "Bronze Tier" },
+      { "value": "silver", "label": "Silver Tier" },
+      { "value": "gold", "label": "Gold Tier" }
+    ],
+    "form": {
+      "title": "Request a Quote",
+      "event_details": "Event Details",
+      "notes_title": "Additional Notes",
+      "name": "Full Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "organization": "Organization / School (Optional)",
+      "date": "Event Date",
+      "time": "Event Time",
+      "guests": "Number of Guests",
+      "budget": "Budget per Person",
+      "venue": "Venue Address",
+      "dietary": "Dietary Notes (Optional)",
+      "message": "Additional Message (Optional)",
+      "consent": "I consent to be contacted by the Le Botocoin team regarding my event inquiry.",
+      "submit": "Request Quote",
+      "success_title": "Quote Request Sent!",
+      "success_desc": "Thank you! We've received your request and will be in touch soon.",
+      "error_title": "Please fill all required fields."
+    },
+    "party": {
+      "hero": {
+        "title": "Parties & Celebrations",
+        "subtitle": "Shareable treats, bright glazes, and effortless hosting for your special day."
+      },
+      "overview": [
+        "From birthdays to baby showers, we craft festive assortments that travel well and set up fast, bringing a touch of handmade joy to any celebration.",
+        "Choose a budget tier and we’ll match the mix of our signature donuts and refreshing beverages to delight your guests and make your event memorable."
+      ],
+      "tiers": [
+        { "value": "bronze", "name": "Bronze", "price": "$8–10 / person", "includes": ["Selection of signature donuts", "1 beverage choice", "Standard packaging"], "notes": "Minimum 20 guests", "highlight": false },
+        { "value": "silver", "name": "Silver", "price": "$12–14 / person", "includes": ["Wider variety of donuts", "Decorative touches", "2 beverage choices", "Custom labels"], "notes": "Minimum 20 guests", "highlight": true },
+        { "value": "gold", "name": "Gold", "price": "$16–18 / person", "includes": ["Premium & specialty donuts", "Mini-donut assortment", "Upgraded beverages", "Personalized setup"], "notes": "Minimum 20 guests", "highlight": false }
+      ],
+      "logistics": [
+        { "title": "Guest Count", "details": "A minimum of 20 guests is required for party catering orders." },
+        { "title": "Lead Time", "details": "Please provide 48–72 hours notice to ensure we can prepare your order to perfection." },
+        { "title": "Delivery & Pickup", "details": "Convenient pickup from our Montréal location or local delivery available (fee based on distance)." },
+        { "title": "Staffing/Setup", "details": "Our catering boxes are designed for easy setup. On-site staff is available for Gold tier events." }
+      ],
+      "faq": [
+        { "q": "How much setup time is needed?", "a": "Minimal! Our donuts arrive in easy-to-display boxes. You can have a beautiful spread ready in 10-15 minutes." },
+        { "q": "What are your serving suggestions?", "a": "We recommend 1.5 donuts per person. For variety, mix standard donuts with our popular mini-donut boxes." },
+        { "q": "Are your donuts suitable for outdoor events?", "a": "Yes, they hold up well. We recommend keeping them in a shaded, cool area, especially on warm days." }
+      ]
+    },
+    "school": {
+      "hero": {
+        "title": "School Events & Fundraisers",
+        "subtitle": "Kid-friendly menus with nut-aware options and quick, reliable service."
+      },
+      "overview": [
+        "Fuel your students and staff with balanced selections tailored for assemblies, club meetings, bake sales, and fundraisers. We prioritize safety with nut-aware handling.",
+        "Our packaging is designed for easy, mess-free distribution, making it simple for educators and volunteers to manage."
+      ],
+      "tiers": [
+        { "value": "bronze", "name": "Bronze", "price": "$6–8 / student", "includes": ["Nut-aware donut selection", "1 standard beverage", "Bulk packaging"], "notes": "Minimum 30 students", "highlight": false },
+        { "value": "silver", "name": "Silver", "price": "$9–11 / student", "includes": ["Variety pack of donuts", "Upgraded beverages (juices)", "Individual packaging option", "Educator discount"], "notes": "Minimum 30 students", "highlight": true },
+        { "value": "gold", "name": "Gold", "price": "$12–14 / student", "includes": ["Premium donut selection", "Staff coffee station", "Custom fundraising options", "Free delivery"], "notes": "Minimum 30 students", "highlight": false }
+      ],
+      "logistics": [
+        { "title": "Guest Count", "details": "A minimum of 30 students is required for school event orders." },
+        { "title": "Nut-Aware Handling", "details": "Our school event menus are prepared with strict nut-aware protocols to enhance safety." },
+        { "title": "Delivery & Pickup", "details": "We offer scheduled delivery directly to your school (fee applies) or free pickup from our store." },
+        { "title": "Fundraising", "details": "Ask about our fundraising programs, where a portion of sales goes back to your school!" }
+      ],
+      "faq": [
+        { "q": "How do you handle allergies?", "a": "Our school menus are nut-aware. For other specific allergies, please note them in the inquiry form so we can advise on suitable options. We cannot guarantee a 100% allergen-free environment." },
+        { "q": "Do you offer educator discounts?", "a": "Yes! We offer a 10% discount for teachers and school staff on all catering orders. Please mention it in your inquiry." },
+        { "q": "What is your invoicing process?", "a": "We can provide a detailed invoice for your school's accounting department and accept payment via cheque or credit card." }
+      ]
+    },
+    "corporate": {
+      "hero": {
+        "title": "Corporate Meetings & Office Catering",
+        "subtitle": "Polished presentation, individual servings, and on-time delivery for your team."
+      },
+      "overview": [
+        "From early morning stand-ups to all-day board meetings, we deliver neat, delicious assortments with clear labeling to keep your team energized and focused.",
+        "We offer flexible options for recurring schedules and can accommodate a wide range of dietary needs to ensure everyone feels included."
+      ],
+      "tiers": [
+        { "value": "bronze", "name": "Bronze", "price": "$10–12 / person", "includes": ["Signature donut selection", "Standard coffee & tea", "Bulk packaging"], "notes": "Minimum 15 guests", "highlight": false },
+        { "value": "silver", "name": "Silver", "price": "$14–16 / person", "includes": ["Expanded donut variety", "Individually labeled portions", "Upgraded beverages", "On-time delivery guarantee"], "notes": "Minimum 15 guests", "highlight": true },
+        { "value": "gold", "name": "Gold", "price": "$18–22 / person", "includes": ["Full premium assortment", "Specialty beverages", "On-site setup service", "Recurring order discount"], "notes": "Minimum 15 guests", "highlight": false }
+      ],
+      "logistics": [
+        { "title": "Guest Count", "details": "A minimum of 15 guests is required for corporate catering." },
+        { "title": "Lead Time", "details": "Please provide 48–72 hours notice. For large or custom orders, more time is appreciated." },
+        { "title": "Delivery", "details": "We offer reliable, on-time delivery with selectable windows to fit your meeting schedule." },
+        { "title": "Presentation", "details": "All orders arrive in professional, easy-to-serve packaging. Full setup is available with our Gold tier." }
+      ],
+      "faq": [
+        { "q": "What are your payment and invoicing terms?", "a": "We offer net-30 invoicing for corporate accounts. Payment can be made via credit card, cheque, or direct deposit." },
+        { "q": "Can you accommodate early-morning deliveries?", "a": "Yes, we can arrange for deliveries outside of our standard store hours to meet your team's schedule. Please specify the time in your request." },
+        { "q": "How do you handle building access and security?", "a": "Our delivery team is professional and experienced with corporate building protocols. Please provide any specific instructions in the form." }
+      ]
+    }
+  }
 
 }

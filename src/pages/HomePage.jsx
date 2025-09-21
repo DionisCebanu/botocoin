@@ -51,7 +51,7 @@ const HomePage = () => {
                     title={t('cta_banner_title')}
                     subtitle={t('cta_banner_subtitle')}
                     buttonText={t('cta_banner_button')}
-                    onButtonClick={() => handleOrderClick(t('cta_banner_button'))}
+                    onButtonClick={() => window.location.href = '/catalog'}
                 />
                 <NewsGrid onReadMore={handleReadMoreClick} />
                 <GallerySection onViewAllClick={handleGalleryClick} />

@@ -16,6 +16,10 @@ import AboutPage from './pages/AboutPage';
 import CheckoutPage from '@/pages/CheckoutPage';
 import NewsArticlePage from '@/pages/NewsArticlePage';
 import { CartProvider } from '@/context/CartContext';
+import EventsMenu from '@/pages/EventsMenu';
+import PartyEvent from '@/pages/events/PartyEvent';
+import SchoolEvent from '@/pages/events/SchoolEvent';
+import CorporateEvent from '@/pages/events/CorporateEvent';
 
 const AppContent = () => {
   const { i18n } = useTranslation();
@@ -42,6 +46,10 @@ const AppContent = () => {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/news/:slug" element={<NewsArticlePage />} />
+          <Route path="/events" element={<EventsMenu />} />
+          <Route path="/events/party" element={<PartyEvent />} />
+          <Route path="/events/school" element={<SchoolEvent />} />
+          <Route path="/events/corporate" element={<CorporateEvent />} />
         </Routes>
         <Footer />
         <Toaster />

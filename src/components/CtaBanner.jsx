@@ -14,9 +14,7 @@ const CtaBanner = ({ title, subtitle, buttonText, onButtonClick, className }) =>
     offset: ['start end', 'end start'],
   });
 
-  function onButtonClick() {
-    window.location.href = '/catalog';
-  }
+
   const y = useTransform(scrollYProgress, [0, 1], ['-20%', '20%']);
 
   return (
