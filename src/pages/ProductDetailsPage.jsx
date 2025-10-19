@@ -14,7 +14,8 @@ import ProductInfo from '@/components/details/ProductInfo';
 import NavWave from '../components/ui/NavWave';
 import { Button } from '@/components/ui/button';
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://127.0.0.1:8000/api';
+/* const API_BASE = import.meta.env.VITE_API_BASE || 'http://127.0.0.1:8000/api'; */
+const API_BASE = import.meta.env.VITE_API_BASE || "https://event-api.dioniscode.com/public/api";
 
 // normalize 'en-US' -> 'en', 'fr-CA' -> 'fr'
 const normalizeLang = (l) => {
