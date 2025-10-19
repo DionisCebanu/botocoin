@@ -58,7 +58,7 @@ const Navbar = ({ onSocialClick, onCallClick, onOrderClick }) => {
   const [activeHash, setActiveHash] = useState("");
 
   // routes that should hard reload when starting from '/'
-  const HARD_RELOAD_ROUTES = new Set(["/catalog", "/about", "/cart"]);
+  const HARD_RELOAD_ROUTES = new Set(["/catalog", "/about", "/cart", '/events']);
   const shouldHardReload = (to) => location.pathname === "/" && HARD_RELOAD_ROUTES.has(to);
 
   // helpers

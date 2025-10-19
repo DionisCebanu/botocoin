@@ -9,6 +9,7 @@ import { appearContainer, appearItem } from '@/lib/animations';
 import FlyingDecor from '@/components/decor/FlyingDecor';
 import WaveDivider from '@/components/WaveDivider';
 import CtaBanner from '@/components/CtaBanner';
+import NavWave from '@/components/ui/NavWave';
 
 const EventsMenu = () => {
   const { t } = useTranslation();
@@ -73,7 +74,7 @@ const EventsMenu = () => {
         {/* Event Type Selector */}
         <motion.section
           id="event-types"
-          className="py-16 md:py-24"
+          className="relative py-16 md:py-24"
           variants={appearContainer}
           initial="hidden"
           whileInView="show"
@@ -102,6 +103,10 @@ const EventsMenu = () => {
             </div>
           </div>
         </motion.section>
+         <div aria-hidden className="relative bottom-[0px] sm:bottom-[0px] z-30 rotate-180">
+            {/* Set these colors to the NEXT section’s background for a seamless transition */}
+            <NavWave className="block w-full h-6 md:h-10 bottom-[-40px] text-white dark:text-[rgb(41,31,26)]" />
+        </div>
 
         {/* How It Works */}
         <motion.section

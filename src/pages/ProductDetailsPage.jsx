@@ -1,11 +1,9 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Frown } from 'lucide-react';
-import allProducts from '@/data/allProducts.json';
 import AnimatedSection from '@/components/AnimatedSection';
 import { containerVariants, itemVariants } from '@/lib/animations';
 import ImageGallery from '@/components/details/ImageGallery';
@@ -16,8 +14,7 @@ import ProductInfo from '@/components/details/ProductInfo';
 import NavWave from '../components/ui/NavWave';
 import { Button } from '@/components/ui/button';
 
-
-const API_BASE = import.meta.env.VITE_API_BASE || 'https://event-api.dioniscode.com/public/api';
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://127.0.0.1:8000/api';
 
 // normalize 'en-US' -> 'en', 'fr-CA' -> 'fr'
 const normalizeLang = (l) => {
@@ -29,38 +26,49 @@ const normalizeLang = (l) => {
 };
 
 const ProductDetailsPage = () => {
-  const { id } = useParams(); // dynamic id
+  const { id } = useParams();
   const { t, i18n } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
 
   const [item, setItem] = useState(null);
+  const [variants, setVariants] = useState([]);
+  const [selectedVariantId, setSelectedVariantId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Helper: map API product -> UI shape used by the page
+  // Map API payload -> UI shape
   function mapApiToUi(p) {
-      const title = p?.translated?.title ?? p?.title ?? '';
-      const description = p?.translated?.description ?? p?.description ?? '';
+    const title = p?.translated?.title ?? p?.title ?? '';
+    const description = p?.translated?.description ?? p?.description ?? '';
 
-      const imageUrls =
-        Array.isArray(p.images) && p.images.length
-          ? p.images.map((i) => i.url)
-          : (p.coverUrl ? [p.coverUrl] : []);
+    const imageUrls =
+      Array.isArray(p.images) && p.images.length
+        ? p.images.map((i) => i.url)
+        : (p.coverUrl ? [p.coverUrl] : []);
 
-      return {
-        id: p.id,
-        title,
-        description,
-        price: Number(p.price ?? 0),
-        cat: p.category?.slug || 'uncategorized',
-        img: imageUrls[0] || '/img/promo/hero-1.png',
-        images: imageUrls,
-        rating: p.rating === null || p.rating === undefined ? 0 : Number(p.rating),
-        reviewCount: 0,
-        _raw: p,
-      };
-    }
+    return {
+      id: p.id,
+      title,
+      description,
+      price: Number(p.price ?? 0), // will be overridden by selected variant
+      fromPrice: typeof p.fromPrice === 'number' ? Number(p.fromPrice) : Number(p.price ?? 0),
+      cat: p.category?.slug || 'uncategorized',
+      img: imageUrls[0] || '/img/promo/hero-1.png',
+      images: imageUrls,
+      rating: p.rating === null || p.rating === undefined ? 0 : Number(p.rating),
+      reviewCount: 0,
+      _raw: p,
+    };
+  }
+
+  // Pick default variant: prefer is_default, else cheapest
+  function pickDefaultVariant(vs) {
+    if (!vs || !vs.length) return null;
+    const explicit = vs.find(v => v.is_default);
+    if (explicit) return explicit;
+    return [...vs].sort((a, b) => Number(a.price) - Number(b.price))[0];
+  }
 
   useEffect(() => {
     let alive = true;
@@ -76,17 +84,55 @@ const ProductDetailsPage = () => {
       })
       .then((json) => {
         if (!alive) return;
-        setItem(mapApiToUi(json));
+
+        const mapped = mapApiToUi(json);
+        setItem(mapped);
+
+        const vs = Array.isArray(json.variants)
+          ? json.variants.map((v) => ({
+              id: v.id,
+              name: v.name,
+              quantity: v.quantity ?? null,
+              translation_key: v.translation_key ?? null,
+              price: Number(v.price),
+              compare_at_price: v.compare_at_price !== null ? Number(v.compare_at_price) : null,
+              is_default: !!v.is_default,
+            }))
+          : [];
+
+        setVariants(vs);
+
+        const def = pickDefaultVariant(vs);
+        setSelectedVariantId(def ? def.id : null);
       })
       .catch((err) => {
         if (!alive) return;
         setError(err.message || 'Failed to load product');
         setItem(null);
+        setVariants([]);
+        setSelectedVariantId(null);
       })
       .finally(() => alive && setLoading(false));
 
     return () => { alive = false; };
   }, [id, i18n.language]);
+
+  const selectedVariant = useMemo(
+    () => variants.find(v => v.id === selectedVariantId) || null,
+    [variants, selectedVariantId]
+  );
+
+  // Item view-model with variant price override
+  const viewItem = useMemo(() => {
+    if (!item) return null;
+    if (!selectedVariant) return item;
+    return {
+      ...item,
+      price: Number(selectedVariant.price),
+      promo_price: selectedVariant.compare_at_price ?? null,
+      selectedVariant,
+    };
+  }, [item, selectedVariant]);
 
   const handleBackToResults = () => {
     navigate(`/catalog${location.state?.from || ''}`);
@@ -121,7 +167,7 @@ const ProductDetailsPage = () => {
     );
   }
 
-  if (error || !item) {
+  if (error || !viewItem) {
     return (
       <div className="pt-24 bg-soft-cream dark:bg-dark-bg min-h-screen">
         <div className="section-container text-center flex flex-col items-center justify-center h-[calc(100vh-12rem)]">
@@ -141,36 +187,85 @@ const ProductDetailsPage = () => {
   const breadcrumbItems = [
     { label: t('breadcrumbs_home'), href: '/' },
     { label: t('nav_catalog'), href: '/catalog' },
-    { label: t(`catalog_gate_${item.cat}`), href: `/catalog?cat=${item.cat}` },
-    { label: item.title }
+    { label: t(`catalog_gate_${viewItem.cat}`), href: `/catalog?cat=${viewItem.cat}` },
+    { label: viewItem.title }
   ];
+
+  // JSON-LD: Offer for single variant, AggregateOffer for multiple
+  const offersJsonLd = variants.length > 1
+    ? {
+        "@type": "AggregateOffer",
+        "priceCurrency": "CAD",
+        "lowPrice": Math.min(...variants.map(v => v.price)).toFixed(2),
+        "highPrice": Math.max(...variants.map(v => v.price)).toFixed(2),
+        "offerCount": variants.length
+      }
+    : {
+        "@type": "Offer",
+        "priceCurrency": "CAD",
+        "price": (viewItem.price ?? 0).toFixed(2),
+        "availability": "https://schema.org/InStock",
+        "url": typeof window !== 'undefined' ? window.location.href : ''
+      };
 
   const productJsonLd = {
     "@context": "https://schema.org/",
     "@type": "Product",
-    "name": item.title,
-    "image": item.images?.[0] || item.img,
-    "description": item.description,
+    "name": viewItem.title,
+    "image": viewItem.images?.[0] || viewItem.img,
+    "description": viewItem.description,
     "brand": { "@type": "Brand", "name": "Le Botocoin" },
-    "offers": {
-      "@type": "Offer",
-      "url": typeof window !== 'undefined' ? window.location.href : '',
-      "priceCurrency": "CAD",
-      "price": item.price?.toFixed ? item.price.toFixed(2) : String(item.price ?? 0),
-      "availability": "https://schema.org/InStock"
-    },
+    "offers": offersJsonLd,
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": item.rating || 0,
-      "reviewCount": item.reviewCount || 0
+      "ratingValue": viewItem.rating || 0,
+      "reviewCount": viewItem.reviewCount || 0
     }
+  };
+
+  const VariantSelector = () => {
+    if (!variants.length) return null;
+    return (
+      <div className="mt-4">
+        <div className="text-sm font-semibold text-warm-gray dark:text-soft-cream mb-2">
+          {t('variant_select_label', { defaultValue: 'Choose an option' })}
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {variants.map((v) => {
+            const active = v.id === selectedVariantId;
+            return (
+              <button
+                key={v.id}
+                type="button"
+                aria-pressed={active}
+                onClick={() => setSelectedVariantId(v.id)}
+                className={[
+                  "px-3 py-2 rounded-xl border transition",
+                  active
+                    ? "bg-chocolate-brown text-white border-chocolate-brown"
+                    : "bg-white/80 dark:bg-neutral-800 text-chocolate-brown dark:text-soft-cream border-neutral-300 dark:border-neutral-700 hover:border-chocolate-brown/60"
+                ].join(' ')}
+                title={v.name}
+              >
+                <span className="text-sm font-medium">{v.name}</span>
+                <span className="ml-2 text-sm opacity-80">
+                  {v.compare_at_price
+                    ? (<><span className="line-through mr-1">${Number(v.compare_at_price).toFixed(2)}</span><span>${Number(v.price).toFixed(2)}</span></>)
+                    : <>${Number(v.price).toFixed(2)}</>}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    );
   };
 
   return (
     <>
       <Helmet>
-        <title>{item.title} - Le Botocoin</title>
-        <meta name="description" content={item.description} />
+        <title>{viewItem.title} - Le Botocoin</title>
+        <meta name="description" content={viewItem.description} />
         <script type="application/ld+json">{JSON.stringify(productJsonLd)}</script>
       </Helmet>
       <div className="pt-24 bg-soft-cream dark:bg-dark-bg min-h-screen">
@@ -184,33 +279,41 @@ const ProductDetailsPage = () => {
               <ArrowLeft className="w-4 h-4" />
               {t('product_details_back_to_results')}
             </motion.button>
+
             <motion.div variants={itemVariants}>
               <Breadcrumbs items={breadcrumbItems} />
             </motion.div>
 
             <div className="mt-8 grid md:grid-cols-2 gap-12 lg:gap-20">
               <motion.div variants={itemVariants}>
-                <ImageGallery images={item.images?.length ? item.images : [item.img]} alt={item.title} />
+                <ImageGallery images={viewItem.images?.length ? viewItem.images : [viewItem.img]} alt={viewItem.title} />
               </motion.div>
+
               <motion.div variants={itemVariants} className="sticky top-28 h-fit">
-                <ProductInfo item={item} />
-                <AddToCartBar item={item} />
+
+                {variants.length > 1 && !selectedVariant && (
+                  <div className="text-sm text-warm-gray">
+                    {t('price_from', { defaultValue: 'From' })} ${viewItem.fromPrice.toFixed(2)}
+                  </div>
+                )}
+
+
+                <ProductInfo item={viewItem} />
+                <VariantSelector />
+                {/* <AddToCartBar item={viewItem} /> */}
               </motion.div>
             </div>
           </motion.div>
         </AnimatedSection>
 
-        {/* The divider wave lives OUTSIDE the section, so it "exits" it */}
         <div aria-hidden className="relative bottom-[-20px] sm:bottom-[-40px] z-30">
           <NavWave className="block w-full h-6 md:h-10 bottom-[-40px] text-soft-cream dark:text-dark-bg opacity-90" />
         </div>
 
-        <RelatedProducts currentItemId={item.id} category={item.cat} />
+        <RelatedProducts currentItemId={viewItem.id} category={viewItem.cat} />
       </div>
     </>
   );
 };
-
-
 
 export default ProductDetailsPage;
