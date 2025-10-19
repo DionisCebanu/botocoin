@@ -27,7 +27,9 @@ const ProductInfo = ({ item }) => {
     return (
         <div className="space-y-4">
             <div className="flex items-center gap-4">
-                <span className="text-sm font-semibold uppercase tracking-wider text-amber-orange">{item.cat}</span>
+                <span className="text-sm font-semibold uppercase tracking-wider text-amber-orange">
+                 {t(`catalog_gate_${item.cat}`, { defaultValue: item.cat })}
+                </span>
                 <div className="flex gap-2">
                     {item.newest && renderBadge('newest', t('product_details_badge_new'))}
                     {item.popular && renderBadge('popular', t('product_details_badge_bestseller'))}
