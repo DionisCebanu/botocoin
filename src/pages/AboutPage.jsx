@@ -191,8 +191,17 @@ const GalleryStrip = () => {
 };
 
 const FranchiseSection = () => {
+    const API_BASE = "http://127.0.0.1:8000/api/franchise";
     const { t } = useTranslation();
-    const [formData, setFormData] = useState({ fname: '', lname: '', email: '', phone: '', city: '', province: '', country: '', capital: '', timeframe: '', message: '', consent: false });
+    const [formData, setFormData] = useState({
+        name: '',
+        surname: '',
+        email: '',
+        phone: '',
+        amount: '',
+        message: '',
+        consent: false,
+    });
     const [errors, setErrors] = useState({});
 
     const handleInputChange = (e) => {
@@ -213,25 +222,88 @@ const FranchiseSection = () => {
         });
     };
     
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const newErrors = {};
-        if (!formData.fname) newErrors.fname = 'Required';
-        if (!formData.lname) newErrors.lname = 'Required';
-        if (!formData.email) newErrors.email = 'Required';
-        if (!formData.consent) newErrors.consent = 'Required';
-        
-        if (Object.keys(newErrors).length > 0) {
-            setErrors(newErrors);
-            toast({ variant: 'destructive', title: 'Please fill all required fields.' });
-            return;
-        }
-        
-        handleNotImplemented('Franchise Inquiry Form');
-        toast({ title: t('about_franchise_form_success_title'), description: t('about_franchise_form_success_desc') });
-        setFormData({ fname: '', lname: '', email: '', phone: '', city: '', province: '', country: '', capital: '', timeframe: '', message: '', consent: false });
-        setErrors({});
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Frontend required fields
+    const newErrors = {};
+    if (!formData.name) newErrors.name = 'Required';
+    if (!formData.surname) newErrors.surname = 'Required';
+    if (!formData.email) newErrors.email = 'Required';
+    if (!formData.consent) newErrors.consent = 'Required';
+
+    if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+        toast({ variant: 'destructive', title: 'Please fill all required fields.' });
+        return;
+    }
+
+    // Payload now matches Laravel exactly
+    const payload = {
+        name: formData.name,
+        surname: formData.surname,
+        email: formData.email,
+        phone: formData.phone || null,
+        amount: formData.amount || null,
+        message: formData.message || null,
+        // nickname: '' // optional honeypot if you add it
     };
+
+    try {
+        const res = await fetch(API_BASE, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        },
+        body: JSON.stringify(payload),
+        });
+
+        const raw = await res.text();
+        let data = null;
+
+        try {
+        data = raw ? JSON.parse(raw) : null;
+        } catch (err) {
+        console.error("Response is not JSON, raw body:", raw);
+        throw new Error("Server did not return JSON. Check Laravel logs / Network tab.");
+        }
+
+        if (!res.ok || !data?.ok) {
+        toast({
+            variant: "destructive",
+            title: "Sending failed",
+            description: data?.message ?? "Server rejected the request.",
+        });
+        console.error("Franchise form server error:", data);
+        return;
+        }
+
+        toast({
+        title: t('about_franchise_form_success_title'),
+        description: t('about_franchise_form_success_desc'),
+        });
+
+        setFormData({
+        name: '',
+        surname: '',
+        email: '',
+        phone: '',
+        amount: '',
+        message: '',
+        consent: false,
+        });
+        setErrors({});
+    } catch (error) {
+        console.error("Franchise form error:", error);
+        toast({
+        variant: "destructive",
+        title: "Network or server error",
+        description: "Please try again later.",
+        });
+    }
+    };
+
 
     return (
         <section id="franchise" className="section-wrapper bg-white dark:bg-dark-surface relative overflow-hidden">
@@ -291,25 +363,93 @@ const FranchiseSection = () => {
                         <div className="sticky top-28">
                              <div className="absolute -z-10 blur-3xl opacity-40 w-80 h-80 rounded-full bg-gradient-to-tr from-amber-300/30 to-rose-300/30 -top-10 -left-10" />
                             <form onSubmit={handleSubmit} className="bg-white/70 dark:bg-dark-surface/70 backdrop-blur supports-[backdrop-filter]:bg-white/50 dark:supports-[backdrop-filter]:bg-dark-surface/50 p-8 rounded-2xl shadow-soft space-y-4">
-                                <h3 className="text-2xl font-bold font-display mb-4 text-center">{t('about_franchise_form_title')}</h3>
-                                <div className="grid grid-cols-2 gap-4">
-                                    <Input name="fname" placeholder={t('about_franchise_form_fname') + '*'} value={formData.fname} onChange={handleInputChange} className={errors.fname ? 'border-red-500' : ''}/>
-                                    <Input name="lname" placeholder={t('about_franchise_form_lname') + '*'} value={formData.lname} onChange={handleInputChange} className={errors.lname ? 'border-red-500' : ''}/>
-                                </div>
-                                <Input name="email" type="email" placeholder={t('about_franchise_form_email') + '*'} value={formData.email} onChange={handleInputChange} className={errors.email ? 'border-red-500' : ''}/>
-                                <Input name="phone" placeholder={t('about_franchise_form_phone')} value={formData.phone} onChange={handleInputChange} />
-                                <Select name="capital" onValueChange={(v) => handleSelectChange('capital', v)}>
-                                    <SelectTrigger><SelectValue placeholder={t('about_franchise_form_capital_placeholder')} /></SelectTrigger>
-                                    <SelectContent>{t('about_franchise_form_capital_options', {returnObjects: true}).map(opt => <SelectItem key={opt} value={opt}>{opt}</SelectItem>)}</SelectContent>
-                                </Select>
-                                <Textarea name="message" placeholder={t('about_franchise_form_message')} value={formData.message} onChange={handleInputChange} />
-                                <div className="flex items-center space-x-2 pt-2">
-                                    <Checkbox id="consent" name="consent" checked={formData.consent} onCheckedChange={(c) => handleInputChange({target: {name: 'consent', type:'checkbox', checked:c}})} className={errors.consent ? 'border-red-500' : ''}/>
-                                    <label htmlFor="consent" className="text-sm text-warm-gray leading-none">{t('about_franchise_form_consent')}</label>
-                                </div>
-                                <SparkleButton type="submit" className="w-full !mt-6" size="lg"><Plus className="mr-2 h-4 w-4" />{t('about_franchise_form_submit')}</SparkleButton>
-                                <Button type="button" onClick={() => handleNotImplemented('Franchise Brochure Download')} variant="outline" className="w-full btn-secondary !mt-2" size="lg"><FileText className="mr-2 h-4 w-4" />{t('about_franchise_brochure_button')}</Button>
-                            </form>
+                        <h3 className="text-2xl font-bold font-display mb-4 text-center">
+                            {t('about_franchise_form_title')}
+                        </h3>
+
+                        <div className="grid grid-cols-2 gap-4">
+                            <Input
+                            name="name"
+                            placeholder={t('about_franchise_form_fname') + '*'}
+                            value={formData.name}
+                            onChange={handleInputChange}
+                            className={errors.name ? 'border-red-500' : ''}
+                            />
+                            <Input
+                            name="surname"
+                            placeholder={t('about_franchise_form_lname') + '*'}
+                            value={formData.surname}
+                            onChange={handleInputChange}
+                            className={errors.surname ? 'border-red-500' : ''}
+                            />
+                        </div>
+
+                        <Input
+                            name="email"
+                            type="email"
+                            placeholder={t('about_franchise_form_email') + '*'}
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            className={errors.email ? 'border-red-500' : ''}
+                        />
+
+                        <Input
+                            name="phone"
+                            placeholder={t('about_franchise_form_phone')}
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                        />
+
+                        <Select name="amount" onValueChange={(v) => handleSelectChange('amount', v)}>
+                            <SelectTrigger>
+                            <SelectValue placeholder={t('about_franchise_form_capital_placeholder')} />
+                            </SelectTrigger>
+                            <SelectContent>
+                            {t('about_franchise_form_capital_options', { returnObjects: true }).map(opt => (
+                                <SelectItem key={opt} value={opt}>{opt}</SelectItem>
+                            ))}
+                            </SelectContent>
+                        </Select>
+
+                        <Textarea
+                            name="message"
+                            placeholder={t('about_franchise_form_message')}
+                            value={formData.message}
+                            onChange={handleInputChange}
+                        />
+
+                        <div className="flex items-center space-x-2 pt-2">
+                            <Checkbox
+                            id="consent"
+                            name="consent"
+                            checked={formData.consent}
+                            onCheckedChange={(c) =>
+                                handleInputChange({ target: { name: 'consent', type: 'checkbox', checked: c } })
+                            }
+                            className={errors.consent ? 'border-red-500' : ''}
+                            />
+                            <label htmlFor="consent" className="text-sm text-warm-gray leading-none">
+                            {t('about_franchise_form_consent')}
+                            </label>
+                        </div>
+
+                        <SparkleButton type="submit" className="w-full !mt-6" size="lg">
+                            <Plus className="mr-2 h-4 w-4" />
+                            {t('about_franchise_form_submit')}
+                        </SparkleButton>
+
+                        <Button
+                            type="button"
+                            onClick={() => handleNotImplemented('Franchise Brochure Download')}
+                            variant="outline"
+                            className="w-full btn-secondary !mt-2"
+                            size="lg"
+                        >
+                            <FileText className="mr-2 h-4 w-4" />
+                            {t('about_franchise_brochure_button')}
+                        </Button>
+                        </form>
+
                         </div>
                     </motion.div>
                 </div>
@@ -338,7 +478,7 @@ const AboutPage = () => {
                     <NavWave className="block w-full h-6 md:h-10 bottom-[-40px] text-soft-cream dark:text-dark-bg opacity-90" />
                 </div>
                 <ValuesSection />
-                <TeamSection />
+                {/* <TeamSection /> */}
                 <GalleryStrip />
                 <FranchiseSection />
                 <ContactSection />

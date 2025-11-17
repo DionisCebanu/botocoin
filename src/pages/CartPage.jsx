@@ -251,7 +251,7 @@ const CartPage = () => {
             </motion.div>
 
             {/* RIGHT: contact + map (sticky) */}
-            <motion.aside variants={itemVariants} className="lg:col-span-1">
+           {/*  <motion.aside variants={itemVariants} className="lg:col-span-1">
               <div className="sticky top-28 rounded-2xl bg-white dark:bg-dark-surface p-8 shadow-md">
                 <h2 className="text-2xl font-bold font-display mb-6">{t('checkout_contact_info')}</h2>
 
@@ -294,13 +294,13 @@ const CartPage = () => {
                   {t('checkout_payment_notice')}
                 </p>
               </div>
-            </motion.aside>
+            </motion.aside> */}
           </form>
         )}
       </AnimatedSection>
 
       {/* Confirmation modal */}
-      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen} className="bg-black/50">
         <DialogContent>
           <DialogHeader><DialogTitle>{t('confirmation_modal_title')}</DialogTitle></DialogHeader>
           <div className="py-4 space-y-3 text-sm">
