@@ -191,7 +191,8 @@ const GalleryStrip = () => {
 };
 
 const FranchiseSection = () => {
-    const API_BASE = "http://127.0.0.1:8000/api/franchise";
+    /* const API_BASE = "http://127.0.0.1:8000/api/franchise"; */
+    const API_BASE = import.meta.env.VITE_API_BASE || "https://event-api.dioniscode.com/public/api/franchise"; 
     const { t } = useTranslation();
     const [formData, setFormData] = useState({
         name: '',
